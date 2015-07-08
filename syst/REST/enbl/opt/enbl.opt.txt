@@ -1,0 +1,2 @@
+jre 1.8
+rdbms with jdbc
