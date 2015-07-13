@@ -8,17 +8,13 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
 
+import data_importer.domain.Version;
 import data_importer.domain.servers.Server;
 
-@Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name="dataset_type")
-public abstract class Dataset<ServerClass extends Server> {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)	
-	private long id;	
-	
+@MappedSuperclass
+public abstract class Dataset<ServerClass extends Server> extends Version{	
 	@ManyToOne(targetEntity=Server.class)
 	private ServerClass server;	
 }
