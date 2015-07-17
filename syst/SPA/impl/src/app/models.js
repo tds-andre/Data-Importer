@@ -2,7 +2,7 @@ var app = app || {};
 
 (function () {
 	'use strict';
-
+	app.superJson = 
 	app.BaseModel = Backbone.Model.extend({
 		nesteds: {},
 
@@ -21,7 +21,7 @@ var app = app || {};
             mdl.fetch({url: embeddedLink});
           	this.set(key, mdl);
         }
-        
+
     }
 	});
 
@@ -53,6 +53,7 @@ var app = app || {};
 		initialize: function(){
 			this.on("sync", function(){
 				this.models.forEach(function(mdl){mdl.nestedFetch()})
+				this.trigger("fullsync");
 			})
 		}
 	});

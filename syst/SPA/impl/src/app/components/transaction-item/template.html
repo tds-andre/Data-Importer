@@ -1,20 +1,20 @@
 <script type="text/template" id="transaction-item-template">
-<tr>
+
 	<td>
-		<a href="wizard_A_01.html" title="Executar Transação de Dados">Transação Dados 01</a>
+		<a href="wizard_A_01.html" title="Executar Transação de Dados"><%- scd.attributes.name%></a>
 	</td>													
 	<td>
-		Origem Lorem
+		<%- sourceDataset.attributes.name %>
 	</td>
 	<td>
-		Destino Dolor
+		<%- targetDataset.attributes.name %>
 	</td>
 	<td>
-		Mapeamento 01
+		<%- mapping.attributes.name %>
 	</td>
 	<td class="hidden-print">
 		<a class="btn bg-silver btn-xs icon-only white" href="#" data-target="#modal-detalhes" data-toggle="modal" title="Detalhes"><i class="fa fa-search"></i></a>
 		<a title="Remover dos Favoritos" class="btn bg-gold btn-xs icon-only white bootbox-confirm" href="javascript:void(0);" onclick="$(this).toggleClass('bg-gold');$(this).toggleClass('bg-gray');"><i class="fa fa-star"></i></a>
 	</td>
-</tr>
+
 </script>
