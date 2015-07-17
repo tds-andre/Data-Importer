@@ -19,4 +19,19 @@ public class SCD<T extends Version> {
 	
 	private String name;
 
+	public List<T> getVersions() {
+		return versions;
+	}
+
+	public void setVersions(List<T> versions) {
+		this.versions = versions;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 }

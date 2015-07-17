@@ -16,7 +16,7 @@ public class TransactionLog {
 	@GeneratedValue(strategy = GenerationType.AUTO)	
 	private long id;
 	
-	@ManyToOne(optional=false)
+	@ManyToOne(optional=false, targetEntity=Transaction.class)
 	private Transaction transaction;
 	
 	@ManyToOne(targetEntity=Version.class)

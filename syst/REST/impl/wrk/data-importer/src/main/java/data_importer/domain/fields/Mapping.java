@@ -11,11 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.OneToMany;
 
+import data_importer.domain.Version;
+
 @Entity
-public abstract class Mapping {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)	
-	protected long id;
+public abstract class Mapping extends Version {	
 	
 	@OneToMany(mappedBy="mapping", targetEntity=Field.class, fetch=FetchType.LAZY)
 	private List<Field> fields;
