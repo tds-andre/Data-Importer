@@ -380,123 +380,14 @@ Purchase: http://wrapbootstrap.com
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						
-							<!-- widget em execucao -->
-							<div class="widget radius-bordered" id="em_execucao">
-								<div class="widget-header bg-seashell bordered-bottom bordered-warning">
-									<span class="widget-caption silver"><strong>Em Execução</strong></span>
-									<div class="widget-buttons buttons-bordered hidden-print">									
-										<a href="#" data-toggle="maximize">
-											<i class="fa fa-expand silver"></i>
-										</a>
-										<a href="#" data-toggle="collapse">
-											<i class="fa fa-minus silver"></i>
-										</a>
-									</div>									
-								</div>
-								<div class="widget-body">
-
-									<div class="table-scrollable">
-										<table class="table table-striped table-bordered table-hover">
-											<thead>
-												<tr>
-													<th scope="col" class="sorting_asc">
-														Título
-													</th>													
-													<th scope="col" class="sorting">
-														Origem
-													</th>
-													<th scope="col" class="sorting">
-														Destino
-													</th>
-													<th scope="col" style="width: 300px">
-														
-													</th>
-													<th class="hidden-print min-width"></th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>
-														Transação Dados 06
-													</td>													
-													<td>
-														Origem Lorem
-													</td>
-													<td>
-														Destino Dolor
-													</td>
-													<td>
-														<div class="progress progress-striped progress-lg active no-margin">
-															<div style="width: 5%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" role="progressbar" class="progress-bar progress-bar-warning">
-																<span class="carbon padding-left-5 padding-right-5">
-																	<strong>Lendo Arquivo (05%)</strong>
-																</span>
-															</div>
-														</div>
-													</td>
-													<td>
-														<a class="btn btn-xs btn-danger icon-only cancelar-confirm" href="#" title="Cancelar Execução"><i class="fa fa-ban"></i></a>
-													</td>
-												</tr>
-												<tr>
-													<td>
-														Transação Dados 07
-													</td>													
-													<td>
-														Origem Lorem
-													</td>
-													<td>
-														Destino Dolor
-													</td>
-													<td>
-														<div class="progress progress-striped progress-lg active no-margin">
-															<div style="width: 35%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" role="progressbar" class="progress-bar progress-bar-warning">
-																<span class="carbon padding-left-5 padding-right-5">
-																	<strong>Lendo Arquivo (35%)</strong>
-																</span>
-															</div>
-														</div>
-													</td>
-													<td>
-														<a class="btn btn-xs btn-danger icon-only" href="#" title="Cancelar Execução"><i class="fa fa-ban"></i></a>
-													</td>
-												</tr>
-												<tr>
-													<td>
-														Transação Dados 08
-													</td>													
-													<td>
-														Origem Lorem
-													</td>
-													<td>
-														Destino Dolor
-													</td>
-													<td>
-														<div class="progress progress-striped progress-lg active no-margin">
-															<div style="width: 75%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" role="progressbar" class="progress-bar progress-bar-warning">
-																<span class="carbon padding-left-5 padding-right-5">
-																	<strong>Lendo Arquivo (75%)</strong>
-																</span>
-															</div>
-														</div>
-													</td>
-													<td>
-														<a class="btn btn-xs btn-danger icon-only" href="#" title="Cancelar Execução"><i class="fa fa-ban"></i></a>
-													</td>
-												</tr>												
-											</tbody>
-										</table>
-									</div>
-
-								</div>
-							</div>
-							<!-- /widget em execucao -->
+							
 							
 							
 							<!-- tabbable -->
 							
                             <?php include_once "components/transaction-list/template.html"; ?>
                             <?php include_once "components/transaction-item/template.html"; ?>
+                            <?php include_once "components/start-transaction/template.html"; ?>
                             <div id="transaction-list-placeholder"></div>
 
 
@@ -816,6 +707,7 @@ Purchase: http://wrapbootstrap.com
     <script type="text/javascript" src="models.js"></script>
     <script type="text/javascript" src="components/transaction-item/view.js"></script>
     <script type="text/javascript" src="components/transaction-list/view.js"></script>
+    <script type="text/javascript" src="components/start-transaction/view.js"></script>
     
 
     <script type="text/javascript" src="app.js"></script>

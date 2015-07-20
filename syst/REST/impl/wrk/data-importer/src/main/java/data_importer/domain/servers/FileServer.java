@@ -4,7 +4,6 @@ import javax.persistence.MappedSuperclass;
 
 
 @MappedSuperclass
-public abstract class FileServer extends Server {
-	private String root;
+public abstract class FileServer extends Server {	
 
 }

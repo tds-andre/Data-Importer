@@ -19,14 +19,12 @@ var app = app || {};
 		},
 
 		initialize: function () {
-			
-			this.listenTo(app.transactions, 'fullsync', this.addAll);
-			
-			//this.listenTo(app.transactions, 'all', _.debounce(this.render, 0));
-			this.$list = function(){
-				return $("tbody",this.$el);
-			} ;
-			this.render();
+			this.collection = new app.TransactionCollection();
+			this.$list = function(){return $("tbody",this.$el);} ;
+			//this.listenTo(this.collection, 'sync', this.addAll);
+			//this.listenTo(this.collection, 'reset', this.addAll);		
+			this.listenTo(this.collection, 'innersync', this.addAll);
+			this.render();			
 			this.collection.fetch({reset: true});
 			
 		},
@@ -41,6 +39,7 @@ var app = app || {};
 		addOne: function (transaction) {
 			var view = new app.TransactionItemView({ model: transaction });
 			this.$list().append(view.render().el);
+			this.listenTo(view, 'selected', this.triggerSelected);
 		},
 
 		// Add all transactions in the transactions collection at once.
@@ -49,8 +48,9 @@ var app = app || {};
 			this.collection.each(this.addOne, this);
 		},
 
-		filterOne: function (transaction) {
-			transaction.trigger('visible');
+		triggerSelected: function (transaction) {
+			this.trigger('selected', transaction);
+			console.log(transaction);
 		},
 
 		filterAll: function () {

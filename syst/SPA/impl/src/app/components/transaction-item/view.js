@@ -5,8 +5,15 @@ var app = app || {};
 	app.TransactionItemView = Backbone.View.extend({
 		tagName: 'tr',
 		template: _.template($('#transaction-item-template').html()),
+		events:{
+			'click td:first-child a': 'triggerSelected'
+
+		},
+		triggerSelected: function(){
+			this.trigger("selected", this.model);
+		},
 		initialize: function(){
-			this.listenTo(this.model.get('scd'), 'change:name', this.updateName);
+			this.listenTo(this.model, 'change:name', this.updateName);
 			this.listenTo(this.model.get('sourceDataset'), 'change:name', this.updateSourceName);
 			this.listenTo(this.model.get('targetDataset'), 'change:name', this.updateTargetName);
 			this.listenTo(this.model.get('mapping'), 'change:name', this.updateMappigName);

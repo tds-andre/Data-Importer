@@ -16,7 +16,7 @@ public abstract class Field {
 	@GeneratedValue(strategy = GenerationType.AUTO)	
 	protected long id;
 	
-	@ManyToOne(optional=false)
-	protected Mapping mapping;
+	//@ManyToOne(optional=false)
+	//protected Mapping mapping;
 
 }

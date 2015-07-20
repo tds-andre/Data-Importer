@@ -1,0 +1,9 @@
+server = {}
+csv = {server: "http://localhost:8090/localserver/1"}
+transaction = {sourceDataset: "http://localhost:8090/csv/1", targetDataset: "http://localhost:8090/csv/1"}
+$.ajax({url: "http://localhost:8090/localserver", type: "POST", contentType: "application/json", data: JSON.stringify(server), success: function(){
+	$.ajax({url: "http://localhost:8090/csv", type: "POST", contentType: "application/json", data: JSON.stringify(csv), success: function(){
+		$.ajax({url: "http://localhost:8090/transaction", type: "POST", contentType: "application/json", data: JSON.stringify(transaction) })
+	} })
+} })
+

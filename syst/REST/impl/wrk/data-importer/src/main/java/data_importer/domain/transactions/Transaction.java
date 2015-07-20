@@ -2,6 +2,7 @@ package data_importer.domain.transactions;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,27 +10,77 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import data_importer.domain.SCD;
-import data_importer.domain.Version;
 import data_importer.domain.datasets.Dataset;
 import data_importer.domain.fields.Mapping;
+import data_importer.domain.servers.FileServer;
 
 @Entity
-public class Transaction extends Version {
+public class Transaction{
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private long id;
 	
-	@ManyToOne(optional=false)
-	private SCD<Dataset> targetDataset;
+	@Column(nullable=true)
+	private String name = "Sem nome";
 	
-	@ManyToOne(optional=false, targetEntity=SCD.class)	
-	private SCD<Dataset> sourceDataset;
+	@ManyToOne
+	private Dataset targetDataset;
 	
-	@ManyToOne(optional=false)
-	private SCD<Mapping> mapping;	
+	@ManyToOne
+	private Dataset sourceDataset;
 	
-	
+	@ManyToOne(optional=true)	
+	private Mapping mapping;	
+
 	@OneToMany(targetEntity=TransactionLog.class, mappedBy="transaction")
 	private List<TransactionLog> logs;
-	
 
+	
+	
+	public Dataset getTargetDataset() {
+		return targetDataset;
+	}
+
+	public void setTargetDataset(Dataset targetDataset) {
+		this.targetDataset = targetDataset;
+	}
+
+	public Dataset getSourceDataset() {
+		return sourceDataset;
+	}
+
+	public void setSourceDataset(Dataset sourceDataset) {
+		this.sourceDataset = sourceDataset;
+	}
+
+	public Mapping getMapping() {
+		return mapping;
+	}
+
+	public void setMapping(Mapping mapping) {
+		this.mapping = mapping;
+	}
+
+	public List<TransactionLog> getLogs() {
+		return logs;
+	}
+
+	public void setLogs(List<TransactionLog> logs) {
+		this.logs = logs;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	
 	
 }

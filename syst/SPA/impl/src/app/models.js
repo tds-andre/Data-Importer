@@ -2,27 +2,33 @@ var app = app || {};
 
 (function () {
 	'use strict';
-	app.superJson = 
+
+//------------------------------------------------------------------------------//
+//------------------------------------------------------------------------------//
+//------------------------------------------------------------------------------//
+
 	app.BaseModel = Backbone.Model.extend({
-		nesteds: {},
-
+		nested: {},
+		inherited: {},
 		nestedFetch: function(_links){
-		var links = _links || this.attributes._links;
-        for(var key in links)
-        {
-            if(key=='self')
-            	continue;
-            var embeddedClass = this.nested[key] || this.inherited[key];
-            var embeddedLink = links[key].href;
-            if(embeddedClass)            
-            	var mdl = new embeddedClass();
-            else
-            	var mdl = new app.BaseModel();
-            mdl.fetch({url: embeddedLink});
-          	this.set(key, mdl);
-        }
-
-    }
+			var _this = this;
+			var links = _links || this.attributes._links;			
+	        for(var key in links)
+	        {
+	            if(key=='self')
+	            	continue;
+	            var embeddedClass = this.nested[key] || this.inherited[key];
+	            var embeddedLink = links[key].href;
+	            if(embeddedClass)            
+	            	var mdl = new embeddedClass();
+	            else
+	            	var mdl = new app.BaseModel();	            
+	           	this.set(key, mdl);
+	            mdl.fetch({url: embeddedLink});
+	          	
+	        }
+	        this.trigger("innersync");
+    	}
 	});
 
 	app.BaseCollection = Backbone.Collection.extend({
@@ -34,16 +40,34 @@ var app = app || {};
  		}
 	});
 
-	app.ScdModel = app.BaseModel.extend({defaults:{name: "Sem nome"}});
+//------------------------------------------------------------------------------//
+//------------------------------------------------------------------------------//
+//------------------------------------------------------------------------------//
+
+	app.MappingModel = app.BaseModel.extend({defaults:{name: "Sem nome"}});
+	app.DatasetModel = app.BaseModel.extend({defaults:{name: "Sem nome"}});
+	app.ServerModel = app.BaseModel.extend({defaults:{name: "Sem nome"}});
+	app.CsvModel = app.BaseModel.extend({
+		defaults:{name: "Sem nome"},
+		inherited:{
+			dataset: app.DatasetModel
+		}
+	});
+	app.LocalServerModel = app.BaseModel.extend({
+		defaults:{name: "Sem nome"},
+		inherited:{
+			dataset: app.SeverModel
+		}
+	});
 
 	app.TransactionModel = app.BaseModel.extend({
 		nested:{			
-			mapping: app.ScdModel,
-			targetDataset: app.ScdModel,
-			sourceDataset: app.ScdModel
+			mapping: app.MappingModel,
+			targetDataset: app.DatasetModel,
+			sourceDataset: app.DatasetModel
 		},
-		inherited:{
-			scd: app.ScdModel
+		defaults:{
+			mapping : "Indefinido"
 		}
 	});
 
@@ -52,8 +76,10 @@ var app = app || {};
 		model: app.TransactionModel,
 		initialize: function(){
 			this.on("sync", function(){
-				this.models.forEach(function(mdl){mdl.nestedFetch()})
-				this.trigger("fullsync");
+				this.models.forEach(function(mdl){mdl.nestedFetch()});				
+			})
+			this.on("reset", function(){
+				this.models.forEach(function(mdl){mdl.nestedFetch()});				
 			})
 		}
 	});
