@@ -10,9 +10,10 @@ var app = app || {};
 	app.BaseModel = Backbone.Model.extend({
 		nested: {},
 		inherited: {},
-		nestedFetch: function(_links){
+		nestedFetch: function(_args){
+			var args = _args || {}
 			var _this = this;
-			var links = _links || this.attributes._links;			
+			var links = args.links || this.attributes._links;			
 	        for(var key in links)
 	        {
 	            if(key=='self')
@@ -24,6 +25,8 @@ var app = app || {};
 	            else
 	            	var mdl = new app.BaseModel();	            
 	           	this.set(key, mdl);
+	           	if(args.beforeFetch)
+	           		args.beforeFetch(this, mdl)
 	            mdl.fetch({url: embeddedLink});
 	          	
 	        }

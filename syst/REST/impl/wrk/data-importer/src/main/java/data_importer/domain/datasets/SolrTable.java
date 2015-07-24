@@ -6,5 +6,5 @@ import data_importer.domain.servers.SolrServer;
 
 @Entity
 public class SolrTable extends Dataset<SolrServer>{
-
+	private String tableName;
 }

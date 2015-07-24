@@ -1,0 +1,20 @@
+<script type="text/template" id="transaction-item-template">
+
+	<td>
+		<a href="#" title="Executar Transação de Dados"><%- name %></a>
+	</td>													
+	<td>
+		<%- sourceDataset.attributes.name %>
+	</td>
+	<td>
+		<%- targetDataset.attributes.name %>
+	</td>
+	<td>
+		<%- mapping.attributes.name %>
+	</td>
+	<td class="hidden-print">
+		<a class="btn bg-silver btn-xs icon-only white" href="#" data-target="#modal-detalhes" data-toggle="modal" title="Detalhes"><i class="fa fa-search"></i></a>
+		<a title="Remover dos Favoritos" class="btn bg-gold btn-xs icon-only white bootbox-confirm" href="javascript:void(0);" onclick="$(this).toggleClass('bg-gold');$(this).toggleClass('bg-gray');"><i class="fa fa-star"></i></a>
+	</td>
+
+</script>

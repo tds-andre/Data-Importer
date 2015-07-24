@@ -1,7 +1,7 @@
 
 <script type="text/template" id="start-transaction-template">
 	<!-- wizard -->
-							<div id="simplewizardinwidget" class="wizard" data-target="#simplewizardinwidget-steps">
+							<div id="simplewizardinwidget" class="js-wizard wizard" data-target="#simplewizardinwidget-steps">
 								<ul class="steps">
 									<li data-target="#simplewizardinwidgetstep1" class="active"><span class="step">1</span>Dados<span class="chevron"></span></li>
 									<li data-target="#simplewizardinwidgetstep2"><span class="step">2</span>Arquivo<span class="chevron"></span></li>
@@ -24,7 +24,7 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<h6><strong>Título</strong></h6>
-											<h5>Transação Dados 01</h5>
+											<h5 class="js-name"><%- name %></h5>
 										</div>
 									</div>
 									<!-- /secao -->
@@ -35,22 +35,18 @@
 									<div class="row">
 										<div class="col-sm-6">
 											<h6>Nome</h6>
-											<h5>Origem 01</h5>
+											<h5 class="js-sourceDataset-name"><%- sourceDataset.attributes.name %></h5>
 										</div>
 										<div class="col-sm-6">
 											<h6>Conector</h6>
-											<h5>CBI</h5>
+											<h5>Sistema de arquivos local</h5>
 										</div>							
 									</div>
 									<div class="row">
 										<div class="col-sm-6">
 											<h6>URL</h6>
 											<h5>localhost</h5>
-										</div>
-										<div class="col-sm-6" style="display: none;">
-											<h6>Porta</h6>
-											<h5>8080</h5>
-										</div>					
+										</div>				
 									</div>
 									<!-- /secao -->
 													
@@ -60,21 +56,21 @@
 									<div class="row">
 										<div class="col-sm-6">
 											<h6>Nome</h6>
-											<h5>Destino 01</h5>
+											<h5 class="js-targetDataset-name"><%- targetDataset.attributes.name %></h5>
 										</div>
 										<div class="col-sm-6">
 											<h6>Conector</h6>
-											<h5>MySQL</h5>
+											<h5>Tabela CBI</h5>
 										</div>							
 									</div>
 									<div class="row">
 										<div class="col-sm-6">
 											<h6>URL</h6>
-											<h5>www.tcis.calndra.br/biserver-web/painel</h5>
+											<h5 class="js-targetDataset-server-host"><%- targetDataset.attributes.server.attributes.host %></h5>
 										</div>
 										<div class="col-sm-6">
 											<h6>Porta</h6>
-											<h5>8080</h5>
+											<h5 class="js-targetDataset-server-port"><%- targetDataset.attributes.server.attributes.port %></h5>
 										</div>							
 									</div>
 									<div class="row">

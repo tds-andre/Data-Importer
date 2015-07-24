@@ -382,13 +382,8 @@ Purchase: http://wrapbootstrap.com
 						
 							
 							
-							
-							<!-- tabbable -->
-							
-                            <?php include_once "components/transaction-list/template.html"; ?>
-                            <?php include_once "components/transaction-item/template.html"; ?>
-                            <?php include_once "components/start-transaction/template.html"; ?>
-                            <div id="transaction-list-placeholder"></div>
+						
+                            <div id="main-placeholder"></div>
 
 
 								
@@ -701,18 +696,12 @@ Purchase: http://wrapbootstrap.com
     <script src="../assets/js/fuelux/wizard/wizard-custom.js"></script>
 
     <script src="vendor/underscore/underscore-min.js" type="text/javascript"></script>
-    <script src="vendor/backbone/backbone-min.js" type="text/javascript"></script>
+	<script src="vendor/mais/wiblaho/core.js" type="text/javascript"></script>
+	<script src="vendor/mais/wiblaho/service.js" type="text/javascript"></script>
+	<script src="vendor/mais/wiblaho/model.js" type="text/javascript"></script>
+	<script src="vendor/mais/wiblaho/repository.js" type="text/javascript"></script>
+	<script src="vendor/mais/wiblaho/view.js" type="text/javascript"></script>
 
-    <script type="text/javascript" src="config.js"></script>
-
-    <script type="text/javascript" src="models.js"></script>
-    <script type="text/javascript" src="components/transaction-item/view.js"></script>
-    <script type="text/javascript" src="components/transaction-list/view.js"></script>
-    <script type="text/javascript" src="components/start-transaction/view.js"></script>
-    
-
-    <script type="text/javascript" src="app.js"></script>
-    <script type="text/javascript" src="init.js"></script>
 
     <script>
         // If you want to draw your charts with Theme colors you must run initiating charts after that current skin is loaded
@@ -734,6 +723,16 @@ Purchase: http://wrapbootstrap.com
 				});
 			});
 			
+
+            app.transactinListView = new app.TransactionListView($("#main-placeholder"),{
+                collection: Wiblaho.Services.repo.fetch(app.Transaction)
+            })
+
+
+
+
+
+
         });
     </script>
     
