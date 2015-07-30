@@ -97,7 +97,7 @@
 											<div class="col-sm-12 col-md-6">
 												<div class="form-group simula_validacao">
 													<label for="0005" class="control-label">Selecione o arquivo para executar a carga de dados <sup>*</sup></label>
-													<input type="file" id="0005"/>
+													<input type="file" class="js-file"/>
 													
 													<!-- barra progressao -->
 													<div class="table-scrollable margin-top-20">
@@ -106,9 +106,9 @@
 																<tr>
 																	<td>
 																		<div class="progress progress-striped progress-lg active no-margin">
-																			<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 5%">
+																			<div class="js-progress progress-bar progress-bar-warning" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
 																				<span class="carbon padding-left-5 padding-right-5">
-																					<strong>Upload do Arquivo (05%)</strong>
+																					<strong class="js-upload-message">Sem arquivo</strong>
 																				</span>
 																			</div>
 																		</div>

@@ -69,6 +69,7 @@ var app = app || {};
 			targetDataset: app.DatasetModel,
 			sourceDataset: app.DatasetModel
 		},
+
 		defaults:{
 			mapping : "Indefinido"
 		}
