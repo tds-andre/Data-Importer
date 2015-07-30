@@ -35,7 +35,8 @@ public class Transaction{
 	@OneToMany(targetEntity=TransactionLog.class, mappedBy="transaction")
 	private List<TransactionLog> logs;
 
-	
+	@Column(nullable = true)
+	private String uploadedFilename = null;
 	
 	public Dataset getTargetDataset() {
 		return targetDataset;
