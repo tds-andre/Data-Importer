@@ -10,6 +10,6 @@ import data_importer.domain.transactions.Transaction;
 
 @RepositoryRestResource(collectionResourceRel = "transaction", path = "transaction")
 public interface TransactionRepo extends CrudRepository<Transaction, Long> {
-	@Query(nativeQuery=true, value="SELECT *, max(created_at) FROM data_importer.transaction a left join data_importer.version b on a.id = b.id group by scd")
+	@Query(nativeQuery=true, value="SELECT *, max(created_at) FROM data_importer.transaction a left join data_importer.transaction_log b on a.id = b.transaction group by scd")
 	public List<Transaction> latest();
 }

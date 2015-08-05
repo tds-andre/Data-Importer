@@ -10,6 +10,12 @@ var app = app || {};
 	app.BaseModel = Backbone.Model.extend({
 		nested: {},
 		inherited: {},
+		parse: function(a){
+			this.href = a._links.self.href;
+			var ss = this.href.split("/");
+			this.id = ss[ss.length-1];
+			return a;
+		},
 		nestedFetch: function(_args){
 			var args = _args || {}
 			var _this = this;
@@ -17,7 +23,7 @@ var app = app || {};
 	        for(var key in links)
 	        {
 	            if(key=='self')
-	            	continue;
+	            	this.href = links[key].href;
 	            var embeddedClass = this.nested[key] || this.inherited[key];
 	            var embeddedLink = links[key].href;
 	            if(embeddedClass)            
@@ -67,12 +73,20 @@ var app = app || {};
 		nested:{			
 			mapping: app.MappingModel,
 			targetDataset: app.DatasetModel,
-			sourceDataset: app.DatasetModel
+			sourceDataset: app.DatasetModel,
+			logs: app.LogCollection
 		},
 
 		defaults:{
 			mapping : "Indefinido"
 		}
+	});
+
+	app.LogModel = app.BaseModel.extend({
+		nested: {
+			transaction: app.TransactionModel
+		}
+
 	});
 
 	app.TransactionCollection = app.BaseCollection.extend({
@@ -87,6 +101,11 @@ var app = app || {};
 			})
 		}
 	});
+
+	app.LogCollection = app.BaseCollection.extend({
+		path: "log",
+		model: app.LogModel
+	})
 
 
 	

@@ -1,5 +1,6 @@
 package data_importer.domain.transactions;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -30,13 +31,12 @@ public class Transaction{
 	private Dataset sourceDataset;
 	
 	@ManyToOne(optional=true)	
-	private Mapping mapping;	
+	private Mapping mapping;
+	
 
 	@OneToMany(targetEntity=TransactionLog.class, mappedBy="transaction")
 	private List<TransactionLog> logs;
 
-	@Column(nullable = true)
-	private String uploadedFilename = null;
 	
 	public Dataset getTargetDataset() {
 		return targetDataset;
@@ -81,6 +81,20 @@ public class Transaction{
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	/*public Long getLatest(){
+		if(logs.size()==0)
+			return null;
+		TransactionLog result = logs.get(0);
+		for(TransactionLog log:logs){
+			if(log.getCreatedAt().after(result.getCreatedAt()))
+				result = log;
+		}
+		return result.getId();
+		
+	}*/
+	
+	
 	
 	
 	

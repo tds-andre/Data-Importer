@@ -9,7 +9,10 @@ var app = app || {};
 		el: '#transaction-list-placeholder',
 
 		events: {
-			'change .js-file': 'upload'
+			'change .js-file'  : 'upload',
+			'click  .actions'  : 'stepClick'
+			
+
 		},
 
 		template: _.template($('#start-transaction-template').html()),
@@ -17,6 +20,34 @@ var app = app || {};
 		progress: 0,
 		uploading: false,
 		uploaded: false,
+		step: 1,
+
+		stepClick: function(ev){
+			console.log(ev);
+			if($(ev.target).hasClass("btn-next")){
+				this.changeStep(this.step + 1);
+			} else if($(ev.target).hasClass("btn-prev")){
+				this.changeStep(this.step - 1);
+
+			}	
+
+		},		
+
+		
+		changeStep: function(value){
+			this.step = value;
+			switch(this.step){
+				case 1:
+					$(".btn-next",this.$el).removeAttr("disabled");
+					break;
+				case 2:
+					if(!this.uploaded)
+						$(".btn-next",this.$el).attr("disabled", true);
+					break;
+				default:
+			}
+		},
+
 
 		initialize: function () {
 			var self = this;
@@ -32,6 +63,7 @@ var app = app || {};
 			}});
 			this.render();			
 			this.listenTo(this.model, "change:name", this.updateName);
+			//this.on("change:step", this.changeStep);
 		},
 
 		render: function () {
