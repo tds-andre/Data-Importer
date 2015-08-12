@@ -702,6 +702,7 @@ Purchase: http://wrapbootstrap.com
 
     <script src="vendor/underscore/underscore-min.js" type="text/javascript"></script>
     <script src="vendor/backbone/backbone-min.js" type="text/javascript"></script>
+    <script src="vendor/jfeldstein/jQuery.AjaxFileUpload.js/jQuery.AjaxFileUpload.js" type="text/javascript"></script>
 
     <script type="text/javascript" src="config.js"></script>
 

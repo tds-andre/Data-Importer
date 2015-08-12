@@ -50,7 +50,26 @@ var app = app || {};
 
 
 		initialize: function () {
+			$('input[type="file"]').ajaxfileupload({
+				'action': '/upload/' +this.model.dummy.logs.models[this.model.dummy.logs.models.length-1].id,
+				'params': {
+				'extra': 'info'
+				},
+				'onComplete': function(response) {
+				console.log('custom handler for file:');
+					alert(JSON.stringify(response));
+				},
+				'onStart': function() {
+					if(weWantedTo) return false; // cancels upload
+				},
+				'onCancel': function() {
+					console.log('no file selected');
+				}
+		    });
+
 			var self = this;
+
+			
 			this.model.get("targetDataset").nestedFetch({beforeFetch: function(){
 				self.listenTo(self.model.get('targetDataset'), 'change', self.updateTargetDataset);			
 				self.listenTo(self.model.get('targetDataset'), 'sync', self.updateTargetDataset);
@@ -71,8 +90,72 @@ var app = app || {};
 			return this;			
 		},		
 
+
+
+
 		upload: function(e){
-			var 
+			function fileUpload(form, action_url, div_id) {
+				
+
+			    // Create the iframe...
+			    var iframe = document.createElement("iframe");
+			    iframe.setAttribute("id", "upload_iframe");
+			    iframe.setAttribute("name", "upload_iframe");
+			    iframe.setAttribute("width", "0");
+			    iframe.setAttribute("height", "0");
+			    iframe.setAttribute("border", "0");
+			    iframe.setAttribute("style", "width: 0; height: 0; border: none;");
+			 
+			    // Add to document...
+			    form.parentNode.appendChild(iframe);
+			    window.frames['upload_iframe'].name = "upload_iframe";
+			 
+			    var iframeId = $("#upload_iframe")[0];
+			 
+			    // Add event...
+			    var eventHandler = function () {
+			 
+			            if (iframeId.detachEvent) iframeId.detachEvent("onload", eventHandler);
+			            else iframeId.removeEventListener("load", eventHandler, false);
+			 
+			            // Message from server...
+			            if (iframeId.contentDocument) {
+			                content = iframeId.contentDocument.body.innerHTML;
+			            } else if (iframeId.contentWindow) {
+			                content = iframeId.contentWindow.document.body.innerHTML;
+			            } else if (iframeId.document) {
+			                content = iframeId.document.body.innerHTML;
+			            }
+			 
+			            document.getElementById(div_id).innerHTML = content;
+			 
+			            // Del the iframe...
+			            setTimeout('iframeId.parentNode.removeChild(iframeId)', 250);
+			        }
+			 
+			    if (iframeId.addEventListener) iframeId.addEventListener("load", eventHandler, true);
+			    if (iframeId.attachEvent) iframeId.attachEvent("onload", eventHandler);
+			 
+			    // Set properties of form...
+			    form.setAttribute("target", "upload_iframe");
+			    form.setAttribute("action", action_url);
+			    form.setAttribute("method", "post");
+			    form.setAttribute("enctype", "multipart/form-data");
+			    form.setAttribute("encoding", "multipart/form-data");
+			 
+			    // Submit the form...
+			    form.submit();
+			 
+			    document.getElementById(div_id).innerHTML = "Uploading...";
+			}
+
+			var
+				form = $(e.currentTarget).parent()[0],
+				action_url = "/upload/" + this.model.dummy.logs.models[this.model.dummy.logs.models.length-1].id,
+				div_id = "blah";
+			fileUpload(form, action_url, div_id);
+
+			/*var 
 				xhr = new XMLHttpRequest(),
 				self = this,
 				file = e.currentTarget.files[0];
@@ -90,9 +173,9 @@ var app = app || {};
 					xhr.status == 200 ? self.setFile(file.name) : self.unsetFile;				
 			};
 
-			xhr.open("POST", app.config.serverUrl + "/upload", true);
+			xhr.open("POST", app.config.serverUrl + "/upload/" + this.model.dummy.logs.models[this.model.dummy.logs.models.length-1].id, true);
 			//xhr.setRequestHeader("X-FILENAME", file.name);
-			xhr.send(file);
+			xhr.send(file);*/
 		},
 
 		setFile: function(filename){			
@@ -145,7 +228,7 @@ var app = app || {};
 			this.updateTargetServer(dataset.get("server"));
 			
 		}, 
-		udateTargetServer: function(sever){
+		updateTargetServer: function(server){
 			$(".js-targetDataset-server-host", this.$el).html(server.get("host"));
 			$(".js-targetDataset-server-port", this.$el).html(server.get("port"));
 		},
@@ -164,3 +247,4 @@ var app = app || {};
 	console.log("start transaction view loaded");
 })(jQuery);
 
+//https://www.google.com/settings/takeout/download?j=0146afa5-f7c7-4936-9eb8-5d00cca5a0d2&i=0

@@ -11,29 +11,38 @@ var app = app || {};
 		nested: {},
 		inherited: {},
 		parse: function(a){
-			this.href = a._links.self.href;
-			var ss = this.href.split("/");
-			this.id = ss[ss.length-1];
+			try{
+				this.href = a._links.self.href;
+				var ss = this.href.split("/");
+				this.id = ss[ss.length-1];
+			}catch(e){}
 			return a;
 		},
 		nestedFetch: function(_args){
 			var args = _args || {}
 			var _this = this;
-			var links = args.links || this.attributes._links;			
+			var links = args.links || this.attributes._links;
+			this.dummy = {};		
 	        for(var key in links)
 	        {
-	            if(key=='self')
+	            if(key=='self'){
 	            	this.href = links[key].href;
+	            	continue;
+	            }
 	            var embeddedClass = this.nested[key] || this.inherited[key];
 	            var embeddedLink = links[key].href;
 	            if(embeddedClass)            
 	            	var mdl = new embeddedClass();
 	            else
-	            	var mdl = new app.BaseModel();	            
-	           	this.set(key, mdl);
+	            	var mdl = new app.BaseModel();
+	            if(mdl instanceof app.BaseModel)          
+	           		this.set(key, mdl);
+	           	else
+	           		this.dummy[key] = mdl;
+
 	           	if(args.beforeFetch)
 	           		args.beforeFetch(this, mdl)
-	            mdl.fetch({url: embeddedLink});
+	           	mdl.fetch({url: embeddedLink});
 	          	
 	        }
 	        this.trigger("innersync");
@@ -69,6 +78,18 @@ var app = app || {};
 		}
 	});
 
+
+	app.LogModel = app.BaseModel.extend({
+		nested: {
+			//transaction: app.TransactionModel
+		}
+	});
+
+	app.LogCollection = app.BaseCollection.extend({
+		path: "log",
+		model: app.LogModel
+	});
+
 	app.TransactionModel = app.BaseModel.extend({
 		nested:{			
 			mapping: app.MappingModel,
@@ -82,12 +103,6 @@ var app = app || {};
 		}
 	});
 
-	app.LogModel = app.BaseModel.extend({
-		nested: {
-			transaction: app.TransactionModel
-		}
-
-	});
 
 	app.TransactionCollection = app.BaseCollection.extend({
 		path:"transaction",
@@ -95,17 +110,14 @@ var app = app || {};
 		initialize: function(){
 			this.on("sync", function(){
 				this.models.forEach(function(mdl){mdl.nestedFetch()});				
-			})
-			this.on("reset", function(){
-				this.models.forEach(function(mdl){mdl.nestedFetch()});				
-			})
+			});
+			//this.on("reset", function(){
+			//	this.models.forEach(function(mdl){mdl.nestedFetch()});				
+			//});
 		}
 	});
 
-	app.LogCollection = app.BaseCollection.extend({
-		path: "log",
-		model: app.LogModel
-	})
+
 
 
 	

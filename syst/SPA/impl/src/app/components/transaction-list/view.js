@@ -19,7 +19,7 @@ var app = app || {};
 		},
 
 		initialize: function () {
-			this.collection = new app.TransactionCollection();
+			//this.collection = new app.TransactionCollection();
 			this.$list = function(){return $("tbody",this.$el);} ;
 			//this.listenTo(this.collection, 'sync', this.addAll);
 			//this.listenTo(this.collection, 'reset', this.addAll);		
