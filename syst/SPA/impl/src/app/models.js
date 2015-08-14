@@ -38,7 +38,7 @@ var app = app || {};
 	            if(mdl instanceof app.BaseModel)          
 	           		this.set(key, mdl);
 	           	else
-	           		this.dummy[key] = mdl;
+	           		this.set(key,mdl);
 
 	           	if(args.beforeFetch)
 	           		args.beforeFetch(this, mdl)
@@ -82,6 +82,43 @@ var app = app || {};
 	app.LogModel = app.BaseModel.extend({
 		nested: {
 			//transaction: app.TransactionModel
+		},
+		upload: function(formData, options){
+			var
+				url = app.LogCollection.prototype.url() + "/" + this.id + "/upload",
+				defaults = {},
+				settings = $.extend(options,defaults);
+
+			$.ajax({
+       			url: url,  
+       			type: 'POST',
+       			data: formData,
+		     	cache: false,
+		        contentType: false,
+		        processData: false,
+       			xhr: function() { 
+        			var
+        				myXhr = $.ajaxSettings.xhr();
+        			if(myXhr.upload){
+        				if(settings.progress)
+         					myXhr.upload.addEventListener('progress', settings.progress, false); 
+        			}
+       				return myXhr;
+       			},
+      
+       			success:  function(data) {       				
+         			if(settings.success)
+       					settings.success(data)      		
+       			},
+       			error: function(a,b,c){
+       				if(settings.error)
+       					settings.error(a,b,c)
+       			},
+       			complete: function(a,b,c){
+       				if(settings.complete)
+       					settings.complete(a,b,c)
+       			}
+			});
 		}
 	});
 
@@ -100,6 +137,10 @@ var app = app || {};
 
 		defaults:{
 			mapping : "Indefinido"
+		},
+
+		lastLog: function(){
+			return this.get("logs").last();
 		}
 	});
 

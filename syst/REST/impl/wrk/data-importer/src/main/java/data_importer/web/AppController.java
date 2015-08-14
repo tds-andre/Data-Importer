@@ -3,11 +3,19 @@ package data_importer.web;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transaction;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.converter.AbstractHttpMessageConverter;
+import org.springframework.http.converter.HttpMessageNotWritableException;
+import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.http.server.ServletServerHttpResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -64,5 +72,28 @@ public class AppController  extends WebMvcConfigurerAdapter {
         //}
     }
 	
+	
+	@RequestMapping(value = "log/{transactionLogId}/upload", method = RequestMethod.POST)
+	 public void uploadFile(HttpServletResponse response, @RequestParam(value="file") MultipartFile file, @PathVariable long transactionLogId){	  
+		try{
+			TransactionLog log = logs.findOne(transactionLogId);
+			byte[] bytes = file.getBytes();
+			File dir = new File("uploads/"+((Long)transactionLogId).toString());
+			if(!dir.exists())
+				dir.mkdir();
+			String filename = dir.getAbsolutePath() + "\\" + file.getOriginalFilename(); 
+			BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(filename)));
+			stream.write(bytes);
+			log.setUploadedFilename(filename);
+			logs.save(log);
+			stream.close();	
+		}catch(Exception e){
+			e.printStackTrace();
+			
+		}
 
+		response.setHeader("Pragma", "no-cache");
+		response.setHeader("Cache-Control", "no-cache");
+		response.setDateHeader("Expires", 0);	
+	}
 }

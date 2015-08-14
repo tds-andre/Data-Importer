@@ -1,0 +1,50 @@
+<html>
+<body>
+	<form enctype="multipart/form-data">
+		<input id="instanceValue" multiple="true" name="file" type="file">
+		<input type="button" value="Upload">
+	</form>
+	<progress></progress>
+	<script src="jquery.min.js"></script>
+</body>
+<script>
+var $yourDomElement = $("body");
+$yourDomElement.find(':button').click(function(){
+     $yourDomElement.find('progress').attr({value:0,max:100});
+        //create a FormData Object that will be sent
+      var formData = new FormData($yourDomElement.find('form')[0]);
+      $.ajax({
+       url: 'http://localhost:8090/log/17/upload',  //server script to process data
+       type: 'POST',
+       xhr: function() {  // custom xhr
+        myXhr = $.ajaxSettings.xhr();
+        if(myXhr.upload){ // check if upload property exists
+         myXhr.upload.addEventListener('progress',function (evt){
+          if(evt.lengthComputable){
+           $yourDomElement.find('progress').attr({value:evt.loaded,max:evt.total});
+            }
+         }, false); // for handling the progress of the upload
+        }
+        return myXhr;
+       },
+       //Ajax events
+       //beforeSend: beforeSendHandler,
+       success:  function(data) {
+       if (data.successMessage){//
+        //set progress to 100%
+        $yourDomElement.find('progress').attr({value:100,max:100});
+       }
+       if (data.errorMessage){
+        console.log("error uploading file");
+       }
+      },
+       data: formData,
+       cache: false,
+       contentType: false,
+       processData: false
+      });
+ 
+    });
+
+</script>
+</html>

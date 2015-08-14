@@ -9,8 +9,8 @@ var app = app || {};
 		el: '#transaction-list-placeholder',
 
 		events: {
-			'change .js-file'  : 'upload',
-			'click  .actions'  : 'stepClick'
+			'change .js-file'  : 'fileSelected',
+			'click  .actions'  : 'stepClicked'
 			
 
 		},
@@ -22,7 +22,7 @@ var app = app || {};
 		uploaded: false,
 		step: 1,
 
-		stepClick: function(ev){
+		stepClicked: function(ev){
 			console.log(ev);
 			if($(ev.target).hasClass("btn-next")){
 				this.changeStep(this.step + 1);
@@ -50,23 +50,6 @@ var app = app || {};
 
 
 		initialize: function () {
-			$('input[type="file"]').ajaxfileupload({
-				'action': '/upload/' +this.model.dummy.logs.models[this.model.dummy.logs.models.length-1].id,
-				'params': {
-				'extra': 'info'
-				},
-				'onComplete': function(response) {
-				console.log('custom handler for file:');
-					alert(JSON.stringify(response));
-				},
-				'onStart': function() {
-					if(weWantedTo) return false; // cancels upload
-				},
-				'onCancel': function() {
-					console.log('no file selected');
-				}
-		    });
-
 			var self = this;
 
 			
@@ -90,123 +73,73 @@ var app = app || {};
 			return this;			
 		},		
 
-
-
-
-		upload: function(e){
-			function fileUpload(form, action_url, div_id) {
-				
-
-			    // Create the iframe...
-			    var iframe = document.createElement("iframe");
-			    iframe.setAttribute("id", "upload_iframe");
-			    iframe.setAttribute("name", "upload_iframe");
-			    iframe.setAttribute("width", "0");
-			    iframe.setAttribute("height", "0");
-			    iframe.setAttribute("border", "0");
-			    iframe.setAttribute("style", "width: 0; height: 0; border: none;");
-			 
-			    // Add to document...
-			    form.parentNode.appendChild(iframe);
-			    window.frames['upload_iframe'].name = "upload_iframe";
-			 
-			    var iframeId = $("#upload_iframe")[0];
-			 
-			    // Add event...
-			    var eventHandler = function () {
-			 
-			            if (iframeId.detachEvent) iframeId.detachEvent("onload", eventHandler);
-			            else iframeId.removeEventListener("load", eventHandler, false);
-			 
-			            // Message from server...
-			            if (iframeId.contentDocument) {
-			                content = iframeId.contentDocument.body.innerHTML;
-			            } else if (iframeId.contentWindow) {
-			                content = iframeId.contentWindow.document.body.innerHTML;
-			            } else if (iframeId.document) {
-			                content = iframeId.document.body.innerHTML;
-			            }
-			 
-			            document.getElementById(div_id).innerHTML = content;
-			 
-			            // Del the iframe...
-			            setTimeout('iframeId.parentNode.removeChild(iframeId)', 250);
-			        }
-			 
-			    if (iframeId.addEventListener) iframeId.addEventListener("load", eventHandler, true);
-			    if (iframeId.attachEvent) iframeId.attachEvent("onload", eventHandler);
-			 
-			    // Set properties of form...
-			    form.setAttribute("target", "upload_iframe");
-			    form.setAttribute("action", action_url);
-			    form.setAttribute("method", "post");
-			    form.setAttribute("enctype", "multipart/form-data");
-			    form.setAttribute("encoding", "multipart/form-data");
-			 
-			    // Submit the form...
-			    form.submit();
-			 
-			    document.getElementById(div_id).innerHTML = "Uploading...";
-			}
-
+		fileSelected: function(event){
 			var
-				form = $(e.currentTarget).parent()[0],
-				action_url = "/upload/" + this.model.dummy.logs.models[this.model.dummy.logs.models.length-1].id,
-				div_id = "blah";
-			fileUpload(form, action_url, div_id);
-
-			/*var 
-				xhr = new XMLHttpRequest(),
-				self = this,
-				file = e.currentTarget.files[0];
-				
-			xhr.upload.addEventListener(
-				"progress", 
-				function(e) {	
-					self.addProgress(parseInt(100 - (e.loaded / e.total * 100)));
-				}, 
-				false
-			);
-
-			xhr.onreadystatechange = function(e) {
-				if (xhr.readyState == 4) 
-					xhr.status == 200 ? self.setFile(file.name) : self.unsetFile;				
-			};
-
-			xhr.open("POST", app.config.serverUrl + "/upload/" + this.model.dummy.logs.models[this.model.dummy.logs.models.length-1].id, true);
-			//xhr.setRequestHeader("X-FILENAME", file.name);
-			xhr.send(file);*/
-		},
-
-		setFile: function(filename){			
-			this.model.save({uploadedFilename: filename}, {
-				success: function(){
-					this.uploading = false;
-					this.uploaded = true;
-					this.progress = 100;
-					updateUploadMessage("Arquivo carregado");			
-					updateProgress(100);
+				form = $(event.currentTarget).parent()[0],
+				formData = new FormData(form),
+				log = this.model.lastLog(),
+				self = this;
+			log.upload(formData,{
+				success: function(data){
+					console.log("upload concluído");
+					self.setFile();
+				},
+				error: function(a,b,c){
+					console.log("upload fracassado");
+					console.log(a,b,c);
+					self.unsetFile();
+				},
+				progress: function(event){
+					self.setProgress(parseInt(event.loaded/event.total * 100));
 				}
-			});
+			})
 		},
+
+		
+		setFile: function(filename){
+			this.uploading = false;
+			this.uploaded = true;		
+			this.completeProgress();
+			this.changeStep(2);
+		},
+
+
 
 		unsetFile: function(){
 			this.uploading = false;
 			this.uploaded = false;
-			this.progress = 0;
-			updateProgress(0);
-			updateUploadMessage("Sem arquivo");
+			this.resetProgress();			
 		},
 
-		addProgress: function(val){
-			this.progress += val;
+		completeProgress: function(){
+			this.progress = 100;
+			this.updateUploadMessage("Arquivo carregado");			
+			this.updateProgress(100);
+			var $progress = $(".js-progress", this.$el);
+			$progress.removeClass("progress-bar-warning");
+			$progress.addClass("progress-bar-success");
+			$progress.parent().removeClass("active");
+		},
+
+		resetProgress: function(){
+			this.progress = 0;
+			this.updateUploadMessage("Sem arquivo");			
+			this.updateProgress(100);
+			var $progress = $(".js-progress", this.$el);
+			$progress.removeClass("progress-bar-success");
+			$progress.addClass("progress-bar-warning");
+			$progress.parent().addClass("active");
+		},
+
+		setProgress: function(val){
+			this.progress = val;
 			this.updateProgress(this.progress);
 			this.updateUploadMessage("Carregand arquivo ("+this.progress+"%)");
-			
-		}, 
+		},
 
 		updateProgress: function(val){
-			$(".js-progress", this.$el).css("width", val + "%");
+			var $progress = $(".js-progress", this.$el);
+			$progress.css("width", val + "%");
 		},
 
 		updateUploadMessage: function(msg){

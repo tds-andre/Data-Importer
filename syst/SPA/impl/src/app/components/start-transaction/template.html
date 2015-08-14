@@ -97,11 +97,10 @@
 											<div class="col-sm-12 col-md-6">
 												<div class="form-group simula_validacao">
 													<label for="0005" class="control-label">Selecione o arquivo para executar a carga de dados <sup>*</sup></label>
-													<form method="POST">
-													<input type="file" class="js-file"/>
-													<div id="blah" ></div>
+													<form enctype="multipart/form-data">
+														<input class="js-file" multiple="true" name="file" type="file"/>
 													</form>
-													<iframe id="upload_iframe"></idframe>
+													
 													
 													<!-- barra progressao -->
 													<div class="table-scrollable margin-top-20">
