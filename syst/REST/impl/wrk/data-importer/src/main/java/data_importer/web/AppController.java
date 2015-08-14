@@ -3,19 +3,11 @@ package data_importer.web;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.transaction.Transaction;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.http.converter.AbstractHttpMessageConverter;
-import org.springframework.http.converter.HttpMessageNotWritableException;
-import org.springframework.http.converter.StringHttpMessageConverter;
-import org.springframework.http.server.ServletServerHttpResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import data_importer.domain.transactions.TransactionLog;
@@ -46,15 +37,14 @@ public class AppController  extends WebMvcConfigurerAdapter {
 	
 	@RequestMapping(value="service/transaction/{transactionId}/start", method=RequestMethod.GET)
     public TransactionLog startTransaction(@PathVariable long transactionId) {
-		return dataService.startTransaction(transactions.findOne(transactionId));
+		return null;
+		//return dataService.startTransaction(transactions.findOne(transactionId));
  	}
 	
 	@RequestMapping(value="/upload/{transactionId}", method=RequestMethod.POST)
-    public @ResponseBody String handleFileUpload(HttpServletRequest request, @PathVariable long transactionLogId){
-        
+    public @ResponseBody String handleFileUpload(HttpServletRequest request, @PathVariable long transactionLogId){        
 		//if (!file.isEmpty()) {
-            try {
-            	
+            try {            	
             	TransactionLog log = logs.findOne(transactionLogId);
             	String filename = ((Long)log.getTransaction().getId()).toString();
                 byte[] bytes = null;//file.getBytes();
