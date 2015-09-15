@@ -1,13 +1,13 @@
 server = {name: "Minha máquina"}
 solrServer = {name: "Embelleze", host:"www.embelleze.calandra.com.br/biserver-web", port: "123", username: "André"}
-solrTable = {name: "GPD Alvo", server: "http://localhost:8090/solrserver/2" }
-csv = {name: "Arquivo csv de teste", server: "http://localhost:8090/localserver/1"}
-transaction = {name: "Minha primeira transação", sourceDataset: "http://localhost:8090/csv/1", targetDataset: "http://localhost:8090/solrtable/2"}
-$.ajax({url: "http://localhost:8090/localserver", type: "POST", contentType: "application/json", data: JSON.stringify(server), success: function(){
-	$.ajax({url: "http://localhost:8090/csv", type: "POST", contentType: "application/json", data: JSON.stringify(csv), success: function(){
-		$.ajax({url: "http://localhost:8090/solrserver", type: "POST", contentType: "application/json", data: JSON.stringify(solrServer), success: function(){
-			$.ajax({url: "http://localhost:8090/solrtable", type: "POST", contentType: "application/json", data: JSON.stringify(solrTable), success: function(){
-				$.ajax({url: "http://localhost:8090/transaction", type: "POST", contentType: "application/json", data: JSON.stringify(transaction) })
+solrTable = {name: "GPD Alvo", server: "http://localhost:8084/data-importer-services/solrserver/2" }
+csv = {name: "Arquivo csv de teste", server: "http://localhost:8084/data-importer-services/localserver/1"}
+transaction = {name: "Minha primeira transação", sourceDataset: "http://localhost:8084/data-importer-services/csv/1", targetDataset: "http://localhost:8084/data-importer-services/solrtable/2"}
+$.ajax({url: "http://localhost:8084/data-importer-services/localserver", type: "POST", contentType: "application/json", data: JSON.stringify(server), success: function(){
+	$.ajax({url: "http://localhost:8084/data-importer-services/csv", type: "POST", contentType: "application/json", data: JSON.stringify(csv), success: function(){
+		$.ajax({url: "http://localhost:8084/data-importer-services/solrserver", type: "POST", contentType: "application/json", data: JSON.stringify(solrServer), success: function(){
+			$.ajax({url: "http://localhost:8084/data-importer-services/solrtable", type: "POST", contentType: "application/json", data: JSON.stringify(solrTable), success: function(){
+				$.ajax({url: "http://localhost:8084/data-importer-services/transaction", type: "POST", contentType: "application/json", data: JSON.stringify(transaction) })
 			} })
 		} })
 	} })
