@@ -33,7 +33,7 @@ Purchase: http://wrapbootstrap.com
     <link href="../assets/css/typicons.min.css" rel="stylesheet" />
     <link href="../assets/css/animate.min.css" rel="stylesheet" />
     <link href="../assets/css/skins/calandra.css" rel="stylesheet" type="text/css" />
-	
+    
     <!--Page Related styles-->
     <link href="../assets/css/dataTables.bootstrap.css" rel="stylesheet" />
 
@@ -57,18 +57,20 @@ Purchase: http://wrapbootstrap.com
                     </a>
                 </div>
                 <!-- /Navbar Barnd -->
-				
+                
                 <!-- Sidebar Collapse -->
-                <!-- removido -->
+                <div class="sidebar-collapse hidden-print" id="sidebar-collapse">
+                    <i class="collapse-icon fa fa-bars"></i>
+                </div>
                 <!-- /Sidebar Collapse -->
-				
+                
                 <!-- Account Area and Settings --->
-                <div class="navbar-header pull-right">
+                <div class="navbar-header pull-right hidden-print">
                     <div class="navbar-account">
                         <ul class="account-area">
-						
-							<!-- atalho aplicacoes -->
-							<li>
+                            
+                            <!-- atalho aplicacoes -->
+                            <li>
                                 <a class=" dropdown-toggle" data-toggle="dropdown" title="Atalho Aplicações" href="#">
                                     <i class="icon fa fa-desktop"></i>
                                 </a>
@@ -78,7 +80,7 @@ Purchase: http://wrapbootstrap.com
                                         <a href="#">
                                             <div class="clearfix">
                                                 <div class="notification-icon">
-													<img src="../assets/img/aplic_icons/aplic_icon_gpd.jpg" />
+                                                    <img src="../assets/img/aplic_icons/aplic_icon_gpd.jpg" />
                                                 </div>
                                                 <div class="notification-body">
                                                     <span class="title">GPD TCIS</span>
@@ -87,12 +89,12 @@ Purchase: http://wrapbootstrap.com
                                             </div>
                                         </a>
                                     </li>
-									
+                                    
                                     <li>
                                         <a href="#">
                                             <div class="clearfix">
                                                 <div class="notification-icon">
-													<img src="../assets/img/aplic_icons/aplic_icon_painel.jpg" />
+                                                    <img src="../assets/img/aplic_icons/aplic_icon_painel.jpg" />
                                                 </div>
                                                 <div class="notification-body">
                                                     <span class="title">Painel TCIS</span>
@@ -101,12 +103,12 @@ Purchase: http://wrapbootstrap.com
                                             </div>
                                         </a>
                                     </li>
-									
+                                    
                                     <li>
                                         <a href="#">
                                             <div class="clearfix">
                                                 <div class="notification-icon">
-													<img src="../assets/img/aplic_icons/aplic_icon_cbi.jpg" />
+                                                    <img src="../assets/img/aplic_icons/aplic_icon_cbi.jpg" />
                                                 </div>
                                                 <div class="notification-body">
                                                     <span class="title">Calandra BI TCIS</span>
@@ -115,12 +117,12 @@ Purchase: http://wrapbootstrap.com
                                             </div>
                                         </a>
                                     </li>
-									
+                                    
                                     <li>
                                         <a href="#">
                                             <div class="clearfix">
                                                 <div class="notification-icon">
-													<img src="../assets/img/aplic_icons/aplic_icon_unimed2.jpg" />
+                                                    <img src="../assets/img/aplic_icons/aplic_icon_unimed2.jpg" />
                                                 </div>
                                                 <div class="notification-body">
                                                     <span class="title">GPD Unimed</span>
@@ -129,12 +131,12 @@ Purchase: http://wrapbootstrap.com
                                             </div>
                                         </a>
                                     </li>
-									
+                                    
                                     <li>
                                         <a href="#">
                                             <div class="clearfix">
                                                 <div class="notification-icon">
-													<img src="../assets/img/aplic_icons/aplic_icon_embelleze.jpg" />
+                                                    <img src="../assets/img/aplic_icons/aplic_icon_embelleze.jpg" />
                                                 </div>
                                                 <div class="notification-body">
                                                     <span class="title">GPD Embelleze</span>
@@ -143,7 +145,7 @@ Purchase: http://wrapbootstrap.com
                                             </div>
                                         </a>
                                     </li>
-									
+                                    
                                     <li class="bg-whitesmoke">
                                         <a href="#">
                                             <div class="clearfix">
@@ -152,16 +154,16 @@ Purchase: http://wrapbootstrap.com
                                                 </div>
                                             </div>
                                         </a>
-                                    </li>									
-									
-									
+                                    </li>                                   
+                                    
+                                    
 
                                 </ul>
                                 <!--/aplicacoes Dropdown-->
                             </li>
-							<!-- /atalho aplicacoes -->
-						
-						
+                            <!-- /atalho aplicacoes -->
+                            
+                            
                             <li>
                                 <a class=" dropdown-toggle" data-toggle="dropdown" title="Notificações" href="#">
                                     <i class="icon fa fa-warning warning"></i>
@@ -280,7 +282,7 @@ Purchase: http://wrapbootstrap.com
                                                 </div>
                                             </div>
                                         </a>
-                                    </li>									
+                                    </li>                                   
                                     <li class="dropdown-footer ">
                                         <span>
                                             Hoje - 07 de Maio
@@ -290,36 +292,32 @@ Purchase: http://wrapbootstrap.com
                                 <!--/Notification Dropdown-->
                             </li>
                             
-
                             <li>
                                 <a class="login-area dropdown-toggle" data-toggle="dropdown">
                                     <div class="avatar" title="View your public profile">
                                         <img src="../assets/img/avatars/adam-jansen.jpg">
                                     </div>
                                     <section>
-                                        <h2><span class="profile"><span>David Stevenson</span></span></h2>
+                                        <h2><span class="profile"><span>Administrador</span></span></h2>
                                     </section>
                                 </a>
                                 <!--Login Area Dropdown-->
                                 <ul class="pull-right dropdown-menu dropdown-arrow dropdown-login-area">
-                                    <li class="username"><a>David Stevenson</a></li>
-                                    <li class="email"><a>David.Stevenson@live.com</a></li>
+                                    <li class="username"><a>Administrador</a></li>
                                     <!--Avatar Area-->
                                     <li>
                                         <div class="avatar-area">
                                             <img src="../assets/img/avatars/adam-jansen.jpg" class="avatar">
-                                            <span class="caption">Change Photo</span>
                                         </div>
                                     </li>
                                     <!--Avatar Area-->
                                     <li class="edit">
-                                        <a href="profile.html" class="pull-left">Profile</a>
-                                        <a href="#" class="pull-right">Setting</a>
+                                        <a href="usuario_perfil.html" class="pull-right">Perfil</a>
                                     </li>
 
                                     <li class="dropdown-footer">
                                         <a href="login.html">
-                                            Sign out
+                                            Sair
                                         </a>
                                     </li>
                                 </ul>
@@ -329,7 +327,28 @@ Purchase: http://wrapbootstrap.com
                             <!--Note: notice that setting div must start right after account area list.
                             no space must be between these elements-->
                             <!-- Settings -->
-                        </ul>
+                        </ul><div class="setting">
+                            <a id="btn-setting" title="Setting" href="#">
+                                <i class="icon glyphicon glyphicon-cog"></i>
+                            </a>
+                        </div><div class="setting-container">
+                            <label>
+                                <input type="checkbox" id="checkbox_fixednavbar">
+                                <span class="text">Fixar Topo</span>
+                            </label>
+                            <label>
+                                <input type="checkbox" id="checkbox_fixedsidebar">
+                                <span class="text">Fixar Menu Lateral</span>
+                            </label>
+                            <label>
+                                <input type="checkbox" id="checkbox_fixedbreadcrumbs">
+                                <span class="text">Fixar BreadCrumbs</span>
+                            </label>
+                            <label>
+                                <input type="checkbox" id="checkbox_fixedheader">
+                                <span class="text">Fixed Título</span>
+                            </label>
+                        </div>
                         <!-- Settings -->
                     </div>
                 </div>
@@ -344,61 +363,907 @@ Purchase: http://wrapbootstrap.com
         <div class="page-container">
 
             <!-- Page Sidebar -->
-			<!-- removida -->
+            <div class="page-sidebar hidden-print" id="sidebar">
+                <!-- Page Sidebar Header-->
+                <div class="sidebar-header-wrapper busca">
+                    <input type="text" class="searchinput" />
+                    <i class="searchicon fa fa-search"></i>
+                    <div class="searchhelper">Search Reports, Charts, Emails or Notifications</div>
+                </div>
+                <!-- /Page Sidebar Header -->
+                <!-- Sidebar Menu -->
+                <ul class="nav sidebar-menu">
+                    <!--Principal-->
+                    <li class="active">
+                        <a href="index_admin.html">
+                            <i class="menu-icon fa fa-list"></i>
+                            <span class="menu-text"> Principal </span>
+                        </a>
+                    </li>
+                    
+                    <!-- transacoes -->
+                    <li>
+                        <a href="#" class="menu-dropdown">
+                            <i class="menu-icon glyphicon glyphicon-tasks"></i>
+                            <span class="menu-text"> Transações </span>
+                            <i class="menu-expand"></i>
+                        </a>
+                        
+                        <ul class="submenu">
+                            <li>
+                                <a href="transacoes_listar.html">
+                                    <span class="menu-text">Consultar</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="wizard_transacao_nova.html">
+                                    <span class="menu-text">Nova</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <!-- origens -->
+                    <li>
+                        <a href="#" class="menu-dropdown">
+                            <i class="menu-icon fa fa-upload"></i>
+                            <span class="menu-text"> Origens </span>
+                            <i class="menu-expand"></i>
+                        </a>
+                        
+                        <ul class="submenu">
+                            <li>
+                                <a href="#">
+                                    <span class="menu-text">Consultar</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" id="new-origin-button">
+                                    <span class="menu-text">Nova</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>                   
+                    
+                    <!-- destinos -->
+                    <li>
+                        <a href="#" class="menu-dropdown">
+                            <i class="menu-icon fa fa-download"></i>
+                            <span class="menu-text"> Destinos </span>
+                            <i class="menu-expand"></i>
+                        </a>
+                        
+                        <ul class="submenu">
+                            <li>
+                                <a href="destinos_listar.html">
+                                    <span class="menu-text">Consultar</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="destinos_novo.html">
+                                    <span class="menu-text">Novo</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- mapeamentos -->
+                    <li>
+                        <a href="#" class="menu-dropdown">
+                            <i class="menu-icon fa fa-random"></i>
+                            <span class="menu-text"> Mapeamentos </span>
+                            <i class="menu-expand"></i>
+                        </a>
+                        
+                        <ul class="submenu">
+                            <li>
+                                <a href="mapeamentos_listar.html">
+                                    <span class="menu-text">Consultar</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="mapeamentos_novo.html">
+                                    <span class="menu-text">Novo</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                </ul>
+                <!-- /Sidebar Menu -->
+            </div>
             <!-- /Page Sidebar -->
-			
+            
 
             <!-- Page Content -->
-            <div class="page-content" style="margin-left: 0 !important;">
+            <div class="page-content">
                 <!-- Page Breadcrumb -->
                 <div class="page-breadcrumbs">
-                    <ul class="breadcrumb">
+                    <ul class="breadcrumb" id="main-breadcrumb">
                         <li>
                             <i class="fa fa-home"></i>
-                            <a href="#">Data Importer</a>
+                            <a href="index_admin.html">Data Importer</a>
                         </li>
-                        <li class="active">Principal</li>
+                        <li class="active">Principal</li>                        
                     </ul>
                 </div>
                 <!-- /Page Breadcrumb -->
                 <!-- Page Header -->
-                <div class="page-header position-relative">
-                    <div class="header-title">
+                <div class="page-header position-relative hidden-print">
+                    <div class="header-title" id="main-content-title">
                         <h1>
                             Principal
                         </h1>
                     </div>
-					
+                    
                     <!-- Header Buttons -->
-                    <!-- removido -->
+                    <div class="header-buttons">
+                        <a class="sidebar-toggler" href="#">
+                            <i class="fa fa-arrows-h"></i>
+                        </a>
+                        <a class="refresh" id="refresh-toggler" href="">
+                            <i class="glyphicon glyphicon-refresh"></i>
+                        </a>
+                        <a class="fullscreen" id="fullscreen-toggler" href="#">
+                            <i class="glyphicon glyphicon-fullscreen"></i>
+                        </a>
+                    </div>
                     <!-- Header Buttons End -->
-					
+                    
                 </div>
                 <!-- /Page Header -->
                 <!-- Page Body -->
                 <div class="page-body">
                     <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-						
-							
-							
-							
-							<!-- tabbable -->
-							
-                            <?php include_once "components/transaction-list/template.html"; ?>
-                            <?php include_once "components/transaction-item/template.html"; ?>
-                            <?php include_once "components/start-transaction/template.html"; ?>
-                            <div id="transaction-list-placeholder"></div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="main-content-placeholder">
 
+                            <!-- widget em execucao -->
+                            <div class="widget radius-bordered" id="em_execucao">
+                                <div class="widget-header bg-seashell bordered-bottom bordered-warning">
+                                    <span class="widget-caption silver"><strong>Em Execução</strong></span>
+                                    <div class="widget-buttons buttons-bordered hidden-print">                                  
+                                        <a href="#" data-toggle="maximize">
+                                            <i class="fa fa-expand silver"></i>
+                                        </a>
+                                        <a href="#" data-toggle="collapse">
+                                            <i class="fa fa-minus silver"></i>
+                                        </a>
+                                    </div>                                  
+                                </div>
+                                <div class="widget-body">
 
-								
-							</div>
-							<!-- /tabbable -->
+                                    <div class="table-scrollable">
+                                        <table class="table table-striped table-bordered table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col" class="sorting_asc">
+                                                        Título
+                                                    </th>                                                   
+                                                    <th scope="col" class="sorting">
+                                                        Origem
+                                                    </th>
+                                                    <th scope="col" class="sorting">
+                                                        Destino
+                                                    </th>
+                                                    <th scope="col" style="width: 300px">
+                                                        
+                                                    </th>
+                                                    <th class="hidden-print min-width"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        Transação Dados 06
+                                                    </td>                                                   
+                                                    <td>
+                                                        Origem Lorem
+                                                    </td>
+                                                    <td>
+                                                        Destino Dolor
+                                                    </td>
+                                                    <td>
+                                                        <div class="progress progress-striped progress-lg active no-margin">
+                                                            <div style="width: 5%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" role="progressbar" class="progress-bar progress-bar-warning">
+                                                                <span class="carbon padding-left-5 padding-right-5">
+                                                                    <strong>Lendo Arquivo (05%)</strong>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <a class="btn btn-danger btn-xs icon-only cancelar-confirm" href="#" title="Cancelar Execução"><i class="fa fa-ban"></i></a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        Transação Dados 07
+                                                    </td>                                                   
+                                                    <td>
+                                                        Origem Lorem
+                                                    </td>
+                                                    <td>
+                                                        Destino Dolor
+                                                    </td>
+                                                    <td>
+                                                        <div class="progress progress-striped progress-lg active no-margin">
+                                                            <div style="width: 35%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" role="progressbar" class="progress-bar progress-bar-warning">
+                                                                <span class="carbon padding-left-5 padding-right-5">
+                                                                    <strong>Lendo Arquivo (35%)</strong>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <a class="btn btn-danger btn-xs icon-only cancelar-confirm" href="#" title="Cancelar Execução"><i class="fa fa-ban"></i></a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        Transação Dados 08
+                                                    </td>                                                   
+                                                    <td>
+                                                        Origem Lorem
+                                                    </td>
+                                                    <td>
+                                                        Destino Dolor
+                                                    </td>
+                                                    <td>
+                                                        <div class="progress progress-striped progress-lg active no-margin">
+                                                            <div style="width: 75%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" role="progressbar" class="progress-bar progress-bar-warning">
+                                                                <span class="carbon padding-left-5 padding-right-5">
+                                                                    <strong>Lendo Arquivo (75%)</strong>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <a class="btn btn-danger btn-xs icon-only cancelar-confirm" href="#" title="Cancelar Execução"><i class="fa fa-ban"></i></a>
+                                                    </td>
+                                                </tr>                                               
+                                            </tbody>
+                                        </table>
+                                    </div>
 
+                                </div>
+                            </div>
+                            <!-- /widget em execucao -->
+                            
+                            
+                            <!-- tabbable -->
+                            <div class="tabbable">
+                            
+                                <!-- nav-tabs -->
+                                <ul class="nav nav-tabs" id="">
+                                    <li class="active">
+                                        <a data-toggle="tab" href="#favoritos">
+                                            Favoritos
+                                        </a>
+                                    </li>
 
+                                    <li>
+                                        <a data-toggle="tab" href="#recentes">
+                                            Recentes
+                                        </a>
+                                    </li>
+                                    
+                                    <li>
+                                        <a data-toggle="tab" href="#todos">
+                                            Todos
+                                        </a>
+                                    </li>                                       
+                                </ul>
+                                <!-- /nav-tabs -->
+
+                                <!-- tab-content -->
+                                <div class="tab-content">
+                                
+                                    <!-- favoritos -->
+                                    <div id="favoritos" class="tab-pane in active">
+                                        
+                                        <div class="table-scrollable">
+                                            <table class="table table-striped table-bordered table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col" class="sorting_asc">
+                                                            Título
+                                                        </th>                                                   
+                                                        <th scope="col" class="sorting">
+                                                            Origem
+                                                        </th>
+                                                        <th scope="col" class="sorting">
+                                                            Destino
+                                                        </th>
+                                                        <th scope="col" class="sorting">
+                                                            Mapeamento
+                                                        </th>
+                                                        <th class="hidden-print min-width"></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <a href="wizard_A_01.html" title="Executar Transação de Dados">Transação Dados 01</a>
+                                                        </td>                                                   
+                                                        <td>
+                                                            Origem Lorem
+                                                        </td>
+                                                        <td>
+                                                            Destino Dolor
+                                                        </td>
+                                                        <td>
+                                                            Mapeamento 01
+                                                        </td>
+                                                        <td class="hidden-print">
+                                                            <a class="btn bg-silver btn-xs icon-only white" href="#" data-target="#modal-detalhes" data-toggle="modal" title="Detalhes"><i class="fa fa-search"></i></a>
+                                                            <a title="Remover dos Favoritos" class="btn bg-gold btn-xs icon-only white bootbox-confirm" href="javascript:void(0);" onclick="$(this).toggleClass('bg-gold');$(this).toggleClass('bg-gray');"><i class="fa fa-star"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <a href="wizard_B_01.html">Transação Dados 02</a>
+                                                        </td>   
+                                                        <td>
+                                                            Origem Ipsum
+                                                        </td>
+                                                        <td>
+                                                            Destino Sit Amet
+                                                        </td>
+                                                        <td>
+                                                            Mapeamento 02
+                                                        </td>
+                                                        <td class="hidden-print">
+                                                            <a class="btn bg-silver btn-xs icon-only white" href="#" data-target="#modal-detalhes" data-toggle="modal" title="Detalhes"><i class="fa fa-search"></i></a>
+                                                            <a title="Remover dos Favoritos" class="btn bg-gold btn-xs icon-only white bootbox-confirm" href="#"><i class="fa fa-star"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <a href="wizard_A_01" title="Executar Transação de Dados">Transação Dados 03</a>
+                                                        </td>                                                   
+                                                        <td>
+                                                            Origem Lorem
+                                                        </td>
+                                                        <td>
+                                                            Destino Dolor
+                                                        </td>
+                                                        <td>
+                                                            Mapeamento 01
+                                                        </td>
+                                                        <td class="hidden-print">
+                                                            <a class="btn bg-silver btn-xs icon-only white" href="#" data-target="#modal-detalhes" data-toggle="modal" title="Detalhes"><i class="fa fa-search"></i></a>
+                                                            <a title="Remover dos Favoritos" class="btn bg-gold btn-xs icon-only white bootbox-confirm" href="#"><i class="fa fa-star"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <a href="wizard_A_01" title="Executar Transação de Dados">Transação Dados 04</a>
+                                                        </td>   
+                                                        <td>
+                                                            Origem Ipsum
+                                                        </td>
+                                                        <td>
+                                                            Destino Sit Amet
+                                                        </td>
+                                                        <td>
+                                                            Mapeamento 02
+                                                        </td>
+                                                        <td class="hidden-print">
+                                                            <a class="btn bg-silver btn-xs icon-only white" href="#" data-target="#modal-detalhes" data-toggle="modal" title="Detalhes"><i class="fa fa-search"></i></a>
+                                                            <a title="Remover dos Favoritos" class="btn bg-gold btn-xs icon-only white bootbox-confirm" href="#"><i class="fa fa-star"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <a href="wizard_A_01" title="Executar Transação de Dados">Transação Dados 05</a>
+                                                        </td>   
+                                                        <td>
+                                                            Origem Ipsum
+                                                        </td>
+                                                        <td>
+                                                            Destino Sit Amet
+                                                        </td>
+                                                        <td>
+                                                            Mapeamento 02
+                                                        </td>
+                                                        <td class="hidden-print">
+                                                            <a class="btn bg-silver btn-xs icon-only white" href="#" data-target="#modal-detalhes" data-toggle="modal" title="Detalhes"><i class="fa fa-search"></i></a>
+                                                            <a title="Remover dos Favoritos" class="btn bg-gold btn-xs icon-only white bootbox-confirm" href="#"><i class="fa fa-star"></i></a>
+                                                        </td>
+                                                    </tr>                                               
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        
+                                    </div>
+                                    <!-- /favoritos -->
+                                    
+                                    
+                                    <!-- recentes -->
+                                    <div id="recentes" class="tab-pane">
+
+                                        <div class="table-scrollable">
+                                            <table class="table table-striped table-bordered table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col" class="sorting_asc">
+                                                            Título
+                                                        </th>                                                   
+                                                        <th scope="col" class="sorting">
+                                                            Origem
+                                                        </th>
+                                                        <th scope="col" class="sorting">
+                                                            Destino
+                                                        </th>
+                                                        <th scope="col" class="sorting">
+                                                            Mapeamento
+                                                        </th>
+                                                        <th class="hidden-print min-width"></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <a href="wizard_A_01.html" title="Executar Transação de Dados">Transação Dados Fusce ornare</a>
+                                                        </td>                                                   
+                                                        <td>
+                                                            Origem Lorem
+                                                        </td>
+                                                        <td>
+                                                            Destino Dolor
+                                                        </td>
+                                                        <td>
+                                                            Mapeamento 01
+                                                        </td>
+                                                        <td class="hidden-print">
+                                                            <a class="btn bg-silver btn-xs icon-only white" href="#" data-target="#modal-detalhes" data-toggle="modal" title="Detalhes"><i class="fa fa-search"></i></a>
+                                                            <a title="Adicionar aos Favoritos" class="btn bg-gray btn-xs icon-only white bootbox-confirm" href="javascript:void(0);" onclick="$(this).toggleClass('bg-gold');$(this).toggleClass('bg-gray');"><i class="fa fa-star"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <a href="wizard_A_01.html" title="Executar Transação de Dados">Transação Dados Etiam in mauris</a>
+                                                        </td>   
+                                                        <td>
+                                                            Origem Ipsum
+                                                        </td>
+                                                        <td>
+                                                            Destino Sit Amet
+                                                        </td>
+                                                        <td>
+                                                            Mapeamento 02
+                                                        </td>
+                                                        <td class="hidden-print">
+                                                            <a class="btn bg-silver btn-xs icon-only white" href="#" data-target="#modal-detalhes" data-toggle="modal" title="Detalhes"><i class="fa fa-search"></i></a>
+                                                            <a title="Adicionar aos Favoritos" class="btn bg-gray btn-xs icon-only white bootbox-confirm" href="#"><i class="fa fa-star"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <a href="wizard_A_01.html" title="Executar Transação de Dados">Transação Dados Duis dictum nisi</a>
+                                                        </td>                                                   
+                                                        <td>
+                                                            Origem Lorem
+                                                        </td>
+                                                        <td>
+                                                            Destino Dolor
+                                                        </td>
+                                                        <td>
+                                                            Mapeamento 01
+                                                        </td>
+                                                        <td class="hidden-print">
+                                                            <a class="btn bg-silver btn-xs icon-only white" href="#" data-target="#modal-detalhes" data-toggle="modal" title="Detalhes"><i class="fa fa-search"></i></a>
+                                                            <a title="Adicionar aos Favoritos" class="btn bg-gray btn-xs icon-only white bootbox-confirm" href="#"><i class="fa fa-star"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <a href="wizard_A_01.html" title="Executar Transação de Dados">Transação Dados Nam interdum</a>
+                                                        </td>   
+                                                        <td>
+                                                            Origem Ipsum
+                                                        </td>
+                                                        <td>
+                                                            Destino Sit Amet
+                                                        </td>
+                                                        <td>
+                                                            Mapeamento 02
+                                                        </td>
+                                                        <td class="hidden-print">
+                                                            <a class="btn bg-silver btn-xs icon-only white" href="#" data-target="#modal-detalhes" data-toggle="modal" title="Detalhes"><i class="fa fa-search"></i></a>
+                                                            <a title="Adicionar aos Favoritos" class="btn bg-gray btn-xs icon-only white bootbox-confirm" href="#"><i class="fa fa-star"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <a href="wizard_A_01.html" title="Executar Transação de Dados">Transação Dados Etiam justo</a>
+                                                        </td>   
+                                                        <td>
+                                                            Origem Ipsum
+                                                        </td>
+                                                        <td>
+                                                            Destino Sit Amet
+                                                        </td>
+                                                        <td>
+                                                            Mapeamento 02
+                                                        </td>
+                                                        <td class="hidden-print">
+                                                            <a class="btn bg-silver btn-xs icon-only white" href="#" data-target="#modal-detalhes" data-toggle="modal" title="Detalhes"><i class="fa fa-search"></i></a>
+                                                            <a title="Adicionar aos Favoritos" class="btn bg-gray btn-xs icon-only white bootbox-confirm" href="#"><i class="fa fa-star"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <a href="wizard_A_01.html" title="Executar Transação de Dados">Transação Dados Fusce ornare</a>
+                                                        </td>                                                   
+                                                        <td>
+                                                            Origem Lorem
+                                                        </td>
+                                                        <td>
+                                                            Destino Dolor
+                                                        </td>
+                                                        <td>
+                                                            Mapeamento 01
+                                                        </td>
+                                                        <td class="hidden-print">
+                                                            <a class="btn bg-silver btn-xs icon-only white" href="#" data-target="#modal-detalhes" data-toggle="modal" title="Detalhes"><i class="fa fa-search"></i></a>
+                                                            <a title="Adicionar aos Favoritos" class="btn bg-gray btn-xs icon-only white bootbox-confirm" href="#"><i class="fa fa-star"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <a href="wizard_A_01.html" title="Executar Transação de Dados">Transação Dados Etiam in mauris</a>
+                                                        </td>   
+                                                        <td>
+                                                            Origem Ipsum
+                                                        </td>
+                                                        <td>
+                                                            Destino Sit Amet
+                                                        </td>
+                                                        <td>
+                                                            Mapeamento 02
+                                                        </td>
+                                                        <td class="hidden-print">
+                                                            <a class="btn bg-silver btn-xs icon-only white" href="#" data-target="#modal-detalhes" data-toggle="modal" title="Detalhes"><i class="fa fa-search"></i></a>
+                                                            <a title="Adicionar aos Favoritos" class="btn bg-gray btn-xs icon-only white bootbox-confirm" href="#"><i class="fa fa-star"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <a href="wizard_A_01.html" title="Executar Transação de Dados">Transação Dados Duis dictum nisi</a>
+                                                        </td>                                                   
+                                                        <td>
+                                                            Origem Lorem
+                                                        </td>
+                                                        <td>
+                                                            Destino Dolor
+                                                        </td>
+                                                        <td>
+                                                            Mapeamento 01
+                                                        </td>
+                                                        <td class="hidden-print">
+                                                            <a class="btn bg-silver btn-xs icon-only white" href="#" data-target="#modal-detalhes" data-toggle="modal" title="Detalhes"><i class="fa fa-search"></i></a>
+                                                            <a title="Adicionar aos Favoritos" class="btn bg-gray btn-xs icon-only white bootbox-confirm" href="#"><i class="fa fa-star"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <a href="wizard_A_01.html" title="Executar Transação de Dados">Transação Dados Nam interdum</a>
+                                                        </td>   
+                                                        <td>
+                                                            Origem Ipsum
+                                                        </td>
+                                                        <td>
+                                                            Destino Sit Amet
+                                                        </td>
+                                                        <td>
+                                                            Mapeamento 02
+                                                        </td>
+                                                        <td class="hidden-print">
+                                                            <a class="btn bg-silver btn-xs icon-only white" href="#" data-target="#modal-detalhes" data-toggle="modal" title="Detalhes"><i class="fa fa-search"></i></a>
+                                                            <a title="Adicionar aos Favoritos" class="btn bg-gray btn-xs icon-only white bootbox-confirm" href="#"><i class="fa fa-star"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <a href="wizard_A_01.html" title="Executar Transação de Dados">Transação Dados Etiam justo</a>
+                                                        </td>   
+                                                        <td>
+                                                            Origem Ipsum
+                                                        </td>
+                                                        <td>
+                                                            Destino Sit Amet
+                                                        </td>
+                                                        <td>
+                                                            Mapeamento 02
+                                                        </td>
+                                                        <td class="hidden-print">
+                                                            <a class="btn bg-silver btn-xs icon-only white" href="#" data-target="#modal-detalhes" data-toggle="modal" title="Detalhes"><i class="fa fa-search"></i></a>
+                                                            <a title="Adicionar aos Favoritos" class="btn bg-gray btn-xs icon-only white bootbox-confirm" href="#"><i class="fa fa-star"></i></a>
+                                                        </td>
+                                                    </tr>   
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        
+                                    </div>
+                                    <!-- /recentes -->
+                                    
+                                    
+                                    <!-- todos -->
+                                    <div id="todos" class="tab-pane">
+
+                                        <!-- paginacao -->       
+                                        <div class="margin-bottom-10 text-right">
+                                            <ul class="pagination pagination-sm">
+                                                <li class="disabled"><a title="Primeira" href="#">‹</a></li>
+                                                <li class="disabled"><a title="Anterior" href="#">«</a></li>                                            
+                                                <li class="active"><a href="#">1</a></li>
+                                                <li><a href="#">2</a></li>
+                                                <li><a href="#">3</a></li>
+                                                <li><a href="#">4</a></li>
+                                                <li><a href="#">5</a></li>
+                                                <li><a href="#">6</a></li>
+                                                <li><a href="#">7</a></li>
+                                                <li><a href="#">8</a></li>
+                                                <li><a href="#">9</a></li>
+                                                <li><a title="Próxima" href="#">›</a></li>                                          
+                                                <li><a title="Última" href="#">»</a></li>
+                                            </ul>
+                                            
+                                            <ul class="pagination pagination-sm margin-left-20">
+                                                <li class="active"><a title="Itens por página" href="#">10</a></li>
+                                                <li><a title="Itens por página" href="#">25</a></li>
+                                                <li><a title="Itens por página" href="#">50</a></li>
+                                                <li><a title="Itens por página" href="#">100</a></li>
+                                            </ul>
+                                        </div>
+                                        <!-- /paginacao -->
+                                
+                                        <div class="table-scrollable">
+                                            <table class="table table-striped table-bordered table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col" class="sorting_asc">
+                                                            Título
+                                                        </th>                                                   
+                                                        <th scope="col" class="sorting">
+                                                            Origem
+                                                        </th>
+                                                        <th scope="col" class="sorting">
+                                                            Destino
+                                                        </th>
+                                                        <th scope="col" class="sorting">
+                                                            Mapeamento
+                                                        </th>
+                                                        <th class="hidden-print min-width"></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <a href="wizard_A_01.html" title="Executar Transação de Dados">Transação Dados Fusce ornare</a>
+                                                        </td>                                                   
+                                                        <td>
+                                                            Origem Lorem
+                                                        </td>
+                                                        <td>
+                                                            Destino Dolor
+                                                        </td>
+                                                        <td>
+                                                            Mapeamento 01
+                                                        </td>
+                                                        <td class="hidden-print">
+                                                            <a class="btn bg-silver btn-xs icon-only white" href="#" data-target="#modal-detalhes" data-toggle="modal" title="Detalhes"><i class="fa fa-search"></i></a>
+                                                            <a title="Adicionar aos Favoritos" class="btn bg-gray btn-xs icon-only white bootbox-confirm" href="javascript:void(0);" onclick="$(this).toggleClass('bg-gold');$(this).toggleClass('bg-gray');"><i class="fa fa-star"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <a href="wizard_A_01.html" title="Executar Transação de Dados">Transação Dados Etiam in mauris</a>
+                                                        </td>   
+                                                        <td>
+                                                            Origem Ipsum
+                                                        </td>
+                                                        <td>
+                                                            Destino Sit Amet
+                                                        </td>
+                                                        <td>
+                                                            Mapeamento 02
+                                                        </td>
+                                                        <td class="hidden-print">
+                                                            <a class="btn bg-silver btn-xs icon-only white" href="#" data-target="#modal-detalhes" data-toggle="modal" title="Detalhes"><i class="fa fa-search"></i></a>
+                                                            <a title="Adicionar aos Favoritos" class="btn bg-gray btn-xs icon-only white bootbox-confirm" href="#"><i class="fa fa-star"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <a href="wizard_A_01.html" title="Executar Transação de Dados">Transação Dados Duis dictum nisi</a>
+                                                        </td>                                                   
+                                                        <td>
+                                                            Origem Lorem
+                                                        </td>
+                                                        <td>
+                                                            Destino Dolor
+                                                        </td>
+                                                        <td>
+                                                            Mapeamento 01
+                                                        </td>
+                                                        <td class="hidden-print">
+                                                            <a class="btn bg-silver btn-xs icon-only white" href="#" data-target="#modal-detalhes" data-toggle="modal" title="Detalhes"><i class="fa fa-search"></i></a>
+                                                            <a title="Adicionar aos Favoritos" class="btn bg-gray btn-xs icon-only white bootbox-confirm" href="#"><i class="fa fa-star"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <a href="wizard_A_01.html" title="Executar Transação de Dados">Transação Dados Nam interdum</a>
+                                                        </td>   
+                                                        <td>
+                                                            Origem Ipsum
+                                                        </td>
+                                                        <td>
+                                                            Destino Sit Amet
+                                                        </td>
+                                                        <td>
+                                                            Mapeamento 02
+                                                        </td>
+                                                        <td class="hidden-print">
+                                                            <a class="btn bg-silver btn-xs icon-only white" href="#" data-target="#modal-detalhes" data-toggle="modal" title="Detalhes"><i class="fa fa-search"></i></a>
+                                                            <a title="Adicionar aos Favoritos" class="btn bg-gray btn-xs icon-only white bootbox-confirm" href="#"><i class="fa fa-star"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <a href="wizard_A_01.html" title="Executar Transação de Dados">Transação Dados Etiam justo</a>
+                                                        </td>   
+                                                        <td>
+                                                            Origem Ipsum
+                                                        </td>
+                                                        <td>
+                                                            Destino Sit Amet
+                                                        </td>
+                                                        <td>
+                                                            Mapeamento 02
+                                                        </td>
+                                                        <td class="hidden-print">
+                                                            <a class="btn bg-silver btn-xs icon-only white" href="#" data-target="#modal-detalhes" data-toggle="modal" title="Detalhes"><i class="fa fa-search"></i></a>
+                                                            <a title="Adicionar aos Favoritos" class="btn bg-gray btn-xs icon-only white bootbox-confirm" href="#"><i class="fa fa-star"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <a href="wizard_A_01.html" title="Executar Transação de Dados">Transação Dados Fusce ornare</a>
+                                                        </td>                                                   
+                                                        <td>
+                                                            Origem Lorem
+                                                        </td>
+                                                        <td>
+                                                            Destino Dolor
+                                                        </td>
+                                                        <td>
+                                                            Mapeamento 01
+                                                        </td>
+                                                        <td class="hidden-print">
+                                                            <a class="btn bg-silver btn-xs icon-only white" href="#" data-target="#modal-detalhes" data-toggle="modal" title="Detalhes"><i class="fa fa-search"></i></a>
+                                                            <a title="Adicionar aos Favoritos" class="btn bg-gray btn-xs icon-only white bootbox-confirm" href="#"><i class="fa fa-star"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <a href="wizard_A_01.html" title="Executar Transação de Dados">Transação Dados Etiam in mauris</a>
+                                                        </td>   
+                                                        <td>
+                                                            Origem Ipsum
+                                                        </td>
+                                                        <td>
+                                                            Destino Sit Amet
+                                                        </td>
+                                                        <td>
+                                                            Mapeamento 02
+                                                        </td>
+                                                        <td class="hidden-print">
+                                                            <a class="btn bg-silver btn-xs icon-only white" href="#" data-target="#modal-detalhes" data-toggle="modal" title="Detalhes"><i class="fa fa-search"></i></a>
+                                                            <a title="Adicionar aos Favoritos" class="btn bg-gray btn-xs icon-only white bootbox-confirm" href="#"><i class="fa fa-star"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <a href="wizard_A_01.html" title="Executar Transação de Dados">Transação Dados Duis dictum nisi</a>
+                                                        </td>                                                   
+                                                        <td>
+                                                            Origem Lorem
+                                                        </td>
+                                                        <td>
+                                                            Destino Dolor
+                                                        </td>
+                                                        <td>
+                                                            Mapeamento 01
+                                                        </td>
+                                                        <td class="hidden-print">
+                                                            <a class="btn bg-silver btn-xs icon-only white" href="#" data-target="#modal-detalhes" data-toggle="modal" title="Detalhes"><i class="fa fa-search"></i></a>
+                                                            <a title="Adicionar aos Favoritos" class="btn bg-gray btn-xs icon-only white bootbox-confirm" href="#"><i class="fa fa-star"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <a href="wizard_A_01.html" title="Executar Transação de Dados">Transação Dados Nam interdum</a>
+                                                        </td>   
+                                                        <td>
+                                                            Origem Ipsum
+                                                        </td>
+                                                        <td>
+                                                            Destino Sit Amet
+                                                        </td>
+                                                        <td>
+                                                            Mapeamento 02
+                                                        </td>
+                                                        <td class="hidden-print">
+                                                            <a class="btn bg-silver btn-xs icon-only white" href="#" data-target="#modal-detalhes" data-toggle="modal" title="Detalhes"><i class="fa fa-search"></i></a>
+                                                            <a title="Adicionar aos Favoritos" class="btn bg-gray btn-xs icon-only white bootbox-confirm" href="#"><i class="fa fa-star"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <a href="wizard_A_01.html" title="Executar Transação de Dados">Transação Dados Etiam justo</a>
+                                                        </td>   
+                                                        <td>
+                                                            Origem Ipsum
+                                                        </td>
+                                                        <td>
+                                                            Destino Sit Amet
+                                                        </td>
+                                                        <td>
+                                                            Mapeamento 02
+                                                        </td>
+                                                        <td class="hidden-print">
+                                                            <a class="btn bg-silver btn-xs icon-only white" href="#" data-target="#modal-detalhes" data-toggle="modal" title="Detalhes"><i class="fa fa-search"></i></a>
+                                                            <a title="Adicionar aos Favoritos" class="btn bg-gray btn-xs icon-only white bootbox-confirm" href="#"><i class="fa fa-star"></i></a>
+                                                        </td>
+                                                    </tr>   
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        
+                                        <!-- paginacao -->       
+                                        <div class="margin-top-10 text-right">
+                                            <ul class="pagination pagination-sm">
+                                                <li class="disabled"><a title="Primeira" href="#">‹</a></li>
+                                                <li class="disabled"><a title="Anterior" href="#">«</a></li>                                            
+                                                <li class="active"><a href="#">1</a></li>
+                                                <li><a href="#">2</a></li>
+                                                <li><a href="#">3</a></li>
+                                                <li><a href="#">4</a></li>
+                                                <li><a href="#">5</a></li>
+                                                <li><a href="#">6</a></li>
+                                                <li><a href="#">7</a></li>
+                                                <li><a href="#">8</a></li>
+                                                <li><a href="#">9</a></li>
+                                                <li><a title="Próxima" href="#">›</a></li>                                          
+                                                <li><a title="Última" href="#">»</a></li>
+                                            </ul>
+                                            
+                                            <ul class="pagination pagination-sm margin-left-20">
+                                                <li class="active"><a title="Itens por página" href="#">10</a></li>
+                                                <li><a title="Itens por página" href="#">25</a></li>
+                                                <li><a title="Itens por página" href="#">50</a></li>
+                                                <li><a title="Itens por página" href="#">100</a></li>
+                                            </ul>
+                                        </div>
+                                        <!-- /paginacao -->
+                                        
+                                    </div>
+                                    <!-- /todos -->                                     
+                                    
+                                </div>
+                                <!-- /tab-content -->
+                                
+                                
+                            </div>
+                            <!-- /tabbable -->
+                            
                         </div>
                     </div>
-				</div>
+                </div>
                 <!-- /Page Body -->
             </div>
             <!-- /Page Content -->
@@ -407,10 +1272,10 @@ Purchase: http://wrapbootstrap.com
         <!-- /Page Container -->
 
     </div>
-	<!-- /Main Container -->
-
-	
-	
+    <!-- Main Container -->
+    
+    
+    
     <!--Modal Detalhes-->
     <div id="modal-detalhes" class="modal fade" style="display: none;" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -421,231 +1286,231 @@ Purchase: http://wrapbootstrap.com
                 </div>
 
                 <div class="modal-body">
-					<!-- secao -->
-					<div class="row">
-						<div class="col-sm-12">
-							<h6><strong>Título</strong></h6>
-							<h5>Transação Dados 01</h5>
-						</div>
-					</div>
-					<!-- /secao -->
-					
-					<!-- secao -->
-					<h6><strong>Origem</strong></h6>
-					<hr class="no-margin"/>
-					<div class="row">
-						<div class="col-sm-6">
-							<h6>Nome</h6>
-							<h5>Origem 01</h5>
-						</div>
-						<div class="col-sm-6">
-							<h6>Conector</h6>
-							<h5>CBI</h5>
-						</div>							
-					</div>
-					<div class="row">
-						<div class="col-sm-6">
-							<h6>URL</h6>
-							<h5>localhost</h5>
-						</div>
-						<div class="col-sm-6" style="display: none;">
-							<h6>Porta</h6>
-							<h5>8080</h5>
-						</div>					
-					</div>
-					<!-- /secao -->
-					
-					<!-- secao -->
-					<h6><strong>Destino</strong></h6>
-					<hr class="no-margin"/>
-					<div class="row">
-						<div class="col-sm-6">
-							<h6>Nome</h6>
-							<h5>Destino 01</h5>
-						</div>
-						<div class="col-sm-6">
-							<h6>Conector</h6>
-							<h5>MySQL</h5>
-						</div>							
-					</div>
-					<div class="row">
-						<div class="col-sm-6">
-							<h6>URL</h6>
-							<h5>www.tcis.calndra.br/biserver-web/painel</h5>
-						</div>
-						<div class="col-sm-6">
-							<h6>Porta</h6>
-							<h5>8080</h5>
-						</div>							
-					</div>
-					<div class="row">
-						<div class="col-sm-6">
-							<h6>Usuário</h6>
-							<h5>root</h5>
-						</div>
-						<div class="col-sm-6" style="display: none;">
-							<h6>Senha</h6>
-							<h5>************</h5>
-						</div>							
-					</div>					
-					<!-- /secao -->
-					
-					<!-- secao -->
-					<h6><strong>Mapeamento</strong></h6>
-					<hr class="no-margin"/>
-					
-					<h5>Mapeamento 01</h5>
-					<table class="table table-hover table-striped table-bordered table-condensed">
-						<thead>
-							<tr>
-								<th class="min-width">Chave<br/>Única</th>
-								<th>Nome</th>								
-								<th class="text-center">Tipo</th>
-								<th>Variável CBI</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td class="text-center">
-									<i class="fa fa-check silver"></i>
-								</td>
-								<td>
-									Data de Admissão
-								</td>
-								<td class="text-center">
-									data
-								</td>
-								<td>
-									datadeadmissao_tdt
-								</td>								
-							</tr>
-							<tr>
-								<td class="text-center">
-									<i class="fa fa-check silver"></i>
-								</td>
-								<td>
-									Funcionário
-								</td>
-								<td class="text-center">
-									texto
-								</td>
-								<td>
-									funcionario_s
-								</td>	
-							</tr>
-							<tr>
-								<td class="text-center">
-									<i class="fa fa-check silver"></i>
-								</td>
-								<td>
-									Salário
-								</td>
-								<td class="text-center">
-									número
-								</td>
-								<td>
-									salario_b
-								</td>	
-							</tr>
-							<tr>
-								<td class="text-center">
-									<i class="fa fa-check silver"></i>
-								</td>
-								<td>
-									Data de Admissão
-								</td>
-								<td class="text-center">
-									data
-								</td>
-								<td>
-									datadeadmissao_tdt
-								</td>								
-							</tr>
-							<tr>
-								<td class="text-center">
-									<i class="fa fa-check silver"></i>
-								</td>
-								<td>
-									Funcionário
-								</td>
-								<td class="text-center">
-									texto
-								</td>
-								<td>
-									funcionario_s
-								</td>	
-							</tr>
-							<tr>
-								<td class="text-center">
-									<i class="fa fa-check silver"></i>
-								</td>
-								<td>
-									Salário
-								</td>
-								<td class="text-center">
-									número
-								</td>
-								<td>
-									salario_b
-								</td>	
-							</tr>
-							<tr>
-								<td class="text-center">
-									<i class="fa fa-check silver"></i>
-								</td>
-								<td>
-									Data de Admissão
-								</td>
-								<td class="text-center">
-									data
-								</td>
-								<td>
-									datadeadmissao_tdt
-								</td>								
-							</tr>
-							<tr>
-								<td class="text-center">
-									<i class="fa fa-check silver"></i>
-								</td>
-								<td>
-									Funcionário
-								</td>
-								<td class="text-center">
-									texto
-								</td>
-								<td>
-									funcionario_s
-								</td>	
-							</tr>
-							<tr>
-								<td class="text-center">
-									<i class="fa fa-check silver"></i>
-								</td>
-								<td>
-									Salário
-								</td>
-								<td class="text-center">
-									número
-								</td>
-								<td>
-									salario_b
-								</td>	
-							</tr>
-						</tbody>
-					</table>
-				
-					<!-- /secao -->					
-				
-				</div>
+                    <!-- secao -->
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h6><strong>Título</strong></h6>
+                            <h5>Transação Dados 01</h5>
+                        </div>
+                    </div>
+                    <!-- /secao -->
+                    
+                    <!-- secao -->
+                    <h6><strong>Origem</strong></h6>
+                    <hr class="no-margin"/>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h6>Nome</h6>
+                            <h5>Origem 01</h5>
+                        </div>
+                        <div class="col-sm-6">
+                            <h6>Conector</h6>
+                            <h5>CBI</h5>
+                        </div>                          
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h6>URL</h6>
+                            <h5>localhost</h5>
+                        </div>
+                        <div class="col-sm-6" style="display: none;">
+                            <h6>Porta</h6>
+                            <h5>8080</h5>
+                        </div>                  
+                    </div>
+                    <!-- /secao -->
+                    
+                    <!-- secao -->
+                    <h6><strong>Destino</strong></h6>
+                    <hr class="no-margin"/>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h6>Nome</h6>
+                            <h5>Destino 01</h5>
+                        </div>
+                        <div class="col-sm-6">
+                            <h6>Conector</h6>
+                            <h5>MySQL</h5>
+                        </div>                          
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h6>URL</h6>
+                            <h5>www.tcis.calndra.br/biserver-web/painel</h5>
+                        </div>
+                        <div class="col-sm-6">
+                            <h6>Porta</h6>
+                            <h5>8080</h5>
+                        </div>                          
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h6>Usuário</h6>
+                            <h5>root</h5>
+                        </div>
+                        <div class="col-sm-6" style="display: none;">
+                            <h6>Senha</h6>
+                            <h5>************</h5>
+                        </div>                          
+                    </div>                  
+                    <!-- /secao -->
+                    
+                    <!-- secao -->
+                    <h6><strong>Mapeamento</strong></h6>
+                    <hr class="no-margin"/>
+                    
+                    <h5>Mapeamento 01</h5>
+                    <table class="table table-hover table-striped table-bordered table-condensed">
+                        <thead>
+                            <tr>
+                                <th class="min-width">Chave<br/>Única</th>
+                                <th>Nome</th>                               
+                                <th class="text-center">Tipo</th>
+                                <th>Variável CBI</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-center">
+                                    <i class="fa fa-check silver"></i>
+                                </td>
+                                <td>
+                                    Data de Admissão
+                                </td>
+                                <td class="text-center">
+                                    data
+                                </td>
+                                <td>
+                                    datadeadmissao_tdt
+                                </td>                               
+                            </tr>
+                            <tr>
+                                <td class="text-center">
+                                    <i class="fa fa-check silver"></i>
+                                </td>
+                                <td>
+                                    Funcionário
+                                </td>
+                                <td class="text-center">
+                                    texto
+                                </td>
+                                <td>
+                                    funcionario_s
+                                </td>   
+                            </tr>
+                            <tr>
+                                <td class="text-center">
+                                    <i class="fa fa-check silver"></i>
+                                </td>
+                                <td>
+                                    Salário
+                                </td>
+                                <td class="text-center">
+                                    número
+                                </td>
+                                <td>
+                                    salario_b
+                                </td>   
+                            </tr>
+                            <tr>
+                                <td class="text-center">
+                                    <i class="fa fa-check silver"></i>
+                                </td>
+                                <td>
+                                    Data de Admissão
+                                </td>
+                                <td class="text-center">
+                                    data
+                                </td>
+                                <td>
+                                    datadeadmissao_tdt
+                                </td>                               
+                            </tr>
+                            <tr>
+                                <td class="text-center">
+                                    <i class="fa fa-check silver"></i>
+                                </td>
+                                <td>
+                                    Funcionário
+                                </td>
+                                <td class="text-center">
+                                    texto
+                                </td>
+                                <td>
+                                    funcionario_s
+                                </td>   
+                            </tr>
+                            <tr>
+                                <td class="text-center">
+                                    <i class="fa fa-check silver"></i>
+                                </td>
+                                <td>
+                                    Salário
+                                </td>
+                                <td class="text-center">
+                                    número
+                                </td>
+                                <td>
+                                    salario_b
+                                </td>   
+                            </tr>
+                            <tr>
+                                <td class="text-center">
+                                    <i class="fa fa-check silver"></i>
+                                </td>
+                                <td>
+                                    Data de Admissão
+                                </td>
+                                <td class="text-center">
+                                    data
+                                </td>
+                                <td>
+                                    datadeadmissao_tdt
+                                </td>                               
+                            </tr>
+                            <tr>
+                                <td class="text-center">
+                                    <i class="fa fa-check silver"></i>
+                                </td>
+                                <td>
+                                    Funcionário
+                                </td>
+                                <td class="text-center">
+                                    texto
+                                </td>
+                                <td>
+                                    funcionario_s
+                                </td>   
+                            </tr>
+                            <tr>
+                                <td class="text-center">
+                                    <i class="fa fa-check silver"></i>
+                                </td>
+                                <td>
+                                    Salário
+                                </td>
+                                <td class="text-center">
+                                    número
+                                </td>
+                                <td>
+                                    salario_b
+                                </td>   
+                            </tr>
+                        </tbody>
+                    </table>
+                
+                    <!-- /secao -->                 
+                
+                </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>					
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>                  
                 </div>
             </div>
         </div>
     </div>
     <!--/Modal Detalhes-->
-	
-	
+    
+    
     <!--Modal Seleciona arquivo-->
     <div id="modal-seleciona_arquivo" class="modal fade" style="display: none;" aria-hidden="true">
         <div class="modal-dialog">
@@ -656,37 +1521,33 @@ Purchase: http://wrapbootstrap.com
                 </div>
 
                 <div class="modal-body">
-				
-					<!-- validacao -->
-					<div role="alert" class="alert alert-warning alert-dismissible" style="display: none;">
-						<h5>A seleção do arquivo é obrigatória.</h5>
-						<h5>O tipo de arquivo selecionado é incorreto.</h5>
-					</div>
-					<!-- /validacao -->
-				
-					<div class="row">
-						<div class="col-sm-12">
-							<p>Você deve selecionar um arquivo do tipo "CSV" para executar essa transação:</p>
-							<p><input type="file"/></p>
-						</div>
-					</div>
-				
-				</div>
+                
+                    <!-- validacao -->
+                    <div role="alert" class="alert alert-warning alert-dismissible" style="display: none;">
+                        <h5>A seleção do arquivo é obrigatória.</h5>
+                        <h5>O tipo de arquivo selecionado é incorreto.</h5>
+                    </div>
+                    <!-- /validacao -->
+                
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <p>Você deve selecionar um arquivo do tipo "CSV" para executar essa transação:</p>
+                            <p><input type="file"/></p>
+                        </div>
+                    </div>
+                
+                </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>					
-					<a href="#" class="btn btn-primary" onclick="$(this).parents('.modal-content').find('.modal-body .alert').toggle();">Prosseguir</a>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>                    
+                    <a href="#" class="btn btn-primary" onclick="$(this).parents('.modal-content').find('.modal-body .alert').toggle();">Prosseguir</a>
                 </div>
             </div>
         </div>
     </div>
-    <!--/Modal Seleciona arquivo-->	
-	
-	
-	<?php include_once "components/transaction-list/template.html"; ?>
-    <?php include_once "components/transaction-item/template.html"; ?>
-	
-	
-	
+    <!--/Modal Seleciona arquivo--> 
+    
+    
+
     <!--Basic Scripts-->
     <script src="../assets/js/jquery-2.0.3.min.js"></script>
     <script src="../assets/js/bootstrap.min.js"></script>
@@ -697,23 +1558,9 @@ Purchase: http://wrapbootstrap.com
 
 
     <!--Page Related Scripts-->
-	<script src="../assets/js/bootbox/bootbox.js"></script>        
-    <script src="../assets/js/fuelux/wizard/wizard-custom.js"></script>
+    <script src="../assets/js/bootbox/bootbox.js"></script>
 
-    <script src="vendor/underscore/underscore-min.js" type="text/javascript"></script>
-    <script src="vendor/backbone/backbone-min.js" type="text/javascript"></script>
-    <script src="vendor/jfeldstein/jQuery.AjaxFileUpload.js/jQuery.AjaxFileUpload.js" type="text/javascript"></script>
-
-    <script type="text/javascript" src="config.js"></script>
-
-    <script type="text/javascript" src="models.js"></script>
-    <script type="text/javascript" src="components/transaction-item/view.js"></script>
-    <script type="text/javascript" src="components/transaction-list/view.js"></script>
-    <script type="text/javascript" src="components/start-transaction/view.js"></script>
-    
-
-    <script type="text/javascript" src="app.js"></script>
-    <script type="text/javascript" src="init.js"></script>
+    <?php include_once "app.php"; ?>
 
     <script>
         // If you want to draw your charts with Theme colors you must run initiating charts after that current skin is loaded
@@ -727,22 +1574,20 @@ Purchase: http://wrapbootstrap.com
             themefifthcolor = getThemeColorFromCss('themefifthcolor');
 
             //-------------------------bootbox-confirm------------------//
-			$(".cancelar-confirm").on('click', function () {
-				bootbox.confirm("Tem certeza que deseja cancelar a execução de 'Transação Dados 06' ?", function (result) {
-					if (result) {
-						
-					}
-				});
-			});
-			
+            $(".cancelar-confirm").on('click', function () {
+                bootbox.confirm("Tem certeza que deseja cancelar a execução de 'Transação Dados 06' ?", function (result) {
+                    if (result) {
+                        
+                    }
+                });
+            });
+
         });
+
     </script>
     
-
-
 
 
 </body>
 <!--  /Body -->
 </html>
-

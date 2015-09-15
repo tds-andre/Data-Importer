@@ -1,0 +1,66 @@
+<script type="text/template" id="new-dataset-template">
+<div class="widget-header bg-seashell js-new-dataset-header">
+	<div class="widget-buttons buttons-bordered hidden-print" style="display:none">
+		<span><a class="btn btn-primary btn-md js-new-dataset-edit-button">Editar</a></span>
+	</div>
+	<div class="widget-buttons buttons-bordered hidden-print">
+		<span><a class="btn btn-primary btn-md js-new-dataset-save-button">Salvar</a></span>
+	</div>									
+	<div class="widget-buttons buttons-bordered hidden-print">									
+		<span><a class="btn btn-default btn-sm js-new-dataset-cancel-button">Cancelar</a></span>		
+	</div>									
+</div>
+	<fieldset class="bordered">
+		<div>
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label for="new-dataset-name" class="control-label">Nome <sup>*</sup></label>
+						<span contenteditable="true" type="text" class="form-control" id="new-dataset-name">
+					</div>
+				</div>
+				<div class="col-sm-6 col-md-3">
+					<div class="form-group">
+						<label for="new-dataset-conector-select" class="control-label">Conector <sup>*</sup></label>
+						<select class="form-control" name="new-dataset-conector-select" >		
+							<option>CSV</option>
+							<option>MySQL</option>
+							<option>SOLR</option>
+						</select>
+					</div>
+				</div>							
+			</div>
+			
+			<!--<div class="row">
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label for="0005" class="control-label">URL <sup>*</sup></label>
+						<input type="text" class="form-control" name="0005">
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div class="form-group">
+						<label for="0006" class="control-label">Porta <sup>*</sup></label>
+						<input type="text" class="form-control" id="0006">
+					</div>
+				</div>												
+			</div>
+			
+			<div class="row">
+				<div class="col-sm-6 col-md-3">
+					<div class="form-group">
+						<label for="0007" class="control-label">Usuário <sup>*</sup></label>
+						<input type="text" class="form-control" id="0007">
+					</div>
+				</div>
+				<div class="col-sm-6 col-md-3">
+					<div class="form-group">
+						<label for="0008" class="control-label">Senha <sup>*</sup></label>
+						<input type="password" class="form-control" id="0008">
+					</div>
+				</div>												
+			</div>													
+		</div>
+		-->
+	</fieldset>
+</script>
