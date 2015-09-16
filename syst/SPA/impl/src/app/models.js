@@ -62,6 +62,17 @@ var app = app || {};
 //------------------------------------------------------------------------------//
 //------------------------------------------------------------------------------//
 
+	app.DatasetTypeEnum = {
+		"csv": { ordinal: 0, caption: "CSV"},
+		"solr": { ordinal: 0, caption: "Solr"}
+	}
+	app.SourceableDatasetTypes = ["csv"];
+	app.TargetableDatasetType = ["solr"];
+
+//------------------------------------------------------------------------------//
+//------------------------------------------------------------------------------//
+//------------------------------------------------------------------------------//
+
 	app.MappingModel = app.BaseModel.extend({defaults:{name: "Sem nome"}});
 	app.DatasetModel = app.BaseModel.extend({defaults:{name: "Sem nome"}});
 	app.ServerModel = app.BaseModel.extend({defaults:{name: "Sem nome"}});

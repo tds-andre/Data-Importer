@@ -7,9 +7,52 @@ $(function () {
     app.placeholderId = "#main-content-placeholder";
     app.$placeholder = $(app.placeholderId);
     app.$title = $("#main-content-title");
+    app.$validation = $("#validation-modal");
     app.activeView = {destroy: function(){}};
 
     //compact view for the breadcrumb
+    app.views.validation = {
+        $el: app.$validation ,
+        $body: null,
+        $title: null,
+        $button: null,
+        $icon: null,
+        warn: function(msg){
+            this.$el.removeClass("modal-success");
+            this.$el.addClass("modal-warning");
+            this.$icon.removeClass("glyphicon-check");
+            this.$icon.removeClass("glyphicon");
+            this.$icon.addClass("fa");
+            this.$icon.addClass("fa-warning");   
+            this.$body.html(msg);
+            this.$el.modal("show");
+            this.$title.html("Atenção");
+            this.$button.removeClass("btn-success");
+            this.$button.addClass("btn-warning")
+        },
+
+        success: function(msg){      
+            this.$el.removeClass("modal-warning");
+            this.$el.addClass("modal-success");
+            this.$icon.removeClass("fa-warning");
+            this.$icon.removeClass("fa");
+            this.$icon.addClass("glyphicon-check");
+            this.$icon.addClass("glyphicon");            
+            this.$body.html(msg);
+            this.$title.html("Sucesso")
+            this.$el.modal("show");
+            this.$button.removeClass("btn-warning");
+            this.$button.addClass("btn-success")
+        },
+        init: function(){
+            this.$body = this.$el.find(".modal-body");
+            this.$title = this.$el.find(".modal-title");
+            this.$button = this.$el.find(".btn");
+            this.$icon = this.$el.find(".fa");
+        }
+    },
+    app.views.validation.init();
+
     app.views.breadcrumb = {
     	$el: $("#main-breadcrumb"),
     	set: function(strings){
