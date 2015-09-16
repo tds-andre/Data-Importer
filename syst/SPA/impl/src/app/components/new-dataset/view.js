@@ -71,7 +71,9 @@ var app = app || {};
 		// -------------------------------------------------------------------------------- //
 
 		cancelClicked: function(ev){},
-		saveClicked: function(ev){},
+		saveClicked: function(ev){
+			this.model.set("name")
+		},
 		editClicked: function(ev){},
 		datasetTypeSelected: function(ev){
 			this.datasetType = $(ev.currentTarget).val();
