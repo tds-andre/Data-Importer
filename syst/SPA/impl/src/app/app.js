@@ -89,6 +89,11 @@ $(function () {
 	  do { curDate = new Date(); }
 	  while(curDate-date < millis);
 	}
+    app.isDefined(obj){
+        if(obj==null || obj=="undefined" || obj == "")
+            return false;
+        return true;
+    }
 
 
 	//navigation
@@ -106,9 +111,21 @@ $(function () {
 		app.activeView = app.startTransactionView;
 	}
 	app.navigation.showNewOrigin = function(args){
+        var 
+            view = null;
 		app.navigation.views.newOrigin = {};
-		app.navigation.views.newOrigin.view = new app.NewDatasetView({el: app.placeholderId});
-        app.navigation.views.newOrigin.view.start();
+        view = new app.NewDatasetView({el: app.placeholderId});
+		app.navigation.views.newOrigin.view = view;
+        view.on("new", function(){
+            app.views.validation.warn("Dataset de origem criado com successo");
+            //app.navigation.to("OriginList");
+        });
+        view.on("error", function(e){
+            app.views.validation.warn("Erro na criação.")
+            console.log(e);
+        });
+        view.start();
+
 	};
 	app.navigation.to = function (route, args){
 		var
@@ -116,6 +133,7 @@ $(function () {
 			args = args ? args : {};
 		fn(args);
 	}
+
 	
 
 	//initialization

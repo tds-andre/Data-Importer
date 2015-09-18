@@ -55,19 +55,32 @@ var app = app || {};
  		},
  		parse: function(response){
  			return response._embedded[this.path];
+ 		},
+ 		persist: function(model,args){
+ 			args = args ? args : {};
+ 			$.ajax({
+ 				url: this.url(), 
+ 				type: "POST", 
+ 				contentType: "application/json", 
+ 				data: JSON.stringify(model.toJSON(), 
+ 				success: function(ev){
+ 					if(args.success)
+ 						args.success(ev,model);
+ 				},
+ 				error: function(a,b,c){
+ 					if(args.error)
+ 						args.error(a,b,c);
+ 				},
+ 				complete: function(a,b,c){
+ 					if(args.complete)
+ 						args.complete(a,b,c);
+ 					console.log(a,b,c)
+ 				}
+ 			});
  		}
+ 			
+ 		
 	});
-
-//------------------------------------------------------------------------------//
-//------------------------------------------------------------------------------//
-//------------------------------------------------------------------------------//
-
-	app.DatasetTypeEnum = {
-		"csv": { ordinal: 0, caption: "CSV"},
-		"solr": { ordinal: 0, caption: "Solr"}
-	}
-	app.SourceableDatasetTypes = ["csv"];
-	app.TargetableDatasetType = ["solr"];
 
 //------------------------------------------------------------------------------//
 //------------------------------------------------------------------------------//
@@ -169,7 +182,20 @@ var app = app || {};
 		}
 	});
 
+//------------------------------------------------------------------------------//
+//------------------------------------------------------------------------------//
+//------------------------------------------------------------------------------//
 
+	app.DatasetTypeEnum = {
+		"csv": { ordinal: 0, caption: "CSV", model: app.CsvModel},
+		"solr": { ordinal: 0, caption: "Solr", model: null}
+	}
+	app.SourceableDatasetTypes = ["csv"];
+	app.TargetableDatasetType = ["solr"];
+
+//------------------------------------------------------------------------------//
+//------------------------------------------------------------------------------//
+//------------------------------------------------------------------------------//
 
 
 	

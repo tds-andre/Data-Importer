@@ -72,7 +72,41 @@ var app = app || {};
 
 		cancelClicked: function(ev){},
 		saveClicked: function(ev){
-			this.model.set("name")
+			var
+				name = $(".js-new-dataset-name"),
+				col;
+			if(name==""){
+				this.trigger("error",{message: "Nomo não pode ser vazio!"});
+				return;
+			}
+			if(app.isDefined(datasetType)){
+				this.trigger("error",{message: "Selecione o conector!"});
+				return;
+			}
+
+			this.model = new app.DatasetTypeEnum[this.datasetType].model();
+			this.model.set("name", name);
+			switch(this.datasetType){
+				case "csv":
+					this.model.set("fieldSeparator", );
+					this.model.set("lineSeparator", )
+				/*this.model.save({ 
+						name: name,
+						fieldSeparator: $(".js-new-dataset-csv-field-separator") ,
+						lineSeparator: $(".js-new-dataset-csv-line-separator")
+					}, 
+					{
+						success: function(s){
+							this.trigger("new", this.model);
+						}, 
+						error: function(a,b,c) {
+							this.trigger("error", {model: this.model, message: "Error ao salvar dataset"});
+						}
+					});*/
+					break;
+				case "solr":
+					break;
+			}
 		},
 		editClicked: function(ev){},
 		datasetTypeSelected: function(ev){
