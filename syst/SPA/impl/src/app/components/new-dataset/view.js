@@ -73,23 +73,33 @@ var app = app || {};
 		cancelClicked: function(ev){},
 		saveClicked: function(ev){
 			var
-				name = $(".js-new-dataset-name"),
-				col;
-			if(name==""){
+				name = $(".js-new-dataset-name").val(),				
+				server,
+				self = this;
+			if(!app.isDefined(name)){
 				this.trigger("error",{message: "Nomo não pode ser vazio!"});
 				return;
 			}
-			if(app.isDefined(datasetType)){
+			if(!app.isDefined(this.datasetType)){
 				this.trigger("error",{message: "Selecione o conector!"});
 				return;
 			}
-
+			
 			this.model = new app.DatasetTypeEnum[this.datasetType].model();
 			this.model.set("name", name);
 			switch(this.datasetType){
 				case "csv":
-					this.model.set("fieldSeparator", );
-					this.model.set("lineSeparator", )
+					this.model.set("fieldSeparator", $(".js-new-dataset-csv-field-separator").val());
+					this.model.set("lineSeparator", $(".js-new-dataset-csv-line-separator").val());
+					server = new app.LocalServerModel();
+					server.set("name", name + " - Server");
+					app.collections.localServer.persist(server,{success: function(e){						
+						self.model.set("server", server.href);
+						app.collections.csv.persist(self.model, {success: function(ee){
+							self.trigger("new");
+						}});
+					}});
+					
 				/*this.model.save({ 
 						name: name,
 						fieldSeparator: $(".js-new-dataset-csv-field-separator") ,

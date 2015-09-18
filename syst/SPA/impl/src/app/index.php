@@ -32,7 +32,7 @@ Purchase: http://wrapbootstrap.com
     <link href="../assets/css/demo.min.css" rel="stylesheet" />
     <link href="../assets/css/typicons.min.css" rel="stylesheet" />
     <link href="../assets/css/animate.min.css" rel="stylesheet" />
-    <link href="../assets/css/skins/calandra.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/css/skins/mais.css" rel="stylesheet" type="text/css" />
     
     <!--Page Related styles-->
     <link href="../assets/css/dataTables.bootstrap.css" rel="stylesheet" />
@@ -412,14 +412,14 @@ Purchase: http://wrapbootstrap.com
                         </a>
                         
                         <ul class="submenu">
-                            <li>
+                            <li id="origins-list-button">
                                 <a href="#">
-                                    <span class="menu-text">Consultar</span>
+                                    <span class="menu-text" >Consultar</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="#" id="new-origin-button">
-                                    <span class="menu-text">Nova</span>
+                            <li id="new-origin-button">
+                                <a href="#">
+                                    <span class="menu-text" >Nova</span>
                                 </a>
                             </li>
                         </ul>
@@ -482,16 +482,16 @@ Purchase: http://wrapbootstrap.com
                     <ul class="breadcrumb" id="main-breadcrumb">
                         <li>
                             <i class="fa fa-home"></i>
-                            <a href="index_admin.html">Data Importer</a>
+                            <a href="index.php">Data Importer</a>
                         </li>
-                        <li class="active">Principal</li>                        
+                        <li class="active">Principal</li>
                     </ul>
                 </div>
                 <!-- /Page Breadcrumb -->
                 <!-- Page Header -->
                 <div class="page-header position-relative hidden-print">
-                    <div class="header-title" id="main-content-title">
-                        <h1>
+                    <div class="header-title">
+                        <h1 id="main-content-title">
                             Principal
                         </h1>
                     </div>
@@ -1559,7 +1559,6 @@ Purchase: http://wrapbootstrap.com
 
     <!--Page Related Scripts-->
     <script src="../assets/js/bootbox/bootbox.js"></script>
-
     <?php include_once "app.php"; ?>
 
     <script>

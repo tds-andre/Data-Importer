@@ -3,6 +3,9 @@
 <?php include_once "components/transaction-item/template.html"; ?>
 <?php include_once "components/start-transaction/template.html"; ?>
 <?php include_once "components/new-dataset/template.html"; ?>
+<?php include_once "components/dataset-list/template.html"; ?>
+<?php include_once "components/dataset-list-item/template.html"; ?>
+
 
 
 <div id="validation-modal" class="modal modal-message fade" style="display: none;" aria-hidden="true">
@@ -38,7 +41,12 @@
 <script type="text/javascript" src="components/transaction-list/view.js"></script>
 <script type="text/javascript" src="components/start-transaction/view.js"></script>
 <script type="text/javascript" src="components/new-dataset/view.js"></script>
+<script type="text/javascript" src="components/dataset-list/view.js"></script>
+<script type="text/javascript" src="components/dataset-list-item/view.js"></script>
+
 
 <!--App & Initialization-->
+<script type="text/javascript" src="routes.js"></script>
 <script type="text/javascript" src="app.js"></script>
-<script type="text/javascript" src="init.js"></script>
+
+

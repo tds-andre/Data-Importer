@@ -33,7 +33,11 @@
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label class="control-label" for="line">Separador de linha </label>
-							<input type="text" name="line" class="form-control js-new-dataset-csv-line-separator" value="\r\n">
+							<select name="line" class="form-control select js-new-dataset-csv-line-separator">
+								<option value="&#14&#10" selected>Windows</option>
+								<option value "&#10">Unix</option>								
+							</select>
+
 						</div>
 					</div>
 					<div class="col-sm-3">

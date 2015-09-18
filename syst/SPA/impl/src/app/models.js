@@ -10,12 +10,16 @@ var app = app || {};
 	app.BaseModel = Backbone.Model.extend({
 		nested: {},
 		inherited: {},
+		setIdentity: function(url){
+			var
+				ss = url.split("/");
+			this.href = url;
+			this.id = ss[ss.length-1];
+
+		},
 		parse: function(a){
-			try{
-				this.href = a._links.self.href;
-				var ss = this.href.split("/");
-				this.id = ss[ss.length-1];
-			}catch(e){}
+			console.log("model parse: ", a);
+			this.setIdentity(a._links.self.href);			
 			return a;
 		},
 		nestedFetch: function(_args){
@@ -54,7 +58,21 @@ var app = app || {};
  		   return app.config.serverUrl + '/' + this.path;
  		},
  		parse: function(response){
- 			return response._embedded[this.path];
+ 			
+ 			var 
+ 				arrays = response._embedded[this.path],
+ 				result = [],
+ 				i = 0,
+ 				key;
+ 			for(key in arrays){
+ 				for(i = 0; i < arrays.key.length; i++){
+ 					arrays.key[i].typePath = key;
+ 					result.push(arrays.key[i]);
+ 				}
+ 			} 			
+ 			console.log("BaseCollection.parse, response:", response);
+ 			console.log("BaseCollection.parse, result:", result);
+ 			return result;
  		},
  		persist: function(model,args){
  			args = args ? args : {};
@@ -62,19 +80,21 @@ var app = app || {};
  				url: this.url(), 
  				type: "POST", 
  				contentType: "application/json", 
- 				data: JSON.stringify(model.toJSON(), 
- 				success: function(ev){
+ 				data: JSON.stringify(model.toJSON()),  
+ 				success: function(data,status,xhr){
+ 					model.setIdentity(xhr.getResponseHeader("Location"));
  					if(args.success)
- 						args.success(ev,model);
+ 						args.success(data, status, xhr);
+ 					console.log(data,status,xhr);
  				},
- 				error: function(a,b,c){
+ 				error: function(request,status,error){
  					if(args.error)
- 						args.error(a,b,c);
+ 						args.error(request,status,error);
  				},
  				complete: function(a,b,c){
  					if(args.complete)
  						args.complete(a,b,c);
- 					console.log(a,b,c)
+ 					console.log(a,b,c);
  				}
  			});
  		}
@@ -88,6 +108,15 @@ var app = app || {};
 
 	app.MappingModel = app.BaseModel.extend({defaults:{name: "Sem nome"}});
 	app.DatasetModel = app.BaseModel.extend({defaults:{name: "Sem nome"}});
+	app.DatasetCollection = app.BaseCollection.extend({
+		path: "dataset",
+		model: app.DatasetModel,
+		initialize: function(){
+			this.on("sync", function(){
+				this.models.forEach(function(mdl){mdl.nestedFetch()});				
+			});
+		}
+	});
 	app.ServerModel = app.BaseModel.extend({defaults:{name: "Sem nome"}});
 	app.CsvModel = app.BaseModel.extend({
 		defaults:{name: "Sem nome"},
@@ -95,11 +124,20 @@ var app = app || {};
 			dataset: app.DatasetModel
 		}
 	});
+	app.CsvCollection = app.BaseCollection.extend({
+		path: "csv",
+		model: app.LogModel
+	});
+
 	app.LocalServerModel = app.BaseModel.extend({
 		defaults:{name: "Sem nome"},
 		inherited:{
 			dataset: app.SeverModel
 		}
+	});
+	app.LocalServerCollection = app.BaseCollection.extend({
+		path: "localserver",
+		model: app.LogModel
 	});
 
 
@@ -187,7 +225,7 @@ var app = app || {};
 //------------------------------------------------------------------------------//
 
 	app.DatasetTypeEnum = {
-		"csv": { ordinal: 0, caption: "CSV", model: app.CsvModel},
+		"csv": { ordinal: 0, caption: "CSV", model: app.CsvModel, collection: app.CsvCollection},
 		"solr": { ordinal: 0, caption: "Solr", model: null}
 	}
 	app.SourceableDatasetTypes = ["csv"];
