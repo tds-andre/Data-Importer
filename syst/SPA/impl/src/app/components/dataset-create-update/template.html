@@ -1,0 +1,112 @@
+<script type="text/template" id="dataset-create-update-template">
+
+	<div class="widget no-header radius-bordered">
+		<div class="widget-body">
+		
+			<div class="well well-sm attached top text-right js-dataset-create-update-header">
+				<a class="btn btn-default js-dataset-create-update-cancel">Cancelar</a>									
+				<button class="btn btn-primary js-dataset-create-update-save" type="button">Salvar</button>
+			</div>
+
+			<div class="well attached">
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="form-group simula_validacao">
+							<label class="control-label" for="name">Nome <sup>*</sup></label>
+							<input type="text" name="name" class="js-dataset-create-update-name form-control">
+						</div>
+					</div>
+					<div class="col-sm-6 col-md-3">
+						<div class="form-group">
+							<label class="control-label" for="dataset">Conector <sup>*</sup></label>
+							<select name="dataset" class="form-control select js-dataset-create-update-conector">
+								<option>Selecione</option>
+								<option>CSV</option>
+								<option>MySQL</option>
+								<option>SOLR</option>
+							</select>
+							
+						</div>
+					</div>							
+				</div>
+
+				<!-- CSV ---------------------------------------------------------------------------->
+				<!----------------------------------------------------------------------------------->
+
+				<div class="row js-dataset-create-update-fieldset js-dataset-create-update-csv-fieldset">
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label class="control-label" for="line">Separador de linha </label>
+							<select name="line" class="form-control select js-dataset-create-update-csv-line-separator">
+								<option value="&#14&#10" selected>Windows</option>
+								<option value "&#10">Unix</option>								
+							</select>
+					
+
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<div class="form-group simula_validacao">
+							<label class="control-label" for="field">Separador de campo </label>
+							<input type="text" id="field" class="form-control js-dataset-create-update-csv-field-separator" value=";">
+						</div>
+					</div>												
+				</div>
+
+				<!-- SOLR---------------------------------------------------------------------------->
+				<!----------------------------------------------------------------------------------->
+
+				<div class="js-dataset-create-update-fieldset js-dataset-create-update-solr-fieldset">
+					<div class="row">
+						<div class="col-sm-7">
+							<div class="form-group">
+								<label class="control-label" for="line">Servidor </label>
+								<input type="text" id="field" class="form-control js-dataset-create-update-solr-host">
+						
+
+							</div>
+						</div>
+						
+						<div class="col-sm-2">
+							<div class="form-group simula_validacao">
+								<label class="control-label" for="field">Porta HTTP</label>
+								<input type="number" min="0" max ="65535" id="field" class="form-control js-dataset-create-update-solr-port" value="80">
+							</div>
+						</div>													
+					</div>
+					<div class="row">
+						<div class="col-sm-7">
+							<div class="form-group simula_validacao">
+								<label class="control-label" for="field">Core </label>
+								<input type="text" id="field" class="form-control js-dataset-create-update-solr-core">
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-group">
+								<label class="control-label" for="line">Porta FTP</label>
+								<input type="number" min="0" max ="65535" id="field" class="form-control js-dataset-create-update-solr-ftp" value="22">
+						
+
+							</div>
+						</div>
+						
+																
+					</div>
+				</div>
+				
+				
+
+			
+			</div>
+
+			<div class="well well-sm attached bottom text-right js-dataset-create-update-header">
+				<a class="btn btn-default js-dataset-create-update-cancel">Cancelar</a>									
+				<button class="btn btn-primary js-dataset-create-update-save" type="button">Salvar</button>
+			</div>										
+				
+		</div>
+	</div>
+
+
+
+</script>

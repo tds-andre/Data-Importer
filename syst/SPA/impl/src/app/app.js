@@ -9,11 +9,31 @@ $(function () {
     app.$placeholder = $(app.placeholderId);          //MARCAÇÃO : .header-title
     app.$title = $("#main-content-title");            //MARCAÇÃO : <!-- Page Body --> >>>> class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
     app.$validation = $("#validation-modal");         //MARCAÇÃO : Fica no arquivo app.php
+    app.$modal = $("#generic-modal");                 //MARCAÇÃO : Fica no arquivo app.php
     app.$breadcrumb = $("#main-breadcrumb");          //MARCAÇÃO : Em cima do titulo
         
     //marcações
     // #new-origin-button :  menu >>>>> <!-- origens -->
     // #list-origins-button : menu >>>>> <!-- origens -->    
+
+    //compact view for generic modal
+    app.views.modal = {
+        $el: app.$modal,
+        $content: null,
+        $title: null,
+        show: function(title, html){
+            if(html)
+                this.$content.html(html);
+            if(title)
+                this.$title.html(title);
+            this.$el.modal("show");           
+        },
+        init: function(){
+            this.$content = this.$el.find(".modal-body");
+            this.$title = this.$el.find(".modal-title");
+        }
+    }
+    app.views.modal.init();
 
     //compact view for the breadcrumb
     app.views.validation = {
@@ -90,7 +110,13 @@ $(function () {
     		});
             $("#origins-list-button").on("click", function(event){
                 app.navigation.to("OriginsList");
-            })
+            });
+            $("#new-target-button").on("click", function(event){
+                app.navigation.to("NewTarget");
+            });
+            $("#target-list-button").on("click", function(event){
+                app.navigation.to("TargetsList");
+            });
     	}
     };
     app.views.menu.init();
@@ -112,7 +138,9 @@ $(function () {
     app.collections = {
         localServer: new app.LocalServerCollection(),
         csv: new app.CsvCollection(),
-        dataset: new app.DatasetCollection()
+        dataset: new app.DatasetCollection(),
+        solr: new app.SolrCollection(),
+        solrServer: new app.SolrServerCollection()
     };
 
 	

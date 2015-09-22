@@ -1,9 +1,9 @@
 <script type="text/template" id="dataset-list-template">
 	<div class="widget radius-bordered">
 		<div class="widget-header bg-seashell">
-			<span class="widget-caption silver">Origens</span>
+			<span class="widget-caption silver"> <%- title %> </span>
 			<div class="widget-buttons buttons-bordered hidden-print">
-				<span><a class="btn btn-default btn-sm" href="origens_novo.html">Nova Origem</a></span>
+				<span><a class="btn btn-default btn-sm js-dataset-list-new" href="#"> <%- button %> </a></span>
 			</div>									
 			<div class="widget-buttons buttons-bordered hidden-print">									
 				<a data-toggle="maximize" href="#">
@@ -34,7 +34,7 @@
 							<th class="hidden-print min-width"></th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody class="js-dataset-list-list">
 						
 					</tbody>
 				</table>

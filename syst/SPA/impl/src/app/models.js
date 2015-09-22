@@ -10,6 +10,32 @@ var app = app || {};
 	app.BaseModel = Backbone.Model.extend({
 		nested: {},
 		inherited: {},
+		destroy: function(args){
+			for(var key in this.inherited){
+
+			}
+			args = args || {};
+			$.ajax({
+ 				url: this.href, 
+ 				type: "DELETE", 
+ 				contentType: "application/json", 				
+ 				success: function(data,status,xhr){ 					
+ 					if(args.success)
+ 						args.success(data, status, xhr);
+ 					console.log("BaseModel, destroy success:", data,status,xhr);
+ 				},
+ 				error: function(request,status,error){
+ 					if(args.error)
+ 						args.error(request,status,error);
+ 					console.log("BaseModel, destroy error:", request,status,error);
+ 				},
+ 				complete: function(a,b,c){
+ 					if(args.complete)
+ 						args.complete(a,b,c); 					
+ 				}
+ 			});
+
+		},
 		setIdentity: function(url){
 			var
 				ss = url.split("/");
@@ -60,14 +86,14 @@ var app = app || {};
  		parse: function(response){
  			
  			var 
- 				arrays = response._embedded[this.path],
+ 				arrays = response._embedded,
  				result = [],
  				i = 0,
  				key;
  			for(key in arrays){
- 				for(i = 0; i < arrays.key.length; i++){
- 					arrays.key[i].typePath = key;
- 					result.push(arrays.key[i]);
+ 				for(i = 0; i < arrays[key].length; i++){
+ 					arrays[key][i].typePath = key;
+ 					result.push(arrays[key][i]);
  				}
  			} 			
  			console.log("BaseCollection.parse, response:", response);
@@ -97,22 +123,53 @@ var app = app || {};
  					console.log(a,b,c);
  				}
  			});
+ 		},
+ 		update: function(model, args){
+ 			args = args ? args : {};
+ 			$.ajax({
+ 				url: this.url() + "/" + model.id, 
+ 				type: "PATCH", 
+ 				contentType: "application/json", 
+ 				data: JSON.stringify(model.toJSON()),  
+ 				success: function(data,status,xhr){ 					
+ 					if(args.success)
+ 						args.success(data, status, xhr);
+ 					console.log(data,status,xhr);
+ 				},
+ 				error: function(request,status,error){
+ 					if(args.error)
+ 						args.error(request,status,error);
+ 				},
+ 				complete: function(a,b,c){
+ 					if(args.complete)
+ 						args.complete(a,b,c);
+ 					console.log(a,b,c);
+ 				}
+ 			});
  		}
  			
  		
 	});
+ 		
 
 //------------------------------------------------------------------------------//
 //------------------------------------------------------------------------------//
 //------------------------------------------------------------------------------//
 
 	app.MappingModel = app.BaseModel.extend({defaults:{name: "Sem nome"}});
-	app.DatasetModel = app.BaseModel.extend({defaults:{name: "Sem nome"}});
+	app.DatasetModel = app.BaseModel.extend({
+		defaults:{name: "Sem nome"},
+		nested:{			
+			server: app.ServerModel
+		}
+
+
+	});
 	app.DatasetCollection = app.BaseCollection.extend({
 		path: "dataset",
 		model: app.DatasetModel,
 		initialize: function(){
-			this.on("sync", function(){
+			this.on("reset", function(){
 				this.models.forEach(function(mdl){mdl.nestedFetch()});				
 			});
 		}
@@ -129,6 +186,17 @@ var app = app || {};
 		model: app.LogModel
 	});
 
+	app.SolrModel = app.BaseModel.extend({
+		defaults:{name: "Sem nome"},
+		inherited:{
+			dataset: app.DatasetModel
+		}
+	});
+	app.SolrCollection = app.BaseCollection.extend({
+		path: "solrtable",
+		model: app.SolrModel
+	});
+
 	app.LocalServerModel = app.BaseModel.extend({
 		defaults:{name: "Sem nome"},
 		inherited:{
@@ -139,6 +207,18 @@ var app = app || {};
 		path: "localserver",
 		model: app.LogModel
 	});
+
+
+	app.SolrServerModel = app.BaseModel.extend({
+		defaults:{name: "Sem nome"},
+		inherited:{
+			dataset: app.ServerModel
+		}
+	});
+	app.SolrServerCollection = app.BaseCollection.extend({
+		path: "solrserver",
+		model: app.SolrServerModel
+	})
 
 
 	app.LogModel = app.BaseModel.extend({
@@ -225,11 +305,20 @@ var app = app || {};
 //------------------------------------------------------------------------------//
 
 	app.DatasetTypeEnum = {
-		"csv": { ordinal: 0, caption: "CSV", model: app.CsvModel, collection: app.CsvCollection},
-		"solr": { ordinal: 0, caption: "Solr", model: null}
+		"csv": { ordinal: 0, caption: "CSV", model: app.CsvModel, collection: app.CsvCollection, path: "csv"},
+		"solr": { ordinal: 0, caption: "Solr", model: app.SolrModel, collection: app.SolrCollection, path: "solrtable"},
+		byPath: function(path,returnKey){
+			for(var key in this)
+				if(this[key].path && this[key].path==path)
+					if(returnKey)
+						return key;
+					else
+						return this[key];
+			return null;
+		}
 	}
 	app.SourceableDatasetTypes = ["csv"];
-	app.TargetableDatasetType = ["solr"];
+	app.TargetableDatasetTypes = ["solr"];
 
 //------------------------------------------------------------------------------//
 //------------------------------------------------------------------------------//

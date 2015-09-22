@@ -434,13 +434,13 @@ Purchase: http://wrapbootstrap.com
                         </a>
                         
                         <ul class="submenu">
-                            <li>
-                                <a href="destinos_listar.html">
+                            <li id="target-list-button">
+                                <a href="#">
                                     <span class="menu-text">Consultar</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="destinos_novo.html">
+                            <li id="new-target-button">
+                                <a href="#">
                                     <span class="menu-text">Novo</span>
                                 </a>
                             </li>

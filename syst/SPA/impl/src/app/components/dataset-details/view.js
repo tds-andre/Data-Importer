@@ -3,11 +3,11 @@ var app = app || {};
 
 	'use strict';	
 
-	app.##class-name## = Backbone.View.extend({
+	app.DatasetDetailsView = Backbone.View.extend({
 
 		// Variables----------------------------------------------------------------------- //
 		// -------------------------------------------------------------------------------- //
-		
+		tagName: "div",
 		events: {
 			//'click  .js-??????-button'  : 'buttonClicked',			
 		},		
@@ -16,7 +16,7 @@ var app = app || {};
 			
 		},	
 
-		template: _.template($('##template-id##').html()),
+		template: _.template($('#dataset-details-template').html()),
 
 		// Core --------------------------------------------------------------------------- //
 		// -------------------------------------------------------------------------------- //
@@ -26,13 +26,20 @@ var app = app || {};
 		},		
 
 		render: function () {
-			this.$el.html(this.template(this.model.toJSON()));			
+			var
+				json = this.model.toJSON(),
+				key = app.DatasetTypeEnum.byPath(json.typePath,true);
+			json.conector = app.DatasetTypeEnum[key].caption;
+			
+			
+			this.$el.html(this.template(json));
+			
 			return this;			
 		},
 
 		start: function(options){
-			this.render();
-			return this;		
+			this.render();	
+			return this;	
 		},
 
 		// Events ------------------------------------------------------------------------- //
