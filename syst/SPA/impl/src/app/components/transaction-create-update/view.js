@@ -3,7 +3,7 @@ var app = app || {};
 
 	'use strict';	
 
-	app.##class-name## = Backbone.View.extend({
+	app.TransactionCreateUpdateView = Backbone.View.extend({
 
 		// Variables----------------------------------------------------------------------- //
 		// -------------------------------------------------------------------------------- //
@@ -16,7 +16,7 @@ var app = app || {};
 			
 		},	
 
-		template: _.template($('##template-id##').html()),
+		template: _.template($('#transaction-create-update-template').html()),
 
 		// Core --------------------------------------------------------------------------- //
 		// -------------------------------------------------------------------------------- //
@@ -26,7 +26,7 @@ var app = app || {};
 		},		
 
 		render: function () {
-			this.$el.html(this.template(this.model.toJSON()));			
+			this.$el.html(this.template());			
 			return this;			
 		},
 

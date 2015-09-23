@@ -117,6 +117,9 @@ $(function () {
             $("#target-list-button").on("click", function(event){
                 app.navigation.to("TargetsList");
             });
+            $("#new-transaction-button").on("click", function(event){
+                app.navigation.to("NewTransaction");
+            });
     	}
     };
     app.views.menu.init();

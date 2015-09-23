@@ -390,13 +390,13 @@ Purchase: http://wrapbootstrap.com
                         </a>
                         
                         <ul class="submenu">
-                            <li>
-                                <a href="transacoes_listar.html">
+                            <li >
+                                <a href="#">
                                     <span class="menu-text">Consultar</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="wizard_transacao_nova.html">
+                            <li id="new-transaction-button">
+                                <a href="#">
                                     <span class="menu-text">Nova</span>
                                 </a>
                             </li>
@@ -516,7 +516,7 @@ Purchase: http://wrapbootstrap.com
                 <div class="page-body">
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="main-content-placeholder">
-
+                            
                             <!-- widget em execucao -->
                             <div class="widget radius-bordered" id="em_execucao">
                                 <div class="widget-header bg-seashell bordered-bottom bordered-warning">

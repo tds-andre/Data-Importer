@@ -2,11 +2,11 @@
 <?php include_once "components/transaction-list/template.html"; ?>
 <?php include_once "components/transaction-item/template.html"; ?>
 <?php include_once "components/start-transaction/template.html"; ?>
-<?php include_once "components/new-dataset/template.html"; ?>
 <?php include_once "components/dataset-list/template.html"; ?>
 <?php include_once "components/dataset-list-item/template.html"; ?>
 <?php include_once "components/dataset-details/template.html"; ?>
 <?php include_once "components/dataset-create-update/template.html"; ?>
+<?php include_once "components/transaction-create-update/template.html"; ?>
 
 
 
@@ -62,11 +62,11 @@
 <script type="text/javascript" src="components/transaction-item/view.js"></script>
 <script type="text/javascript" src="components/transaction-list/view.js"></script>
 <script type="text/javascript" src="components/start-transaction/view.js"></script>
-<script type="text/javascript" src="components/new-dataset/view.js"></script>
 <script type="text/javascript" src="components/dataset-list/view.js"></script>
 <script type="text/javascript" src="components/dataset-list-item/view.js"></script>
 <script type="text/javascript" src="components/dataset-details/view.js"></script>
 <script type="text/javascript" src="components/dataset-create-update/view.js"></script>
+<script type="text/javascript" src="components/transaction-create-update/view.js"></script>
 
 
 <!--App & Initialization-->

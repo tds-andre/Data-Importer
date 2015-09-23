@@ -5,6 +5,11 @@ app.views = app.views || {}
 
 
 	'use strict';
+	app.navigation.showNewTransaction = function(args){
+		app.navigation.current = app.navigation.prepare("newTransaction", app.TransactionCreateUpdateView, ["Transações", "Nova"], "Nova Transaçao de Dados", args);    	
+		var view = app.navigation.current.view;	
+		view.start({isSource: false});  
+	};
 
 	app.navigation.showNewTarget = function(args){
 		
@@ -158,32 +163,3 @@ app.views = app.views || {}
 		app.views.title.set(title);
 		return app.navigation.views[name];
 	}
-
-
-
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-	/*app.navigation.showTransactionList = function(){		
-		app.activeView.destroy;
-		app.transactionView = new app.TransactionListView({collection:app.transactions});
-		app.activeView = app.transactionView;
-	}
-
-	app.navigation.showStartTransaction = function(transaction){
-		app.activeView.destroy;
-		var log = app.logs.create({transaction: transaction.href});
-		app.startTransactionView = new app.StartTransactionView({model: transaction, log: log });
-		app.activeView = app.startTransactionView;
-	}*/
