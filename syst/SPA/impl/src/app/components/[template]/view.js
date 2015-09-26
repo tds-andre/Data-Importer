@@ -31,6 +31,7 @@ var app = app || {};
 		},
 
 		start: function(options){
+			this.options = _.extend(this.options, options);
 			this.render();
 			return this;		
 		},

@@ -15,7 +15,8 @@ var app = app || {};
 		},		
 		
 		options: {					
-			isSource: true			
+			isSource: true,
+			showHeader: true		
 		},
 
 		datasetConector: null,
@@ -37,10 +38,15 @@ var app = app || {};
 
 		render: function () {
 			var
-				$select, i;					
+				$select, i;
+			this.$el.hide();				
 			this.$el.html(this.template());
+			if(!this.options.showHeader){
+				this.$el.html($(".js-main", this.$el).html());
+			}
+			this.$el.show();
 			this.hideFieldsets();	
-			$select = $(".js-dataset-create-update-conector");
+			$select = $(".js-dataset-create-update-conector", this.$el);
 			$select.html("<option disabled selected> -- Selecione -- </option>");
 			if(this.options.isSource){
 				for(i = 0; i < app.SourceableDatasetTypes.length; i++){
@@ -78,7 +84,7 @@ var app = app || {};
 		},
 		saveClicked: function(ev){
 			var
-				name = $(".js-dataset-create-update-name").val(),				
+				name = $(".js-dataset-create-update-name", this.$el).val(),				
 				server,
 				self = this;
 
@@ -98,8 +104,8 @@ var app = app || {};
 			this.model.set("name", name);
 			switch(this.datasetConector){
 				case "csv":
-					this.model.set("fieldDelimiter", $(".js-dataset-create-update-csv-field-separator").val());
-					this.model.set("recordDelimiter", $(".js-dataset-create-update-csv-line-separator").val());
+					this.model.set("fieldDelimiter", $(".js-dataset-create-update-csv-field-separator", this.$el).val());
+					this.model.set("recordDelimiter", $(".js-dataset-create-update-csv-line-separator", this.$el).val());
 					if(this.isNew){
 						server = new app.LocalServerModel();
 						server.set("name", name + " - Server");
@@ -117,10 +123,10 @@ var app = app || {};
 					else
 						server = this.model.get("server");
 					server.set("name", name + " - Server");
-					this.model.set("location", $(".js-dataset-create-update-solr-core").val());
-					server.set("host", $(".js-dataset-create-update-solr-host").val());
-					server.set("port", $(".js-dataset-create-update-solr-port").val());
-					server.set("ftpPort", $(".js-dataset-create-update-solr-ftp").val());
+					this.model.set("location", $(".js-dataset-create-update-solr-core", this.$el).val());
+					server.set("host", $(".js-dataset-create-update-solr-host", this.$el).val());
+					server.set("port", $(".js-dataset-create-update-solr-port", this.$el).val());
+					server.set("ftpPort", $(".js-dataset-create-update-solr-ftp", this.$el).val());
 					if(this.isNew){						
 						this.create(this.model,server,app.collections.solr,app.collections.solrServer);
 					}
@@ -155,19 +161,19 @@ var app = app || {};
 		},
 
 		showCsvFieldset: function(){
-			$(".js-dataset-create-update-csv-fieldset").show();
+			$(".js-dataset-create-update-csv-fieldset", this.$el).show();
 		},
 
 		showSolrFieldset: function(){
-			$(".js-dataset-create-update-solr-fieldset").show()
+			$(".js-dataset-create-update-solr-fieldset", this.$el).show()
 		},
 
 		hideFieldsets: function(){
-			$(".js-dataset-create-update-fieldset").hide();
+			$(".js-dataset-create-update-fieldset", this.$el).hide();
 		},
 
 		hideHeaders: function(){
-			$(".js-dataset-create-update-header").hide();
+			$(".js-dataset-create-update-header", this.$el).hide();
 		},
 
 		genOption: function(value){
@@ -177,7 +183,7 @@ var app = app || {};
 		update: function(){
 			this.datasetConector = app.DatasetTypeEnum.byPath(this.model.get("typePath"), true);
 			$(".js-dataset-create-update-name",this.$el).val(this.model.get("name"));
-			$('.js-dataset-create-update-conector option[value='+this.datasetConector+']').attr('selected','selected');
+			$('.js-dataset-create-update-conector option[value='+this.datasetConector+']', this.$el).attr('selected','selected');
 			this.renderDatasetTypeFieldset();
 			this.updateDatasetTypeFieldset()
 		},
@@ -188,16 +194,16 @@ var app = app || {};
 			switch(this.datasetConector){
 				case "csv":
 					if(this.model.get("recordDelimiter")=="\r\n")
-						$($('.js-dataset-create-update-csv-line-separator option')[0]).attr('selected', 'selected')
+						$($('.js-dataset-create-update-csv-line-separator option', this.$el)[0]).attr('selected', 'selected')
 					else
-						$($('.js-dataset-create-update-csv-line-separator option')[1]).attr('selected', 'selected')
-					$(".js-dataset-create-update-csv-field-separator").val(this.model.get("fieldDelimiter"));
+						$($('.js-dataset-create-update-csv-line-separator option', this.$el)[1]).attr('selected', 'selected')
+					$(".js-dataset-create-update-csv-field-separator", this.$el).val(this.model.get("fieldDelimiter"));
 					break;
 				case "solr":
-					$(".js-dataset-create-update-solr-host").val(this.model.get("server").get("host"));
-					$(".js-dataset-create-update-solr-core").val(this.model.get("location"));
-					$(".js-dataset-create-update-solr-port").val(this.model.get("server").get("port"));
-					$(".js-dataset-create-update-solr-ftp").val(this.model.get("server").get("ftpPort"));
+					$(".js-dataset-create-update-solr-host", this.$el).val(this.model.get("server").get("host"));
+					$(".js-dataset-create-update-solr-core", this.$el).val(this.model.get("location"));
+					$(".js-dataset-create-update-solr-port", this.$el).val(this.model.get("server").get("port"));
+					$(".js-dataset-create-update-solr-ftp", this.$el).val(this.model.get("server").get("ftpPort"));
 					break;
 			}
 			

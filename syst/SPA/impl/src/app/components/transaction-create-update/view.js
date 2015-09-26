@@ -9,7 +9,7 @@ var app = app || {};
 		// -------------------------------------------------------------------------------- //
 		
 		events: {
-			//'click  .js-??????-button'  : 'buttonClicked',			
+			'change  .js-radio'  : 'radioChanged',			
 		},		
 		
 		options: {
@@ -17,6 +17,16 @@ var app = app || {};
 		},	
 
 		hash: null,
+
+		stepContentId: null,
+
+		newOriginView: null,
+
+		existingOriginView: null,
+
+		newTargetView: null,
+
+		existingTargetView: null,
 
 		$steps: [],
 
@@ -30,22 +40,13 @@ var app = app || {};
 		},		
 
 		render: function () {
-			var
-				$stepsContainer;
-
-			this.hash = Math.random();
-			 
-			$stepsContainer = $(".js-transaction-create-udpate-steps", this.$el).prop("id","js-transaction-create-udpate-steps-"+this.hash);
-			$(".js-transaction-create-udpate-actions",this.$el).prop("id","js-transaction-create-udpate-actions-"+this.hash);
-			$(". js-transaction-create-update-step",this.$steps).each(function(index, el){
-				$steps.push($(el).prop("id", "js-transaction-create-udpate-step-"+index+ "-"+this.hash));
-			});
-
-			this.$el.html(this.template());			
-			return this;			
+			this.$el.html(this.template());				
+			$(".js-transaction-create-update-wizard",this.$el).wizard();
+			return this;		
 		},
 
 		start: function(options){
+			this.options = _.extend(this.options, options)
 			this.render();
 			return this;		
 		},
@@ -53,10 +54,41 @@ var app = app || {};
 		// Events ------------------------------------------------------------------------- //
 		// -------------------------------------------------------------------------------- //
 
-		buttonClicked: function(ev){}	
+		radioChanged: function(ev){
+			switch($(ev.currentTarget).val()){
+				case "new-origin":
+					this.showExisting(this.newOriginView, true);
+					break;
+				case "existing-origin":
+					$(".js-transaction-create-update-target-list").slideDown();
+					break;
+				case "new-target":
+					this.showExisting(this.newTargetView, false);
+					break;
+				case "existing-target":
+					$(".js-transaction-create-update-target-list").slideDown();
+					break;
+				default:
+					console.log($(ev.currentTarget).val());
+			}	
+		},	
 
 		// Internal methods --------------------------------------------------------------- //
 		// -------------------------------------------------------------------------------- //
+
+		showExisting: function(view, isSource){
+			var
+				caption = isSource? "origin" : "target";
+
+			$(".js-transaction-create-update-"+caption+"-existing").hide();					
+			if(view){						
+				view.$el.show();
+			}else{						
+				view= new app.DatasetCreateUpdateView({el: $(".js-transaction-create-update-"+caption+"-new")[0]});
+				view.start({showHeader:false, isSource: isSource});
+				view.$el.show()
+			}
+		}
 
 	});
 })(jQuery);

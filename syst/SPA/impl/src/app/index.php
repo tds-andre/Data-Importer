@@ -5,7 +5,7 @@ Version: 1.3
 Purchase: http://wrapbootstrap.com
 -->
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" >
 
 <!-- Head -->
 <head>
@@ -1559,6 +1559,7 @@ Purchase: http://wrapbootstrap.com
 
     <!--Page Related Scripts-->
     <script src="../assets/js/bootbox/bootbox.js"></script>
+    <script src="../assets/js/fuelux/wizard/wizard-custom.js"></script>
     <?php include_once "app.php"; ?>
 
     <script>
