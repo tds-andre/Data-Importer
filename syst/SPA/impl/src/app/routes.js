@@ -6,13 +6,16 @@ app.views = app.views || {}
 
 	'use strict';
 	app.navigation.showNewTransaction = function(args){
+		var	
+			view,
+			defaults= {collection: app.collections.dataset};
+		args = _.extend(defaults, args);
 		app.navigation.current = app.navigation.prepare("newTransaction", app.TransactionCreateUpdateView, ["Transações", "Nova"], "Nova Transaçao de Dados", args);    	
-		var view = app.navigation.current.view;	
+		view = app.navigation.current.view;	
 		view.start({isSource: false});  
 	};
 
-	app.navigation.showNewTarget = function(args){
-		
+	app.navigation.showNewTarget = function(args){		
 
 		app.navigation.current = app.navigation.prepare("newTarget", app.DatasetCreateUpdateView, ["Destinos", "Nova"], "Novo Destino", args);    	
 		var view = app.navigation.current.view;		

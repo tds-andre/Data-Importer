@@ -2,15 +2,15 @@
 
 
 	<!-- wizard -->
-	<div id="simplewizardinwidget" class="wizard" data-target="#simplewizardinwidget-steps">
+	<div id="simplewizardinwidget" class="wizard js-wizard" data-target="#simplewizardinwidget-steps">
 		<ul class="steps">
 			<li data-target="#simplewizardinwidgetstep1" class="active"><span class="step">1</span>Etapa 1<span class="chevron"></span></li>
 			<li data-target="#simplewizardinwidgetstep2"><span class="step">2</span>Etapa 2<span class="chevron"></span></li>
 			
 		</ul>
 		<div class="actions" id="simplewizardinwidget-actions">
-			<button type="button" class="btn btn-default btn-sm shiny btn-prev"> <i class="fa fa-angle-left"></i>Anterior</button>
-			<button type="button" class="btn btn-default btn-sm shiny btn-next" data-last="Concluir">Próximo<i class="fa fa-angle-right"></i></button>
+			<button type="button" class="btn btn-default btn-sm shiny btn-prev js-prev"> <i class="fa fa-angle-left"></i>Anterior</button>
+			<button type="button" class="btn btn-default btn-sm shiny btn-next js-next" data-last="Concluir">Próximo<i class="fa fa-angle-right"></i></button>
 		</div>
 	</div>
 	<div class="step-content js-transaction-create-udpate-steps" id="simplewizardinwidget-steps" >
@@ -23,7 +23,7 @@
 					<div class="col-sm-12 col-md-6">
 						<div class="form-group simula_validacao">
 							<label for="title" class="control-label">Título <sup>*</sup></label>
-							<input type="text" class="form-control js-transaction-create-update-title" name="title" placeholder="Título">
+							<input type="text" class="form-control js-title" name="title" placeholder="Título">
 						</div>
 					</div>
 				</div>				
@@ -48,18 +48,19 @@
 				</div>
 				
 				<!-- campos origem existente -->
-				<div class="js-transaction-create-update-origin-wrapper">
-					<div class="row js-transaction-create-update-origin-existing">
+				<div class="js-transaction-create-update-origin-wrapper ">
+					<div class="row js-transaction-create-update-origin-existing js-existing-wrapper">
 						<div class="col-sm-12 col-md-6">
 							<div class="form-group simula_validacao">
 								<label for="select" class="control-label">Destino <sup>*</sup></label>
-								<select name="select" class="form-control js-transaction-create-update-origin-select">
+								<select name="select" class="form-control js-transaction-create-update-origin-select js-dataset-select">
 									<option disabled selected> -- Selecione -- </option>
 								</select>
 							</div>
+							<div class="js-existing-el js-transaction-create-update-origin-existing-view">
+							</div>
 						</div>
-						<div class="js-transaction-create-update-origin-existing-view">
-						</div>
+						
 					</div>
 					<div class="js-transaction-create-update-origin-new">
 					</div>
@@ -90,20 +91,22 @@
 				
 				<!-- campos origem existente -->
 				<div class="js-transaction-create-update-target-wrapper">
-					<div class="row js-transaction-create-update-target-list">
+					<div class="row js-transaction-create-update-target-existing  js-existing-wrapper">
 						<div class="col-sm-12 col-md-6">
 							<div class="form-group simula_validacao">
 								<label for="select" class="control-label">Destino <sup>*</sup></label>
-								<select name="select" class="form-control js-transaction-create-update-target-select">
+								<select name="select" class="form-control js-transaction-create-update-target-select js-dataset-select">
 									<option disabled selected> -- Selecione -- </option>
 								</select>
 							</div>
+							<div class="js-existing-el js-transaction-create-update-target-existing-view">
+							</div>	
 						</div>
+						
 					</div>
 					<div class="js-transaction-create-update-target-new">
 					</div>
-					<div class="js-transaction-create-update-target-existing">
-					</div>											
+															
 				</div>
 				<!-- /campos nova origem -->
 			
