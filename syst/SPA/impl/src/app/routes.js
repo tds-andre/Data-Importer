@@ -5,6 +5,16 @@ app.views = app.views || {}
 
 
 	'use strict';
+	app.navigation.showTransactionList = function(args){
+		var	
+			view,
+			defaults= {collection: app.collections.dataset};
+		args = _.extend(defaults, args);
+		app.navigation.current = app.navigation.prepare("transactionList", app.TransactionListView, ["Transações", "Consulta"], "Consulta de Transações", args);    	
+		view = app.navigation.current.view;	
+		view.start();  
+	};
+
 	app.navigation.showNewTransaction = function(args){
 		var	
 			view,

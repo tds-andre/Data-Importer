@@ -390,7 +390,7 @@ Purchase: http://wrapbootstrap.com
                         </a>
                         
                         <ul class="submenu">
-                            <li >
+                            <li id="transaction-list-button">
                                 <a href="#">
                                     <span class="menu-text">Consultar</span>
                                 </a>

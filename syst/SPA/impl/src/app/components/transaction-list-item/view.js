@@ -3,7 +3,7 @@ var app = app || {};
 
 	'use strict';	
 
-	app.TransactionListView = Backbone.View.extend({
+	app.##class-name## = Backbone.View.extend({
 
 		// Variables----------------------------------------------------------------------- //
 		// -------------------------------------------------------------------------------- //
@@ -16,7 +16,7 @@ var app = app || {};
 			
 		},	
 
-		template: _.template($('#transaction-list-template').html()),
+		template: _.template($('##template-id##').html()),
 
 		// Core --------------------------------------------------------------------------- //
 		// -------------------------------------------------------------------------------- //
@@ -26,7 +26,7 @@ var app = app || {};
 		},		
 
 		render: function () {
-			this.$el.html(this.template());			
+			this.$el.html(this.template(this.model.toJSON()));			
 			return this;			
 		},
 

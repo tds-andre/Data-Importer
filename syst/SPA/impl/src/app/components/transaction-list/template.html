@@ -1,3 +1,239 @@
-<script type="text/template" id="##template-id##">
+<script type="text/template" id="transaction-list-template">
+	<div class="widget radius-bordered">
+		<div class="widget-header bg-seashell">
+			<span class="widget-caption silver">Transações</span>
+			<div class="widget-buttons buttons-bordered hidden-print">
+				<span><a class="btn btn-default btn-sm" href="wizard_transacao_nova.html">Nova Transação</a></span>
+			</div>									
+			<div class="widget-buttons buttons-bordered hidden-print">									
+				<a data-toggle="maximize" href="#">
+					<i class="fa fa-expand silver"></i>
+				</a>
+				<a data-toggle="collapse" href="#">
+					<i class="fa fa-minus silver"></i>
+				</a>
+			</div>									
+		</div>
+		<div class="widget-body">
+		
+			
 
+			<div class="table-scrollable">
+				<table class="table table-striped table-bordered table-hover">
+					<thead>
+						<tr>
+							<th scope="col" class="sorting_asc">
+								Título
+							</th>													
+							<th scope="col" class="sorting">
+								Origem
+							</th>
+							<th scope="col" class="sorting">
+								Destino
+							</th>
+							<th scope="col" class="sorting">
+								Mapeamento
+							</th>
+							<th class="hidden-print min-width"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								<a href="wizard_A_01.html">Transação Dados Fusce ornare</a>
+							</td>													
+							<td>
+								Origem Lorem
+							</td>
+							<td>
+								Destino Dolor
+							</td>
+							<td>
+								Mapeamento 01
+							</td>
+							<td class="hidden-print">
+								<a class="btn bg-silver btn-xs icon-only white" href="#" data-target="#modal-detalhes" data-toggle="modal" title="Detalhes"><i class="fa fa-search"></i></a>
+								<a href="wizard_transacao_edit.html" class="btn btn-info btn-xs icon-only white" title="Editar"><i class="fa fa-pencil"></i></a>
+								<a href="#" class="btn btn-danger btn-xs icon-only white bootbox-confirm" title="Excluir" id=""><i class="fa fa-times"></i></a>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<a href="wizard_B_01.html">Transação Dados Etiam in mauris</a>
+							</td>	
+							<td>
+								Origem Ipsum
+							</td>
+							<td>
+								Destino Sit Amet
+							</td>
+							<td>
+								Mapeamento 02
+							</td>
+							<td class="hidden-print">
+								<a class="btn bg-silver btn-xs icon-only white" href="#" data-target="#modal-detalhes" data-toggle="modal" title="Detalhes"><i class="fa fa-search"></i></a>
+								<a href="wizard_transacao_edit.html" class="btn btn-info btn-xs icon-only white" title="Editar"><i class="fa fa-pencil"></i></a>
+								<a href="#" class="btn btn-danger btn-xs icon-only white bootbox-confirm" title="Excluir" id=""><i class="fa fa-times"></i></a>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<a href="wizard_A_01.html">Transação Dados Duis dictum nisi</a>
+							</td>													
+							<td>
+								Origem Lorem
+							</td>
+							<td>
+								Destino Dolor
+							</td>
+							<td>
+								Mapeamento 01
+							</td>
+							<td class="hidden-print">
+								<a class="btn bg-silver btn-xs icon-only white" href="#" data-target="#modal-detalhes" data-toggle="modal" title="Detalhes"><i class="fa fa-search"></i></a>
+								<a href="wizard_transacao_edit.html" class="btn btn-info btn-xs icon-only white" title="Editar"><i class="fa fa-pencil"></i></a>
+								<a href="#" class="btn btn-danger btn-xs icon-only white bootbox-confirm" title="Excluir" id=""><i class="fa fa-times"></i></a>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<a href="wizard_B_01.html">Transação Dados Nam interdum</a>
+							</td>	
+							<td>
+								Origem Ipsum
+							</td>
+							<td>
+								Destino Sit Amet
+							</td>
+							<td>
+								Mapeamento 02
+							</td>
+							<td class="hidden-print">
+								<a class="btn bg-silver btn-xs icon-only white" href="#" data-target="#modal-detalhes" data-toggle="modal" title="Detalhes"><i class="fa fa-search"></i></a>
+								<a href="wizard_transacao_edit.html" class="btn btn-info btn-xs icon-only white" title="Editar"><i class="fa fa-pencil"></i></a>
+								<a href="#" class="btn btn-danger btn-xs icon-only white bootbox-confirm" title="Excluir" id=""><i class="fa fa-times"></i></a>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<a href="wizard_A_01.html">Transação Dados Etiam justo</a>
+							</td>	
+							<td>
+								Origem Ipsum
+							</td>
+							<td>
+								Destino Sit Amet
+							</td>
+							<td>
+								Mapeamento 02
+							</td>
+							<td class="hidden-print">
+								<a class="btn bg-silver btn-xs icon-only white" href="#" data-target="#modal-detalhes" data-toggle="modal" title="Detalhes"><i class="fa fa-search"></i></a>
+								<a href="wizard_transacao_edit.html" class="btn btn-info btn-xs icon-only white" title="Editar"><i class="fa fa-pencil"></i></a>
+								<a href="#" class="btn btn-danger btn-xs icon-only white bootbox-confirm" title="Excluir" id=""><i class="fa fa-times"></i></a>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<a href="wizard_A_01.html">Transação Dados Fusce ornare</a>
+							</td>													
+							<td>
+								Origem Lorem
+							</td>
+							<td>
+								Destino Dolor
+							</td>
+							<td>
+								Mapeamento 01
+							</td>
+							<td class="hidden-print">
+								<a class="btn bg-silver btn-xs icon-only white" href="#" data-target="#modal-detalhes" data-toggle="modal" title="Detalhes"><i class="fa fa-search"></i></a>
+								<a href="wizard_transacao_edit.html" class="btn btn-info btn-xs icon-only white" title="Editar"><i class="fa fa-pencil"></i></a>
+								<a href="#" class="btn btn-danger btn-xs icon-only white bootbox-confirm" title="Excluir" id=""><i class="fa fa-times"></i></a>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<a href="wizard_A_01.html">Transação Dados Etiam in mauris</a>
+							</td>	
+							<td>
+								Origem Ipsum
+							</td>
+							<td>
+								Destino Sit Amet
+							</td>
+							<td>
+								Mapeamento 02
+							</td>
+							<td class="hidden-print">
+								<a class="btn bg-silver btn-xs icon-only white" href="#" data-target="#modal-detalhes" data-toggle="modal" title="Detalhes"><i class="fa fa-search"></i></a>
+								<a href="wizard_transacao_edit.html" class="btn btn-info btn-xs icon-only white" title="Editar"><i class="fa fa-pencil"></i></a>
+								<a href="#" class="btn btn-danger btn-xs icon-only white bootbox-confirm" title="Excluir" id=""><i class="fa fa-times"></i></a>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<a href="wizard_A_01.html">Transação Dados Duis dictum nisi</a>
+							</td>													
+							<td>
+								Origem Lorem
+							</td>
+							<td>
+								Destino Dolor
+							</td>
+							<td>
+								Mapeamento 01
+							</td>
+							<td class="hidden-print">
+								<a class="btn bg-silver btn-xs icon-only white" href="#" data-target="#modal-detalhes" data-toggle="modal" title="Detalhes"><i class="fa fa-search"></i></a>
+								<a href="wizard_transacao_edit.html" class="btn btn-info btn-xs icon-only white" title="Editar"><i class="fa fa-pencil"></i></a>
+								<a href="#" class="btn btn-danger btn-xs icon-only white bootbox-confirm" title="Excluir" id=""><i class="fa fa-times"></i></a>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<a href="wizard_A_01.html">Transação Dados Nam interdum</a>
+							</td>	
+							<td>
+								Origem Ipsum
+							</td>
+							<td>
+								Destino Sit Amet
+							</td>
+							<td>
+								Mapeamento 02
+							</td>
+							<td class="hidden-print">
+								<a class="btn bg-silver btn-xs icon-only white" href="#" data-target="#modal-detalhes" data-toggle="modal" title="Detalhes"><i class="fa fa-search"></i></a>
+								<a href="wizard_transacao_edit.html" class="btn btn-info btn-xs icon-only white" title="Editar"><i class="fa fa-pencil"></i></a>
+								<a href="#" class="btn btn-danger btn-xs icon-only white bootbox-confirm" title="Excluir" id=""><i class="fa fa-times"></i></a>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<a href="wizard_A_01.html">Transação Dados Etiam justo</a>
+							</td>	
+							<td>
+								Origem Ipsum
+							</td>
+							<td>
+								Destino Sit Amet
+							</td>
+							<td>
+								Mapeamento 02
+							</td>
+							<td class="hidden-print">
+								<a class="btn bg-silver btn-xs icon-only white" href="#" data-target="#modal-detalhes" data-toggle="modal" title="Detalhes"><i class="fa fa-search"></i></a>
+								<a href="wizard_transacao_edit.html" class="btn btn-info btn-xs icon-only white" title="Editar"><i class="fa fa-pencil"></i></a>
+								<a href="#" class="btn btn-danger btn-xs icon-only white bootbox-confirm" title="Excluir" id=""><i class="fa fa-times"></i></a>
+							</td>
+						</tr>	
+					</tbody>
+				</table>
+			</div>
+
+			
+				
+		</div>
+	</div>
 </script>

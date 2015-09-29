@@ -120,6 +120,9 @@ $(function () {
             $("#new-transaction-button").on("click", function(event){
                 app.navigation.to("NewTransaction");
             });
+            $("#transaction-list-button").on("click", function(event){
+                app.navigation.to("TransactionList");
+            });
     	}
     };
     app.views.menu.init();
