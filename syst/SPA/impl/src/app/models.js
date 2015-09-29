@@ -36,6 +36,20 @@ var app = app || {};
  			});
 
 		},
+		isValid: function(){
+			return validate(model.attributes, {validate: false});
+		},
+		validate: function(){
+			return true
+		},
+		validationBoilerplate: function(attrs,options){
+			var
+				defaults = {validate: false};
+			options = options || {};
+			options = _.extend(options, defaults);
+			return options;
+		},
+
 		setIdentity: function(url){
 			var
 				ss = url.split("/");
@@ -102,50 +116,54 @@ var app = app || {};
  		},
  		persist: function(model,args){
  			args = args ? args : {};
- 			$.ajax({
- 				url: this.url(), 
- 				type: "POST", 
- 				contentType: "application/json", 
- 				data: JSON.stringify(model.toJSON()),  
- 				success: function(data,status,xhr){
- 					model.setIdentity(xhr.getResponseHeader("Location"));
- 					if(args.success)
- 						args.success(data, status, xhr);
- 					console.log(data,status,xhr);
- 				},
- 				error: function(request,status,error){
- 					if(args.error)
- 						args.error(request,status,error);
- 				},
- 				complete: function(a,b,c){
- 					if(args.complete)
- 						args.complete(a,b,c);
- 					console.log(a,b,c);
- 				}
- 			});
+ 			if(model.validate(model.attributes, args)){
+	 			$.ajax({
+	 				url: this.url(), 
+	 				type: "POST", 
+	 				contentType: "application/json", 
+	 				data: JSON.stringify(model.toJSON()),  
+	 				success: function(data,status,xhr){
+	 					model.setIdentity(xhr.getResponseHeader("Location"));
+	 					if(args.success)
+	 						args.success(data, status, xhr);
+	 					console.log(data,status,xhr);
+	 				},
+	 				error: function(request,status,error){
+	 					if(args.error)
+	 						args.error(request,status,error);
+	 				},
+	 				complete: function(a,b,c){
+	 					if(args.complete)
+	 						args.complete(a,b,c);
+	 					console.log(a,b,c);
+	 				}
+	 			});
+ 			}
  		},
  		update: function(model, args){
  			args = args ? args : {};
- 			$.ajax({
- 				url: this.url() + "/" + model.id, 
- 				type: "PATCH", 
- 				contentType: "application/json", 
- 				data: JSON.stringify(model.toJSON()),  
- 				success: function(data,status,xhr){ 					
- 					if(args.success)
- 						args.success(data, status, xhr);
- 					console.log(data,status,xhr);
- 				},
- 				error: function(request,status,error){
- 					if(args.error)
- 						args.error(request,status,error);
- 				},
- 				complete: function(a,b,c){
- 					if(args.complete)
- 						args.complete(a,b,c);
- 					console.log(a,b,c);
- 				}
- 			});
+ 			if(model.validate(model.attributes, args)){
+	 			$.ajax({
+	 				url: this.url() + "/" + model.id, 
+	 				type: "PATCH", 
+	 				contentType: "application/json", 
+	 				data: JSON.stringify(model.toJSON()),  
+	 				success: function(data,status,xhr){ 					
+	 					if(args.success)
+	 						args.success(data, status, xhr);
+	 					console.log(data,status,xhr);
+	 				},
+	 				error: function(request,status,error){
+	 					if(args.error)
+	 						args.error(request,status,error);
+	 				},
+	 				complete: function(a,b,c){
+	 					if(args.complete)
+	 						args.complete(a,b,c);
+	 					console.log(a,b,c);
+	 				}
+	 			});
+	 		}
  		}
  			
  		
@@ -161,6 +179,21 @@ var app = app || {};
 		defaults:{name: "Sem nome"},
 		nested:{			
 			server: app.ServerModel
+		},
+		validate: function(attrs,options){
+			var result = true;
+			options = this.validationBoilerplate(atrrs, options);
+			if(options.validate)
+				return true;
+			if(!this.has("name") || this.get("name") =="")
+				result = false;			
+			if(!this.has("server"))
+				result = false;
+			if(!result)
+				this.trigger("invalid",this);
+			console.log("invalid: ", this);
+			return result;
+
 		}
 
 
@@ -277,12 +310,27 @@ var app = app || {};
 			logs: app.LogCollection
 		},
 
-		defaults:{
-			mapping : "Indefinido"
+		function(){
+			return this.get("logs").last();
 		},
 
-		lastLog: function(){
-			return this.get("logs").last();
+		validate: function(attrs,options){
+			var
+				result = true;
+			options = this.validationBoilerplate(attrs, options);
+			if(options.validate)
+				result =  true;
+			if(!this.has("name") || this.get("name")=="")
+				result =  false;			
+			if(!this.has("sourceDataset"))
+				result =  false;
+			if(!this.has("targetDataset"))
+				result =  false;
+			if(!result)
+				this.trigger("invalid", this);
+			console.log("invalid: ", this);
+			return result;
+
 		}
 	});
 

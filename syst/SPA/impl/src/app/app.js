@@ -143,7 +143,8 @@ $(function () {
         csv: new app.CsvCollection(),
         dataset: new app.DatasetCollection(),
         solr: new app.SolrCollection(),
-        solrServer: new app.SolrServerCollection()
+        solrServer: new app.SolrServerCollection(),
+        transaction: new app.TransactionCollection()
     };
 
 	

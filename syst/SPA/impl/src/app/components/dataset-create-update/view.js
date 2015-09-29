@@ -21,6 +21,7 @@ var app = app || {};
 
 		datasetConector: null,
 		isNew: null,
+		isSaving: false,
 
 		
 
@@ -87,11 +88,11 @@ var app = app || {};
 				name = $(".js-dataset-create-update-name", this.$el).val(),				
 				server,
 				self = this;
-
-			if(!app.isDefined(name)){
-				this.trigger("error",{message: "Nomo não pode ser vazio!"});
+			if(this.isSaving)
 				return;
-			}
+			this.isSaving = true;
+
+			
 			if(!app.isDefined(this.datasetConector)){
 				this.trigger("error",{message: "Selecione o conector!"});
 				return;
@@ -213,21 +214,54 @@ var app = app || {};
 		create: function(dataset,server,datasetCollection,serverCollection){
 			var
 				self = this;
-
-			serverCollection.persist(server,{success: function(e){						
-				self.model.set("server", server.href);
-				datasetCollection.persist(dataset, {success: function(ee){
-					self.trigger("new");
-				}});
-			}});
+			server.on("invalid", function(){self.trigger("error", self)});
+			dataset.on("invalid", function(){self.trigger("error", self)});
+			serverCollection.persist(server,
+				{
+					success: function(e){						
+						self.model.set("server", server.href);
+						datasetCollection.persist(dataset, 
+							{
+								success: function(ee){
+									self.trigger("new", self);
+								}, 
+								error: function(ee){
+									self.trigger("error", self)
+								}
+							}
+						);
+					},
+					error: function(e){
+						self.trigger("error", self)
+					}
+				}
+			);
 		},
 		udpate: function(model,server,datasetCollection,serverCollection){
-			serverCollection.update(server,{success: function(e){						
-				self.model.set("server", server.href);
-				datasetCollection.update(dataset, {success: function(ee){
-					self.trigger("update");
-				}});
-			}});
+			var 
+				self = this;
+			server.on("invalid", function(){self.trigger("error"), self});
+			dataset.on("invalid", function(){self.trigger("error"), self});
+			serverCollection.update(server,
+				{
+					success: function(e){						
+						self.model.set("server", server.href);
+						datasetCollection.update(dataset, 
+							{
+								success: function(ee){
+									self.trigger("udpate", self);
+								}, 
+								error: function(ee){
+									self.trigger("error", self)
+								}
+							}
+						);
+					},
+					error: function(e){
+						self.trigger("error", self)
+					}
+				}
+			);
 		}
 
 

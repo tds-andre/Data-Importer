@@ -12,8 +12,21 @@ app.views = app.views || {}
 		args = _.extend(defaults, args);
 		app.navigation.current = app.navigation.prepare("newTransaction", app.TransactionCreateUpdateView, ["Transações", "Nova"], "Nova Transaçao de Dados", args);    	
 		view = app.navigation.current.view;	
+		view.on("created", function(){
+			app.views.validation.success("Transação criado com sucesso.");
+	        app.navigation.to("Blank");
+		});
+		view.on("error", function(e){
+	        app.views.validation.warn("Erro na criação.")
+	        console.log(e);
+	    });
 		view.start({isSource: false});  
 	};
+
+	app.navigation.showBlank = function(args){
+		$(app.placeholderId).html("");
+		app.navigation.current = null;
+	}
 
 	app.navigation.showNewTarget = function(args){		
 
