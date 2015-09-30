@@ -11,11 +11,12 @@ var app = app || {};
 		events: {
 			'click  .js-edit'  : 'editClicked',
 			'click  .js-details'  : 'detailsClicked',
-			'click  .js-delete'  : 'deleteClicked'
+			'click  .js-delete'  : 'deleteClicked',
+			'click  .js-favorite'  : 'favoriteClicked',
 		},		
 		
-		options: {
-			
+		options: {		
+			actions:["edit","detail","delete"]
 		},	
 
 		template: _.template($('#transaction-list-item-template').html()),
@@ -27,10 +28,14 @@ var app = app || {};
 			
 		},		
 
-		render: function () {			
+		render: function () {
+			var
+				json = this.model.toJSON();
+			json.actions = this.options.actions;
 			this.listenTo(this.model.get("sourceDataset"), "change:name", this.updateSource)
-			this.listenTo(this.model.get("targetDataset"), "change:name", this.updateTarget)			
-			this.$el.html(this.template(this.model.toJSON()));
+			this.listenTo(this.model.get("targetDataset"), "change:name", this.updateTarget)
+			this.listenTo(this.model, "change:isFavorite", this.favoriteChanged)
+			this.$el.html(this.template(json));
 			return this;			
 		},
 
@@ -64,6 +69,11 @@ var app = app || {};
 		editClicked: function(e){
 			this.trigger("edit", this);
 		},
+		favoriteClicked: function(e){
+			this.model.set("isFavorite", this.model.get("isFavorite"));
+			this.model.save();
+			this.trigger("favorite", this);
+		},
 
 		// Other callbacks----------------------------------------------------------------- //
 		// -------------------------------------------------------------------------------- //
@@ -77,6 +87,19 @@ var app = app || {};
 		},
 		updateSource: function(){
 			$(".js-source-name", this.$el).html(this.model.get("sourceDataset").get("name"));
+		}, 
+
+		favoriteChanged: function(){
+			var
+				fav = this.model.get("isFavorite");
+			if(fav){
+				$(".js-favorite",this.$el).removeClass("bg-gray");
+				$(".js-favorite",this.$el).addClass("bg-gold");
+			}else{
+				$(".js-favorite",this.$el).removeClass("bg-gold");
+				$(".js-favorite",this.$el).addClass("bg-gray");
+			}
+
 		}
 
 	});

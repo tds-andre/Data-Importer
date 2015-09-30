@@ -13,7 +13,9 @@ var app = app || {};
 		},
 
 		options: {
-			
+			actions:["edit","detail","delete"],
+			showHeader: true,
+			fetched: false
 		},	
 
 		template: _.template($('#transaction-list-template').html()),
@@ -26,7 +28,12 @@ var app = app || {};
 		},		
 
 		render: function () {
-			this.$el.html(this.template());			
+			
+			this.$el.html(this.template());	
+			if(!this.options.showHeader){
+				this.$el.html($(".js-main", this.$el).html());
+			}
+			
 			return this;			
 		},
 
@@ -34,8 +41,12 @@ var app = app || {};
 			this.options = _.extend(this.options, options);
 			this.render();
 			this.$list = $(".js-list", this.$el);
-			this.listenTo(this.collection, "reset", this.addAll);
-			this.collection.fetch({reset: true});	
+			if(!this.options.fetched){
+				this.listenTo(this.collection, "reset", this.addAll);
+				this.collection.fetch({reset: true});	
+			}else{
+				this.addAll();
+			}
 		},
 
 		// View callbacks------------------------------------------------------------------ //
@@ -51,7 +62,8 @@ var app = app || {};
 		addOne: function (dataset) {
 			var 
 				view = new app.TransactionListItemView({ model: dataset }),
-				self = this;			
+				self = this;
+			view.start(this.options);
 			this.$list.append(view.render().el);
 			view.on("details", function(view){self.trigger("details",view)});
 			view.on("edit", function(view){self.trigger("edit",view)});
@@ -71,4 +83,10 @@ var app = app || {};
 		// -------------------------------------------------------------------------------- //
 
 	});
+	app.TransactionListView.prototype.ActionsEnum = {
+		"delete": {},
+		"edit": {},
+		"detail": {},
+		"favorite": {}
+	}
 })(jQuery);

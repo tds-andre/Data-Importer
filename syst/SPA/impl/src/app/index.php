@@ -374,8 +374,8 @@ Purchase: http://wrapbootstrap.com
                 <!-- Sidebar Menu -->
                 <ul class="nav sidebar-menu">
                     <!--Principal-->
-                    <li class="active">
-                        <a href="index_admin.html">
+                    <li class="active" id="transaction-report-button">
+                        <a href="#" >
                             <i class="menu-icon fa fa-list"></i>
                             <span class="menu-text"> Principal </span>
                         </a>

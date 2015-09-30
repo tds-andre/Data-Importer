@@ -8,6 +8,7 @@
 <?php include_once "components/transaction-list/template.html"; ?>
 <?php include_once "components/transaction-list-item/template.html"; ?>
 <?php include_once "components/transaction-details/template.html"; ?>
+<?php include_once "components/transaction-tabs/template.html"; ?>
 
 
 
@@ -69,6 +70,7 @@
 <script type="text/javascript" src="components/transaction-list/view.js"></script>
 <script type="text/javascript" src="components/transaction-list-item/view.js"></script>
 <script type="text/javascript" src="components/transaction-details/view.js"></script>
+<script type="text/javascript" src="components/transaction-tabs/view.js"></script>
 
 
 

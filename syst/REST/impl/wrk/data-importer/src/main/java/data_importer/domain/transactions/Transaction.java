@@ -22,6 +22,17 @@ public class Transaction{
 	private long id;
 	
 	@Column(nullable=true)
+	private Boolean isFavorite = false;
+	
+	public Boolean getIsFavorite() {
+		return isFavorite;
+	}
+
+	public void setIsFavorite(Boolean isFavorite) {
+		this.isFavorite = isFavorite;
+	}
+
+	@Column(nullable=true)
 	private String name = "Sem nome";
 	
 	@ManyToOne

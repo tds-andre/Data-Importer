@@ -5,6 +5,17 @@ app.views = app.views || {}
 
 
 	'use strict';
+	app.navigation.showTransactionReport = function(args){
+		var	
+			view,
+			defaults= {};
+		args = _.extend(defaults, args);
+		app.navigation.current = app.navigation.prepare("transactionReport", app.TransactionTabsView, ["Principal"], "Principal", args);    	
+		view = app.navigation.current.view;
+	
+		view.start(); 
+	};
+
 	app.navigation.showTransactionList = function(args){
 		var	
 			view,
@@ -194,10 +205,15 @@ app.views = app.views || {}
 	app.navigation.prepare = function(name,view,breadcrumb,title,args){
 		var
 			defaults = {el: app.placeholderId};
+		try{
+			app.navigation.current.remove();
+		}catch(e){}
+
 		args = _.extend(defaults,args);
 		app.navigation.views[name] = {};
 		app.navigation.views[name].view = new view(args);
 		app.views.breadcrumb.set(breadcrumb);
 		app.views.title.set(title);
+
 		return app.navigation.views[name];
 	}
