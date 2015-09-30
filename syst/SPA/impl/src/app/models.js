@@ -36,9 +36,7 @@ var app = app || {};
  			});
 
 		},
-		isValid: function(){
-			return validate(model.attributes, {validate: false});
-		},
+
 		validate: function(){
 			return true
 		},

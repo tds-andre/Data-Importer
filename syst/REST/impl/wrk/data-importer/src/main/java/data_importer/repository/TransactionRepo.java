@@ -12,4 +12,6 @@ import data_importer.domain.transactions.Transaction;
 public interface TransactionRepo extends CrudRepository<Transaction, Long> {
 	@Query(nativeQuery=true, value="SELECT *, max(created_at) FROM data_importer.transaction a left join data_importer.transaction_log b on a.id = b.transaction group by scd")
 	public List<Transaction> latest();
+	@Query(nativeQuery=true, value="select a.* from `transaction` a right join (SELECT max(created_at), transaction FROM data_importer.transaction_log group by transaction order by created_at desc limit 2) b on a.id=b.transaction")
+	public List<Transaction> recent();
 }

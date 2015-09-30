@@ -19,9 +19,21 @@
 		<% } %>
 	</td>
 	<td class="hidden-print">
-		<a class="btn bg-silver btn-xs icon-only white js-details" title="Detalhes"><i class="fa fa-search"></i></a>
-		<a class="btn btn-info btn-xs icon-only white js-edit" title="Editar"><i class="fa fa-pencil"></i></a>
-		<a class="btn btn-danger btn-xs icon-only white bootbox-confirm js-delete" title="Excluir" ><i class="fa fa-times"></i></a>
+		<% if(actions.indexOf("detail")>-1) {	%>
+			<a class="btn bg-silver btn-xs icon-only white js-details" title="Detalhes"><i class="fa fa-search"></i></a>
+		<% } %>
+		<% if(actions.indexOf("edit")>-1) {	%>
+			<a class="btn btn-info btn-xs icon-only white js-edit" title="Editar"><i class="fa fa-pencil"></i></a>
+		<% } %>
+		<% if(actions.indexOf("delete")>-1) {	%>
+			<a class="btn btn-danger btn-xs icon-only white bootbox-confirm js-delete" title="Excluir" ><i class="fa fa-times"></i></a>
+		<% } %>
+		<% if(actions.indexOf("favorite")>-1 && !isFavorite) {	%>
+			<a title="Adicionar aos Favoritos" class="btn bg-gray btn-xs icon-only white js-favorite" href="#"><i class="fa fa-star"></i></a>
+		<% } %>
+		<% if(actions.indexOf("favorite")>-1 && isFavorite) {	%>
+			<a title="Adicionar aos Favoritos" class="btn bg-gold btn-xs icon-only white js-favorite" href="#"><i class="fa fa-star"></i></a>
+		<% } %>
 	</td>
 
 </script>
