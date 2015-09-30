@@ -23,13 +23,32 @@ var app = app || {};
 
 		initialize: function(){
 			
-		},		
+		},
+
+		serverTwice: function(){
+			console.log("TransactionDetailsView.serverTwice, server: ", jQuery.extend({}, this.model.get("server").attributes));
+			this.render();
+		},
+
+		serverOnce: function(){
+			console.log("TransactionDetailsView.serverOnce, server: ", jQuery.extend({}, this.model.get("server").attributes));
+			this.listenTo(this.model.get("server"), "sync", this.serverTwice);
+		},
 
 		render: function () {
+			if(!app.isDefined(this.model.get("server"))){
+				this.listenToOnce(this.model, "change:server", this.serverOnce)
+				//this.listenTo(this.model, "change:server", this.serverTwice)
+				this.model.nestedFetch();
+				return;
+			}
 			var
+
 				json = this.model.toJSON(),
-				key = app.DatasetTypeEnum.byPath(json.typePath,true);
+				typePath = json.typePath || this.model.typePath,
+				key = app.DatasetTypeEnum.byPath(typePath,true);
 			json.conector = app.DatasetTypeEnum[key].caption;
+
 			
 			
 			this.$el.html(this.template(json));

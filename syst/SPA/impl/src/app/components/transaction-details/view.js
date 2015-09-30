@@ -3,20 +3,25 @@ var app = app || {};
 
 	'use strict';	
 
-	app.##class-name## = Backbone.View.extend({
+	app.TransactionDetailsView = Backbone.View.extend({
 
 		// Variables----------------------------------------------------------------------- //
 		// -------------------------------------------------------------------------------- //
 		
 		events: {
-			//'click  .js-??????-button'  : 'buttonClicked',			
+			
 		},		
 		
 		options: {
 			
 		},	
 
-		template: _.template($('##template-id##').html()),
+		views:{
+			source: null,
+			target: null
+		},
+
+		template: _.template($('#transaction-details-template').html()),
 
 		// Core --------------------------------------------------------------------------- //
 		// -------------------------------------------------------------------------------- //
@@ -26,7 +31,11 @@ var app = app || {};
 		},		
 
 		render: function () {
-			this.$el.html(this.template(this.model.toJSON()));			
+			this.$el.html(this.template(this.model.toJSON()));
+			this.views.source = new app.DatasetDetailsView({el: $(".js-source-el", this.$el)[0], model: this.model.get("sourceDataset")})
+			this.views.target = new app.DatasetDetailsView({el: $(".js-target-el", this.$el)[0], model: this.model.get("targetDataset")})
+			this.views.source.start();
+			this.views.target.start();
 			return this;			
 		},
 
@@ -38,8 +47,7 @@ var app = app || {};
 
 		// View callbacks------------------------------------------------------------------ //
 		// -------------------------------------------------------------------------------- //
-
-		buttonClicked: function(ev){}
+		
 
 		// Other callbacks----------------------------------------------------------------- //
 		// -------------------------------------------------------------------------------- //

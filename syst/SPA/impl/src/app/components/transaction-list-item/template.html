@@ -1,3 +1,27 @@
-<script type="text/template" id="##template-id##">
+<script type="text/template" id="transaction-list-item-template">
+
+	<td>
+		<a><%- name %></a>
+	</td>													
+	<td class="js-source-name">
+		<% if(app.isDefined(sourceDataset)) {	%>
+			<%- sourceDataset.attributes.name %>
+		<% } %>
+	</td>
+	<td class="js-target-name">
+		<% if(app.isDefined(targetDataset)) {	%>
+			<%- targetDataset.attributes.name %>
+		<% } %>
+	</td>
+	<td>
+		<% if(app.isDefined(mapping)) {	%>
+			<%- mapping.attributes.name %>
+		<% } %>
+	</td>
+	<td class="hidden-print">
+		<a class="btn bg-silver btn-xs icon-only white js-details" title="Detalhes"><i class="fa fa-search"></i></a>
+		<a class="btn btn-info btn-xs icon-only white js-edit" title="Editar"><i class="fa fa-pencil"></i></a>
+		<a class="btn btn-danger btn-xs icon-only white bootbox-confirm js-delete" title="Excluir" ><i class="fa fa-times"></i></a>
+	</td>
 
 </script>

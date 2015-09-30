@@ -9,9 +9,9 @@ var app = app || {};
 		// -------------------------------------------------------------------------------- //
 		
 		events: {
-			//'click  .js-??????-button'  : 'buttonClicked',			
-		},		
-		
+			'click  .js-new'  : 'newClicked',			
+		},
+
 		options: {
 			
 		},	
@@ -33,16 +33,39 @@ var app = app || {};
 		start: function(options){
 			this.options = _.extend(this.options, options);
 			this.render();
-			return this;		
+			this.$list = $(".js-list", this.$el);
+			this.listenTo(this.collection, "reset", this.addAll);
+			this.collection.fetch({reset: true});	
 		},
 
 		// View callbacks------------------------------------------------------------------ //
 		// -------------------------------------------------------------------------------- //
 
-		buttonClicked: function(ev){}
+		newClicked: function(ev){
+			this.trigger("new");
+		},
 
-		// View callbacks------------------------------------------------------------------ //
+		// Other callbacks----------------------------------------------------------------- //
 		// -------------------------------------------------------------------------------- //
+
+		addOne: function (dataset) {
+			var 
+				view = new app.TransactionListItemView({ model: dataset }),
+				self = this;			
+			this.$list.append(view.render().el);
+			view.on("details", function(view){self.trigger("details",view)});
+			view.on("edit", function(view){self.trigger("edit",view)});
+			view.on("delete", function(view){
+				view.remove();
+				self.trigger("delete");
+			})
+			
+		},
+
+		addAll: function(){
+			this.$list.html('');
+			this.collection.each(this.addOne, this);
+		}
 
 		// Internal methods --------------------------------------------------------------- //
 		// -------------------------------------------------------------------------------- //

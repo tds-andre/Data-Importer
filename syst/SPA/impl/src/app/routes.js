@@ -8,11 +8,23 @@ app.views = app.views || {}
 	app.navigation.showTransactionList = function(args){
 		var	
 			view,
-			defaults= {collection: app.collections.dataset};
+			defaults= {collection: app.collections.transaction};
 		args = _.extend(defaults, args);
 		app.navigation.current = app.navigation.prepare("transactionList", app.TransactionListView, ["Transações", "Consulta"], "Consulta de Transações", args);    	
-		view = app.navigation.current.view;	
-		view.start();  
+		view = app.navigation.current.view;
+		view.on("details", function(view){
+			detailsView = new app.TransactionDetailsView({model: view.model, el:app.views.modal.$content[0]});
+			detailsView.start();				
+			app.views.modal.show("Transação - Detalhes");
+		});
+		view.on("new", function(){
+			app.navigation.to("NewTransaction");
+		});
+		view.on("delete", function(view){
+			app.views.modal.show("Destino - Exclusão", "Dataset excluído.");
+		});
+
+		view.start(); 
 	};
 
 	app.navigation.showNewTransaction = function(args){
@@ -24,7 +36,7 @@ app.views = app.views || {}
 		view = app.navigation.current.view;	
 		view.on("created", function(){
 			app.views.validation.success("Transação criado com sucesso.");
-	        app.navigation.to("Blank");
+	        app.navigation.to("TransactionList");
 		});
 		view.on("error", function(e){
 	        app.views.validation.warn("Erro na criação.")
@@ -93,7 +105,7 @@ app.views = app.views || {}
 			app.navigation.to("EditTarget", {model: view.model});
 		});
 		view.on("delete", function(view){
-			app.views.modal.show("Destomp - Exclusão", "Dataset excluído.");
+			app.views.modal.show("Destino - Exclusão", "Dataset excluído.");
 		});
 		view.on("new", function(){
 			app.navigation.to("NewTarget");

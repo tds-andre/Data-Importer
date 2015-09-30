@@ -7,6 +7,7 @@
 <?php include_once "components/transaction-create-update/template.html"; ?>
 <?php include_once "components/transaction-list/template.html"; ?>
 <?php include_once "components/transaction-list-item/template.html"; ?>
+<?php include_once "components/transaction-details/template.html"; ?>
 
 
 
@@ -66,6 +67,8 @@
 <script type="text/javascript" src="components/dataset-create-update/view.js"></script>
 <script type="text/javascript" src="components/transaction-create-update/view.js"></script>
 <script type="text/javascript" src="components/transaction-list/view.js"></script>
+<script type="text/javascript" src="components/transaction-list-item/view.js"></script>
+<script type="text/javascript" src="components/transaction-details/view.js"></script>
 
 
 

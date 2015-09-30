@@ -55,14 +55,15 @@ var app = app || {};
 				ss = url.split("/");
 			this.href = url;
 			this.id = ss[ss.length-1];
+			this.typePath = ss[ss.length-2];
 
 		},
-		parse: function(a){
-			console.log("model parse: ", a);
+		parse: function(a){			
 			this.setIdentity(a._links.self.href);			
 			return a;
 		},
-		nestedFetch: function(_args){
+		nestedFetch: function(_args, _deep){
+			var deep = _deep || false;
 			var args = _args || {}
 			var _this = this;
 			var links = args.links || this.attributes._links;
@@ -87,6 +88,8 @@ var app = app || {};
 	           	if(args.beforeFetch)
 	           		args.beforeFetch(this, mdl)
 	           	mdl.fetch({url: embeddedLink});
+	           	if(deep)
+	           		mdl.nestedFetch(null, true)
 	          	
 	        }
 	        this.trigger("innersync");
@@ -97,6 +100,7 @@ var app = app || {};
 		url: function() {
  		   return app.config.serverUrl + '/' + this.path;
  		},
+ 		deepFetch: false,
  		parse: function(response){
  			
  			var 
@@ -109,9 +113,8 @@ var app = app || {};
  					arrays[key][i].typePath = key;
  					result.push(arrays[key][i]);
  				}
- 			} 			
- 			console.log("BaseCollection.parse, response:", response);
- 			console.log("BaseCollection.parse, result:", result);
+ 			} 
+ 			
  			return result;
  		},
  		persist: function(model,args){
@@ -164,17 +167,21 @@ var app = app || {};
 	 				}
 	 			});
 	 		}
- 		}
+ 		} 
+
+ 		
  			
  		
 	});
  		
+ 		
+ 		
 
 //------------------------------------------------------------------------------//
 //------------------------------------------------------------------------------//
 //------------------------------------------------------------------------------//
 
-	app.MappingModel = app.BaseModel.extend({defaults:{name: "Sem nome"}});
+	app.MappingModel = app.BaseModel.extend({defaults:{name: " - "}});
 	app.DatasetModel = app.BaseModel.extend({
 		defaults:{name: "Sem nome"},
 		nested:{			
@@ -310,7 +317,7 @@ var app = app || {};
 			logs: app.LogCollection
 		},
 
-		function(){
+		current: function(){
 			return this.get("logs").last();
 		},
 
@@ -339,7 +346,7 @@ var app = app || {};
 		path:"transaction",
 		model: app.TransactionModel,
 		initialize: function(){
-			this.on("sync", function(){
+			this.on("reset", function(){
 				this.models.forEach(function(mdl){mdl.nestedFetch()});				
 			});
 			//this.on("reset", function(){
