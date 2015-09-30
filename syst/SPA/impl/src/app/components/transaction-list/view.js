@@ -13,7 +13,8 @@ var app = app || {};
 		},
 
 		options: {
-			
+			actions:{"edit","detail","delete"},
+			showFilters: false
 		},	
 
 		template: _.template($('#transaction-list-template').html()),
@@ -71,4 +72,10 @@ var app = app || {};
 		// -------------------------------------------------------------------------------- //
 
 	});
+	app.TransactionListView.prototype.ActionsEnum = {
+		"delete": {},
+		"edit": {},
+		"inspect": {},
+		"favourite": {}
+	}
 })(jQuery);
