@@ -12,7 +12,7 @@ var app = app || {};
 			'click  .js-new'  : 'newClicked',			
 		},
 
-		options: {
+		defaults: {
 			actions:["edit","detail","delete"],
 			showHeader: true,
 			fetched: false
@@ -24,7 +24,7 @@ var app = app || {};
 		// -------------------------------------------------------------------------------- //
 
 		initialize: function(){
-			
+			this.options = {};
 		},		
 
 		render: function () {
@@ -38,7 +38,7 @@ var app = app || {};
 		},
 
 		start: function(options){
-			this.options = _.extend(this.options, options);
+			$.extend(true, this.options, this.defaults, options);
 			this.render();
 			this.$list = $(".js-list", this.$el);
 			if(!this.options.fetched){
@@ -70,6 +70,9 @@ var app = app || {};
 			view.on("delete", function(view){
 				view.remove();
 				self.trigger("delete");
+			});
+			view.on("link", function(view){
+				self.trigger("link", view);
 			})
 			
 		},

@@ -116,6 +116,7 @@ var app = app || {};
  			return result;
  		},
  		persist: function(model,args){
+
  			args = args ? args : {};
  			if(model.validate(model.attributes, args)){
 	 			$.ajax({
@@ -126,16 +127,16 @@ var app = app || {};
 	 				success: function(data,status,xhr){
 	 					model.setIdentity(xhr.getResponseHeader("Location"));
 	 					if(args.success)
-	 						args.success(data, status, xhr);
+	 						args.success(model, data, status, xhr);
 	 					console.log(data,status,xhr);
 	 				},
 	 				error: function(request,status,error){
 	 					if(args.error)
-	 						args.error(request,status,error);
+	 						args.error(model, request,status,error);
 	 				},
 	 				complete: function(a,b,c){
 	 					if(args.complete)
-	 						args.complete(a,b,c);
+	 						args.complete(model, a,b,c);
 	 					console.log(a,b,c);
 	 				}
 	 			});

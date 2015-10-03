@@ -51,6 +51,7 @@ var app = app || {};
 
 		initialize: function () {
 			var self = this;
+			
 
 			
 			this.model.get("targetDataset").nestedFetch({beforeFetch: function(){

@@ -13,7 +13,7 @@ var app = app || {};
 			'input  .js-dataset-select' : 'datasetSelected'
 		},		
 		
-		options: {
+		defaults: {
 			
 		},	
 
@@ -39,7 +39,7 @@ var app = app || {};
 		// -------------------------------------------------------------------------------- //
 
 		initialize: function(){
-			
+			this.options = {};
 		},		
 
 		render: function () {
@@ -58,7 +58,7 @@ var app = app || {};
 		},
 
 		start: function(options){
-			this.options = _.extend(this.options, options)
+			$.extend(true, this.options, this.defaults, options);
 			this.render();
 			this.collection.reset();
 			this.listenTo(this.collection, "reset", this.addOptions);

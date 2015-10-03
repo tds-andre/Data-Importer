@@ -14,7 +14,7 @@ var app = app || {};
 			'input  .js-dataset-create-update-conector' : 'datasetConectorSelected'
 		},		
 		
-		options: {					
+		defaults: {					
 			isSource: true,
 			showHeader: true		
 		},
@@ -65,14 +65,9 @@ var app = app || {};
 		},
 
 		start: function(options){
-			var 				
-				tmp = _.extend(this.options, options);
-
-			this.options = tmp;			
-
-			this.render();
-			
-			
+			this.options = {}
+			$.extend(true,this.options, this.defaults, options);
+			this.render();			
 			return this;
 		
 		},

@@ -12,15 +12,11 @@ var app = app || {};
 			//'click  .js-??????-button'  : 'buttonClicked',			
 		},		
 		
-		options: {
+		defaults: {
 			
 		},	
 
-		views:{
-			recent: null,
-			all:null,
-			favorite: null
-		},
+		
 
 		template: _.template($('#transaction-tabs-template').html()),
 
@@ -28,7 +24,12 @@ var app = app || {};
 		// -------------------------------------------------------------------------------- //
 
 		initialize: function(){
-			
+			this.options = {}
+			this.views ={
+				recent: null,
+				all:null,
+				favorite: null
+			}
 		},		
 
 		render: function () {
@@ -48,7 +49,7 @@ var app = app || {};
 		},
 
 		start: function(options){
-			this.options = _.extend(this.options, options);
+			$.extend(true, this.options, this.defaults, options);
 			this.render();
 			return this;		
 		},

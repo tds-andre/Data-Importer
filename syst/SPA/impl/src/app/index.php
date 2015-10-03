@@ -514,9 +514,9 @@ Purchase: http://wrapbootstrap.com
                 <!-- /Page Header -->
                 <!-- Page Body -->
                 <div class="page-body">
-                    <div class="row">
+                    <div class="row main-content-parent">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="main-content-placeholder">
-                            
+                            <div class="js-main-el">
                             <!-- widget em execucao -->
                             <div class="widget radius-bordered" id="em_execucao">
                                 <div class="widget-header bg-seashell bordered-bottom bordered-warning">
@@ -628,7 +628,7 @@ Purchase: http://wrapbootstrap.com
                                 </div>
                             </div>
                             <!-- /widget em execucao -->
-                            
+                            </div>
                             
                             <!-- tabbable -->
                             <div class="tabbable">

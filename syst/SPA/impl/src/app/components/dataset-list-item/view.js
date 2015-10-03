@@ -22,7 +22,7 @@ var app = app || {};
 			'click  .js-new-dataset-list-item-delete'  : 'deleteClicked'
 		},		
 		
-		options: {
+		defaults: {
 			type: "source"
 		},	
 
@@ -32,7 +32,7 @@ var app = app || {};
 		// -------------------------------------------------------------------------------- //
 
 		initialize: function(){
-			
+			this.options = {};
 		},		
 
 		render: function () {
@@ -45,7 +45,7 @@ var app = app || {};
 		},
 
 		start: function(options){
-			this.options = _.extend(this.options, options);
+			$.extend(true, this.options, this.defaults, options);
 			
 		},
 

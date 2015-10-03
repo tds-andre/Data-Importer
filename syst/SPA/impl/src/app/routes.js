@@ -5,6 +5,18 @@ app.views = app.views || {}
 
 
 	'use strict';
+	app.navigation.showTransactionOperation = function(args){
+		var	
+			view,
+			defaults= {};
+		args = _.extend(defaults, args);
+		app.navigation.current = app.navigation.prepare("transactionOperation", app.TransactionOperationView, ["Transações", "Operação"], "Execute a Transação", args);    	
+		view = app.navigation.current.view;
+	
+		view.start(); 
+	};
+
+
 	app.navigation.showTransactionReport = function(args){
 		var	
 			view,
@@ -34,6 +46,9 @@ app.views = app.views || {}
 		view.on("delete", function(view){
 			app.views.modal.show("Destino - Exclusão", "Dataset excluído.");
 		});
+		view.on("link", function(view){
+			app.navigation.to("TransactionOperation", {model: view.model});
+		})
 
 		view.start(); 
 	};
@@ -203,13 +218,20 @@ app.views = app.views || {}
 	};
 
 	app.navigation.prepare = function(name,view,breadcrumb,title,args){
-		var
-			defaults = {el: app.placeholderId};
+		
 		try{
-			app.navigation.current.remove();
+			app.navigation.current.view.remove();
 		}catch(e){}
-
+		if(!args.el){
+			app.$placeholder.html("");
+			app.$placeholder.append("<div class='js-main-el'></div>");
+		}
+		var
+			defaults = {el: $(".js-main-el")[0]};
 		args = _.extend(defaults,args);
+
+
+
 		app.navigation.views[name] = {};
 		app.navigation.views[name].view = new view(args);
 		app.views.breadcrumb.set(breadcrumb);

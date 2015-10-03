@@ -22,7 +22,7 @@ var app = app || {};
 			'click  .js-dataset-list-new'  : 'newClicked',			
 		},		
 		
-		options: {
+		defaults: {
 			type: "source"
 		},	
 
@@ -32,7 +32,7 @@ var app = app || {};
 		// -------------------------------------------------------------------------------- //
 
 		initialize: function(){
-			
+			this.options = {};
 		},		
 
 		render: function () {			
@@ -41,7 +41,7 @@ var app = app || {};
 		},
 
 		start: function(options){
-			this.options = _.extend(this.options, options);
+			$.extend(true, this.options, this.defaults, options);
 			this.render();
 			this.$list = $(".js-dataset-list-list");
 			this.listenTo(this.collection, "reset", this.addAll);

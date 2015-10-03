@@ -13,9 +13,10 @@ var app = app || {};
 			'click  .js-details'  : 'detailsClicked',
 			'click  .js-delete'  : 'deleteClicked',
 			'click  .js-favorite'  : 'favoriteClicked',
+			'click  .js-link'      : 'linkClicked'
 		},		
 		
-		options: {		
+		defaults: {		
 			actions:["edit","detail","delete"]
 		},	
 
@@ -25,7 +26,7 @@ var app = app || {};
 		// -------------------------------------------------------------------------------- //
 
 		initialize: function(){
-			
+			this.options = {};
 		},		
 
 		render: function () {
@@ -40,7 +41,7 @@ var app = app || {};
 		},
 
 		start: function(options){
-			this.options = _.extend(this.options, options);			
+			$.extend(true, this.options, this.defaults, options);
 			return this;		
 		},
 
@@ -73,6 +74,10 @@ var app = app || {};
 			this.model.set("isFavorite", this.model.get("isFavorite"));
 			this.model.save();
 			this.trigger("favorite", this);
+		},
+
+		linkClicked: function(e){
+			this.trigger("link", this);
 		},
 
 		// Other callbacks----------------------------------------------------------------- //

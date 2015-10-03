@@ -13,6 +13,7 @@ var app = app || {};
 			this.trigger("selected", this.model);
 		},
 		initialize: function(){
+			this.options = {};
 			this.listenTo(this.model, 'change:name', this.updateName);
 			this.listenTo(this.model.get('sourceDataset'), 'change:name', this.updateSourceName);
 			this.listenTo(this.model.get('targetDataset'), 'change:name', this.updateTargetName);

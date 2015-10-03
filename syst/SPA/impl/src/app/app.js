@@ -150,7 +150,8 @@ $(function () {
         dataset: new app.DatasetCollection(),
         solr: new app.SolrCollection(),
         solrServer: new app.SolrServerCollection(),
-        transaction: new app.TransactionCollection()
+        transaction: new app.TransactionCollection(),
+        log: new app.LogCollection()
     };
 
 	

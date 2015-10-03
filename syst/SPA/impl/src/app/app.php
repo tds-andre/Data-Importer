@@ -8,7 +8,9 @@
 <?php include_once "components/transaction-list/template.html"; ?>
 <?php include_once "components/transaction-list-item/template.html"; ?>
 <?php include_once "components/transaction-details/template.html"; ?>
+<?php include_once "components/transaction-operation/template.html"; ?>
 <?php include_once "components/transaction-tabs/template.html"; ?>
+<?php include_once "components/file-upload/template.html"; ?>
 
 
 
@@ -70,9 +72,9 @@
 <script type="text/javascript" src="components/transaction-list/view.js"></script>
 <script type="text/javascript" src="components/transaction-list-item/view.js"></script>
 <script type="text/javascript" src="components/transaction-details/view.js"></script>
+<script type="text/javascript" src="components/transaction-operation/view.js"></script>
 <script type="text/javascript" src="components/transaction-tabs/view.js"></script>
-
-
+<script type="text/javascript" src="components/file-upload/view.js"></script>
 
 <!--App & Initialization-->
 <script type="text/javascript" src="routes.js"></script>

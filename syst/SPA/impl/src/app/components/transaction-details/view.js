@@ -12,7 +12,7 @@ var app = app || {};
 			
 		},		
 		
-		options: {
+		defaults: {
 			
 		},	
 
@@ -27,7 +27,7 @@ var app = app || {};
 		// -------------------------------------------------------------------------------- //
 
 		initialize: function(){
-			
+			this.options = {};
 		},		
 
 		render: function () {
@@ -40,7 +40,7 @@ var app = app || {};
 		},
 
 		start: function(options){
-			this.options = _.extend(this.options, options);
+			$.extend(true, this.options, this.defaults, options);
 			this.render();
 			return this;		
 		},
