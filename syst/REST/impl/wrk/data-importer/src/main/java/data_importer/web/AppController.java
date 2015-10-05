@@ -76,6 +76,30 @@ public class AppController  extends WebMvcConfigurerAdapter {
     }
 	 
 	
+	@RequestMapping(value = "log/{transactionLogId}/do", method = RequestMethod.GET)
+	public  @ResponseBody ResponseEntity<String> executeTransaction(HttpServletResponse response,@PathVariable long transactionLogId){	  
+		HttpStatus responseCode = HttpStatus.OK;
+    	final HttpHeaders headers = new HttpHeaders();
+    	headers.setContentType(MediaType.APPLICATION_JSON);    	
+		String message = "Execução concluída";
+		
+		try{
+			dataService.executeTransaction(transactionLogId);
+			
+			
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			message = "Falha na execução. "+ e.getMessage();
+        	responseCode = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+		
+		
+		
+		
+		return new ResponseEntity<String>(message ,headers, responseCode);	
+	}
+	
 	@RequestMapping(value = "log/{transactionLogId}/upload", method = RequestMethod.POST)
 	 public  @ResponseBody ResponseEntity<String> uploadFile(HttpServletResponse response, @RequestParam(value="file") MultipartFile file, @PathVariable long transactionLogId){	 
 		HttpStatus responseCode = HttpStatus.OK;

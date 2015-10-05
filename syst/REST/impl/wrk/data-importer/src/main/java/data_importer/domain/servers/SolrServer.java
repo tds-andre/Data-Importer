@@ -1,5 +1,6 @@
 package data_importer.domain.servers;
 
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
@@ -8,6 +9,8 @@ import javax.persistence.Entity;
 @DiscriminatorValue("SOLR_SERVER")
 public class SolrServer extends Server {
 	private int ftpPort = 22;
+	
+	
 
 	public int getFtpPort() {
 		return ftpPort;
@@ -17,4 +20,6 @@ public class SolrServer extends Server {
 		this.ftpPort = ftpPort;
 	}
 
+	
+	
 }

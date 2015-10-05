@@ -19,7 +19,7 @@ var app = app || {};
 		},
 
 		events: {
-			'click  .js-dataset-list-new'  : 'newClicked',			
+			'click  .js-new'  : 'newClicked',			
 		},		
 		
 		defaults: {
@@ -43,8 +43,9 @@ var app = app || {};
 		start: function(options){
 			$.extend(true, this.options, this.defaults, options);
 			this.render();
-			this.$list = $(".js-dataset-list-list");
+			this.$list = $(".js-list");
 			this.listenTo(this.collection, "reset", this.addAll);
+			this.collection.reset();
 			this.collection.fetch({reset: true});
 					
 		},

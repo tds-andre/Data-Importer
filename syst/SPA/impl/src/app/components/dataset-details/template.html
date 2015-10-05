@@ -17,7 +17,7 @@
 		if(recordDelimiter = "\n") 
 			recordDelimiter = "Unix";
 	%>
-	<div class="js-dataset-details-csv js-dataset-details-type-specific">
+	<div>
 		<div class="row">
 			<div class="col-sm-6">
 				<h6>Separador de linha</h6>
@@ -32,25 +32,31 @@
 	<% } %>
 
 	<% if(conector=="Solr") { %>
-	<div class="js-dataset-details-solr js-dataset-details-type-specific">
+	<div>
 		<div class="row">
 			<div class="col-sm-6">
 				<h6>Servidor Solr</h6>
-				<h5><%- server.attributes.host %></h5>
+				<h5><%- server.attributes.host || " - " %></h5>
 			</div>
 			<div class="col-sm-6">
 				<h6>Core</h6>
-				<h5> <%- location %> </h5>
-			</div>					
+				<h5> <%- location || " - " %> </h5>
+			</div>
+							
 		</div>
 		<div class="row">
 			<div class="col-sm-6">
-				<h6>Porta</h6>
-				<h5><%- server.attributes.port %></h5>
+				<h6>Usuário</h6>
+				<h5> <%- server.attributes.username || " - " %> </h5>
 			</div>
-			<div class="col-sm-6">
-				<h6>Porta FTP</h6>
-				<h5> <%- server.attributes.ftpPort %> </h5>
+			<div class="col-sm-3">
+				<h6>Porta HTTP</h6>
+				<h5> <%- server.attributes.port || " - " %> </h5>
+			</div>
+			
+			<div class="col-sm-3">
+				<h6>Porta FTP/SSH</h6>
+				<h5> <%- server.attributes.ftpPort || " - " %> </h5>
 			</div>					
 		</div>	
 	</div>

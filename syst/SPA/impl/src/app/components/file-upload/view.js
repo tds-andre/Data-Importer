@@ -29,14 +29,16 @@ var app = app || {};
 		},		
 
 		render: function () {
-			this.$el.html(this.template());			
+			this.$el.html(this.template());	
+			this.$progress = $(".js-progress", this.$el)
+			this.$message = $(".js-progress-message", this.$el)		
 			return this;			
 		},
 
 		start: function(options){
 			$.extend(true, this.options, this.defaults, options);
-			this.render();
-			return this;		
+			
+			return this.render();			
 		},
 
 		// View callbacks------------------------------------------------------------------ //
@@ -81,27 +83,25 @@ var app = app || {};
 		},
 
 		setProgressMessage: function(msg, type){
-			$(".js-progress-message", this.$el).html(msg);
-			if(type == "success"){
-       			$(".js-progress", this.$el).removeClass("progress-bar-success")
-       			$(".js-progress", this.$el).removeClass("progress-bar-danger")
-       			$(".js-progress", this.$el).addClass("progress-bar-info")
+			this.$message.html(msg);
+			if(type == "info"){
+       			this.$progress.removeClass("progress-bar-success")
+       			this.$progress.removeClass("progress-bar-danger")
+       			this.$progress.addClass("progress-bar-info")
        		}
 			if(type == "success"){
-       			$(".js-progress", this.$el).removeClass("progress-bar-info")
-       			$(".js-progress", this.$el).addClass("progress-bar-success")
+       			this.$progress.removeClass("progress-bar-info")
+       			this.$progress.addClass("progress-bar-success")
        		}
        		if(type == "danger"){
-       			$(".js-progress", this.$el).removeClass("progress-bar-info")
-       			$(".js-progress", this.$el).addClass("progress-bar-danger")
+       			this.$progress.removeClass("progress-bar-info")
+       			this.$progress.addClass("progress-bar-danger")
        		}
 		},
 
-       	setProgress: function(val){
-       		this.progress = 0;
-       		$(".js-progress", this.$el).css("width", val + "%");
-       		
-
+       	setProgress: function(val){ 
+       		if(val)     		
+       			this.$progress.css("width", val + "%");
        	},
 
 		upload: function(name, formData){

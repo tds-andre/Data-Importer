@@ -60,7 +60,10 @@
 
 <!--Groundwork-->
 <script type="text/javascript" src="config.js"></script>
+<script type="text/javascript" src="libs/spring-model.js"></script>
+<script type="text/javascript" src="libs/spring-collection.js"></script>
 <script type="text/javascript" src="models.js"></script>
+<script type="text/javascript" src="collections.js"></script>
 
 <!--Views-->
 <script type="text/javascript" src="components/start-transaction/view.js"></script>

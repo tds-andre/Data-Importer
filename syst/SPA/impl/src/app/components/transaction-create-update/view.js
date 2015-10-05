@@ -17,29 +17,26 @@ var app = app || {};
 			
 		},	
 
-
-		newOriginView: null,
-		existingOriginView: null,
-		newTargetView: null,
-		existingTargetView: null,
-
-		
-		state: {
-			newTarget: false,
-			newOrigin: false,
-			step: 1,
-			originConfigured: false,
-			targetConfigured: false,
-			transactionSet: false
-		},
-
 		template: _.template($('#transaction-create-update-template').html()),
 
 		// Core --------------------------------------------------------------------------- //
 		// -------------------------------------------------------------------------------- //
 
 		initialize: function(){
-			this.options = {};
+			this.options = {},
+			this.newOriginView= null,
+			this.existingOriginView= null,
+			this.newTargetView= null,
+			this.existingTargetView= null,
+			this.state = {
+				newTarget: false,
+				newOrigin: false,
+				step: 1,
+				originConfigured: false,
+				targetConfigured: false,
+				transactionSet: false
+			}
+
 		},		
 
 		render: function () {
