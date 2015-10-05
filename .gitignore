@@ -3,6 +3,7 @@
 **/wrk/RemoteSystemsTempFiles
 **/wrk/.metadata
 **/wrk/*/target
+**/wrk/**/target
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
