@@ -1,18 +1,22 @@
 package data_importer.services;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.SocketException;
+import java.io.InputStreamReader;
 
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import data_importer.domain.datasets.CsvFile;
-import data_importer.domain.datasets.Dataset;
 import data_importer.domain.datasets.SolrTable;
 import data_importer.domain.servers.SolrServer;
 import data_importer.domain.transactions.Transaction;
@@ -46,8 +50,26 @@ public class DataService {
 	    client.disconnect();		
 	}
 	
-	public void indexSolr(String host, int port, String core, String filename){
-		
+	public void indexSolr(String host, Integer port, String core, String filename) throws ClientProtocolException, IOException{
+		String url = host+":"+port.toString()+"/biserver-web/"+core+"/update/?commit=true&separator=;&stream.file="+filename+"&stream.contentType=application/csv;charset=UTF-8";
+		HttpClient client = HttpClientBuilder.create().build();
+		HttpGet request = new HttpGet(url);
+
+		// add request header
+		//request.addHeader("User-Agent", USER_AGENT);
+		HttpResponse response = client.execute(request);
+
+		System.out.println("Response Code : " 
+	                + response.getStatusLine().getStatusCode());
+
+		BufferedReader rd = new BufferedReader(
+			new InputStreamReader(response.getEntity().getContent()));
+
+		StringBuffer result = new StringBuffer();
+		String line = "";
+		while ((line = rd.readLine()) != null) {
+			result.append(line);
+		}
 	}
 
 }
