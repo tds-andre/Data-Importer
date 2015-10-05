@@ -45,15 +45,17 @@ app.BaseModel = Backbone.Model.extend({
 		},
 
 		setIdentity: function(url){
+			
 			var
 				ss = url.split("/");
 			this.href = url;
-			this.id = ss[ss.length-1];
+			this.idd = ss[ss.length-1];
 			this.typePath = ss[ss.length-2];
 
 		},
-		parse: function(a){	
-			try{this.setIdentity(a._links.self.href);}catch(e){}
+		parse: function(a){
+			if(a._links)
+				this.setIdentity(a._links.self.href);
 			return a;
 		},
 		nestedFetch: function(_args, _deep){

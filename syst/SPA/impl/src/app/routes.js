@@ -44,7 +44,7 @@ app.views = app.views || {}
 			app.navigation.to("NewTransaction");
 		});
 		view.on("delete", function(view){
-			app.views.modal.show("Destino - Exclusão", "Dataset excluído.");
+			app.views.modal.show("Transação - Exclusão", "Transação excluída.");
 		});
 		view.on("link", function(view){
 			app.navigation.to("TransactionOperation", {model: view.model});
@@ -89,6 +89,7 @@ app.views = app.views || {}
 	        app.views.validation.warn("Erro na criação.")
 	        console.log(e);
 	    });
+	    
 	    view.on("cancel", function(){
 	    	app.navigation.to("TargetsList");
 	    });	 
@@ -100,7 +101,7 @@ app.views = app.views || {}
 		var view = app.navigation.current.view;
 		view.on("update", function(){
 	        app.views.validation.success("Dataset de destino autalizado successo.");
-	        app.navigation.to("TargetList");
+	        app.navigation.to("TargetsList");
 	    });
 	     view.on("error", function(e){
 	        app.views.validation.warn("Erro na criação.")

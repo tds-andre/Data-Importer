@@ -178,7 +178,7 @@ var app = app || {};
 
 	});
 
-	console.log("start transaction view loaded");
+	app.debug("start transaction view loaded");
 })(jQuery);
 
 //https://www.google.com/settings/takeout/download?j=0146afa5-f7c7-4936-9eb8-5d00cca5a0d2&i=0

@@ -12,13 +12,17 @@ var app = app || {};
 	});
 
 	app.DatasetModel = app.BaseModel.extend({
-		defaults:{name: "Sem nome"},
+		defaults:{
+			name: "Sem nome"
+			
+
+		},
 		nested:{			
 			server: app.ServerModel
 		},
 		validate: function(attrs,options){
 			var result = true;
-			options = this.validationBoilerplate(atrrs, options);
+			options = this.validationBoilerplate(attrs, options);
 			if(options.validate)
 				return true;
 			if(!this.has("name") || this.get("name") =="")
@@ -32,9 +36,19 @@ var app = app || {};
 		}
 	});
 
-	app.ServerModel = app.BaseModel.extend({defaults:{name: "Sem nome"}});
+	app.ServerModel = app.BaseModel.extend({
+		defaults:{
+			name: "Sem nome",
+			port: 80,
+			username: "root",
+			password: "rjpoc#789"
+		}
+	});
 	app.CsvModel = app.BaseModel.extend({
-		defaults:{name: "Sem nome"},
+		defaults:{
+			name: "Sem nome",
+			fieldSeparator: ";"
+		},
 		inherited:{
 			dataset: app.DatasetModel
 		}
@@ -55,7 +69,11 @@ var app = app || {};
 	});
 
 	app.SolrServerModel = app.BaseModel.extend({
-		defaults:{name: "Sem nome"},
+		defaults:{
+			name: "Sem nome",
+			ftpPort: 22,
+			ftpRoot: "C:/m/"
+		},
 		inherited:{
 			dataset: app.ServerModel
 		}
@@ -123,5 +141,5 @@ var app = app || {};
 //------------------------------------------------------------------------------//
 //------------------------------------------------------------------------------//
 
-	console.log("models.js loaded");
+	app.debug("models.js loaded");
 })();

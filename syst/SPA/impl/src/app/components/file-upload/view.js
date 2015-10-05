@@ -31,7 +31,8 @@ var app = app || {};
 		render: function () {
 			this.$el.html(this.template());	
 			this.$progress = $(".js-progress", this.$el)
-			this.$message = $(".js-progress-message", this.$el)		
+			this.$message = $(".js-progress-message", this.$el);
+			this.uploaded = false;	
 			return this;			
 		},
 
@@ -129,12 +130,14 @@ var app = app || {};
        			},
       
        			success:  function(data) {
+       				self.uploaded = true;
        				self.setProgressMessage("Upload concluído", "success")
          			if(self.options.success)
        					self.options.success(self,data)      		
        			},
        			error: function(a,b,c){
        				if(a.readyState == 4 && a.status == 200){
+       					self.uploaded = true;
        					self.setProgressMessage("Upload concluído", "success")
          				if(self.options.success)
        						self.options.success(self,data)     

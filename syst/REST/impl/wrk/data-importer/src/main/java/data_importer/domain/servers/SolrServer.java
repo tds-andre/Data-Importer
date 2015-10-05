@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 public class SolrServer extends Server {
 	private int ftpPort = 22;
 	
+	private String ftpRoot = "/";
 	
 
 	public int getFtpPort() {
@@ -18,6 +19,14 @@ public class SolrServer extends Server {
 
 	public void setFtpPort(int ftpPort) {
 		this.ftpPort = ftpPort;
+	}
+
+	public String getFtpRoot() {
+		return ftpRoot;
+	}
+
+	public void setFtpRoot(String ftpRoot) {
+		this.ftpRoot = ftpRoot;
 	}
 
 	

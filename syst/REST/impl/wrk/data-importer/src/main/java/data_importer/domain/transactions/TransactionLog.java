@@ -5,6 +5,8 @@ import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.print.attribute.standard.DateTimeAtCompleted;
 
 import org.apache.commons.net.ntp.TimeStamp;
+
+import data_importer.domain.transactions.TransactionStatus;
 
 @Entity
 public class TransactionLog {
@@ -25,9 +29,13 @@ public class TransactionLog {
 	@Column(nullable=true)
 	private String uploadedFilename = null;
 	
+	@Enumerated(EnumType.STRING)
+	private TransactionStatus status = TransactionStatus.CREATED;
+	
 	private Timestamp createdAt = new Timestamp(new java.util.Date().getTime());
 	
 	private String sourceInfo;
+	
 	private String targetInfo;
 	public Transaction getTransaction() {
 		return transaction;
@@ -62,7 +70,15 @@ public class TransactionLog {
 	public void setCreatedAt(Timestamp createdAt) {
 		this.createdAt = createdAt;
 	}
+	public TransactionStatus getStatus() {
+		return status;
+	}
+	public void setStatus(TransactionStatus status) {
+		this.status = status;
+	}
 
+	
+	
 
 	
 	

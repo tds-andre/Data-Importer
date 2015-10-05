@@ -144,6 +144,11 @@ $(function () {
         return true;
     }
 
+    app.log = function(a){
+        console.log(a)
+    },
+    
+
     app.collections = {
         localServer: new app.LocalServerCollection(),
         csv: new app.CsvCollection(),
@@ -166,7 +171,7 @@ $(function () {
 
 
 
-    console.log("data-importer app loaded");
+    app.debug("data-importer app loaded");
 });
 
 

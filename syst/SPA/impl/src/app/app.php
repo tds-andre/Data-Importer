@@ -59,6 +59,8 @@
 <script src="vendor/jfeldstein/jQuery.AjaxFileUpload.js/jQuery.AjaxFileUpload.js" type="text/javascript"></script>
 
 <!--Groundwork-->
+<script type="text/javascript" src="init.js"></script>
+<script type="text/javascript" src="libs/tds-spinner.js"></script>
 <script type="text/javascript" src="config.js"></script>
 <script type="text/javascript" src="libs/spring-model.js"></script>
 <script type="text/javascript" src="libs/spring-collection.js"></script>

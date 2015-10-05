@@ -3,6 +3,7 @@ package data_importer.domain.transactions;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -35,17 +36,17 @@ public class Transaction{
 	@Column(nullable=true)
 	private String name = "Sem nome";
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.DETACH)
 	private Dataset targetDataset;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.DETACH)
 	private Dataset sourceDataset;
 	
 	@ManyToOne(optional=true)	
 	private Mapping mapping;
 	
 
-	@OneToMany(targetEntity=TransactionLog.class, mappedBy="transaction")
+	@OneToMany(targetEntity=TransactionLog.class, mappedBy="transaction", cascade=CascadeType.REMOVE)
 	private List<TransactionLog> logs;
 
 	

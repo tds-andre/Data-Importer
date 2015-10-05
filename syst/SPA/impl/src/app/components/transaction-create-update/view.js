@@ -143,8 +143,14 @@ var app = app || {};
 				el, model, view;
 			el = $(ev.currentTarget).parents(".js-existing-wrapper").find(".js-existing-el")[0];
 			$(el).html("");
-			model = this.collection.models[$(ev.currentTarget).val()];
+			var $option = $("option[value="+$(ev.currentTarget).val()+"]",ev.currentTarget)
+			var $select = $option.parent();			
+			model = $option.data("model");
 			view = new app.DatasetDetailsView({el: el, model: model});
+			if($select.hasClass("js-transaction-create-update-origin-select"))
+				this.existingOriginView = view;
+			else
+				this.existingTargetView = view;
 			view.start();
 			
 		},
@@ -197,10 +203,11 @@ var app = app || {};
 			view.saveClicked();
 		},
 		retrieveExisting: function(key){
-			var 
-				targetIndex = $(".js-transaction-create-update-"+key+"-select", this.$el).val(),
-				target = this.collection.models[targetIndex],
+			var
+				view = key=="origin" ? this.existingOriginView : this.existingTargetView;				
+			var target = view.model,
 				attr = key=="origin" ? "source" : "target";
+
 			this.model.set(attr+"Dataset", target.href);
 			this.datasetSetup(key);
 
@@ -254,13 +261,21 @@ var app = app || {};
 			return "<option value='"+val+"'>"+name+"</option>";
 		},
 
-		addOption: function(dataset, index){			
-			$(".js-transaction-create-update-target-select", this.$el).append(this.genOption(dataset.get("name"), index));	
+		addTargetOption: function(dataset, index){			
+			$(".js-transaction-create-update-target-select", this.$el).append(this.genOption(dataset.get("name"), index));
+			$(".js-transaction-create-update-target-select option[value="+index+"]", this.$el).data("model", dataset);
+		},
+		addOriginOption: function(dataset, index){						
 			$(".js-transaction-create-update-origin-select", this.$el).append(this.genOption(dataset.get("name"), index));
+			$(".js-transaction-create-update-origin-select option[value="+index+"]", this.$el).data("model", dataset);
 		},
 
 		addOptions: function(){
-			this.collection.each(this.addOption, this);
+			this.collection.filter(function(model){return (app.SourceableDatasetTypes.indexOf(app.DatasetTypeEnum.byPath(model.typePath, true))>-1)})
+				.forEach(this.addOriginOption, this);
+			this.collection.filter(function(model){return (app.TargetableDatasetTypes.indexOf(app.DatasetTypeEnum.byPath(model.typePath, true))>-1)})
+				.forEach(this.addTargetOption, this);
+			
 		}
 
 

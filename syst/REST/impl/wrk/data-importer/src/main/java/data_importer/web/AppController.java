@@ -44,93 +44,46 @@ public class AppController  extends WebMvcConfigurerAdapter {
 	@Autowired
 	private TransactionLogRepo logs;
 	
-	@RequestMapping(value="service/transaction/{transactionId}/start", method=RequestMethod.GET)
-    public TransactionLog startTransaction(@PathVariable long transactionId) {
-		return null;
-		//return dataService.startTransaction(transactions.findOne(transactionId));
- 	}
-	
-	@RequestMapping(value="/upload/{transactionLogId}", method=RequestMethod.POST)
-    public @ResponseBody ResponseEntity<String> handleFileUpload(HttpServletRequest request, @PathVariable long transactionLogId){        
-		HttpStatus responseCode = HttpStatus.OK;
-    	final HttpHeaders headers = new HttpHeaders();
-    	headers.setContentType(MediaType.APPLICATION_JSON);    	
-		String message = null;
 
-            try {            	
-            	TransactionLog log = logs.findOne(transactionLogId);
-            	String filename = ((Long)log.getTransaction().getId()).toString();
-                byte[] bytes = null;//file.getBytes();
-                BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(filename)));
-                stream.write(bytes);
-                stream.close();
-                log.setUploadedFilename(filename);
-                logs.save(log);
-                message = "success";
-            } catch (Exception e) {
-            	message = "You failed to upload. "+ e.getMessage();
-            	responseCode = HttpStatus.INTERNAL_SERVER_ERROR;
-            }
-
-            return new ResponseEntity<String>(message ,headers, responseCode);
-    }
 	 
 	
 	@RequestMapping(value = "log/{transactionLogId}/do", method = RequestMethod.GET)
-	public  @ResponseBody ResponseEntity<String> executeTransaction(HttpServletResponse response,@PathVariable long transactionLogId){	  
-		HttpStatus responseCode = HttpStatus.OK;
-    	final HttpHeaders headers = new HttpHeaders();
+	public  @ResponseBody ResponseEntity<Message> executeTransaction(HttpServletResponse response,@PathVariable long transactionLogId){	  
+		HttpStatus  		responseCode = HttpStatus.OK;
+    	final HttpHeaders	headers 	 = new HttpHeaders();
+    	Message 			msg			 = new Message();
     	headers.setContentType(MediaType.APPLICATION_JSON);    	
-		String message = "Execução concluída";
 		
 		try{
-			dataService.executeTransaction(transactionLogId);
-			
-			
+			dataService.executeTransaction(transactionLogId);			
 		}
 		catch(Exception e){
 			e.printStackTrace();
-			message = "Falha na execução. "+ e.getMessage();
+			msg.message = "Falha na execução. "+ e.getMessage();
         	responseCode = HttpStatus.INTERNAL_SERVER_ERROR;
-		}
+		}		
 		
-		
-		
-		
-		return new ResponseEntity<String>(message ,headers, responseCode);	
+		return new ResponseEntity<Message>(msg ,headers, responseCode);		
 	}
 	
 	@RequestMapping(value = "log/{transactionLogId}/upload", method = RequestMethod.POST)
-	 public  @ResponseBody ResponseEntity<String> uploadFile(HttpServletResponse response, @RequestParam(value="file") MultipartFile file, @PathVariable long transactionLogId){	 
-		HttpStatus responseCode = HttpStatus.OK;
-    	final HttpHeaders headers = new HttpHeaders();
-    	headers.setContentType(MediaType.APPLICATION_JSON);    	
-		String message = null;
+	 public  @ResponseBody ResponseEntity<Message> uploadFile(HttpServletResponse response, @RequestParam(value="file") MultipartFile file, @PathVariable long transactionLogId){	 
+		HttpStatus  		responseCode = HttpStatus.OK;
+    	final HttpHeaders	headers 	 = new HttpHeaders();
+    	Message 			msg			 = new Message();
+    	headers.setContentType(MediaType.APPLICATION_JSON); 
+    	headers.setPragma("no-cache");
+		headers.setCacheControl("no-cache");
+		headers.setDate(0);
 		
 		try{
-			TransactionLog log = logs.findOne(transactionLogId);
-			byte[] bytes = file.getBytes();
-			File dir = new File("uploads/"+((Long)transactionLogId).toString());
-			if(!dir.exists())
-				dir.mkdir();
-			String filename = dir.getAbsolutePath() + "\\" + file.getOriginalFilename(); 
-			BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(filename)));
-			stream.write(bytes);
-			log.setUploadedFilename(filename);
-			logs.save(log);
-			stream.close();	
+			dataService.receiveFile(transactionLogId, file);			
 		}catch(Exception e){
 			e.printStackTrace();
-			message = "You failed to upload. "+ e.getMessage();
-        	responseCode = HttpStatus.INTERNAL_SERVER_ERROR;
-			
+			msg.message = "You failed to upload. "+ e.getMessage();
+        	responseCode = HttpStatus.INTERNAL_SERVER_ERROR;			
 		}
 		
-		//headers.setPragma("no-cache");
-		//headers.setCacheControl("no-cache");
-		///headers.setDate(0);
-		
-		return new ResponseEntity<String>(message ,headers, responseCode);
-
+		return new ResponseEntity<Message>(msg ,headers, responseCode);
 	}
 }

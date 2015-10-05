@@ -76,8 +76,10 @@ var app = app || {};
 		},
 
 		addAll: function(){
+			var group = this.options.type == "source" ? app.SourceableDatasetTypes : app.TargetableDatasetTypes;
 			this.$list.html('');
-			this.collection.each(this.addOne, this);
+			this.collection.filter(function(model){return (group.indexOf(app.DatasetTypeEnum.byPath(model.typePath, true))>-1)})
+			.forEach(this.addOne, this);
 		}
 
 

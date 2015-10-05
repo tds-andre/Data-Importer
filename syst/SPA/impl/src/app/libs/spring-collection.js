@@ -55,7 +55,7 @@ var app = app || {};
  			args = args ? args : {};
  			if(model.validate(model.attributes, args)){
 	 			$.ajax({
-	 				url: this.url() + "/" + model.id, 
+	 				url: this.url() + "/" + model.idd, 
 	 				type: "PATCH", 
 	 				contentType: "application/json", 
 	 				data: JSON.stringify(model.toJSON()),  

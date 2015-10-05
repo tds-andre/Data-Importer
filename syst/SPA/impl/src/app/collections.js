@@ -35,7 +35,25 @@ var app = app || {};
 
 	app.LogCollection = app.BaseCollection.extend({
 		path: "log",
-		model: app.LogModel
+		model: app.LogModel,
+		do: function(log, options){
+			var 
+				self =this;
+			options = options || {};
+			$.ajax({
+				url: app.config.serverUrl +"/"+this.path+"/" + log.idd + '/do',
+				type: "GET",
+				success: function(){
+					if(options.success)
+						options.success(log);
+
+				},
+				error: function(){
+					if(options.error)
+						options.error(log);
+				}
+			})
+		}
 	});
 
 	app.TransactionCollection = app.BaseCollection.extend({
@@ -48,5 +66,5 @@ var app = app || {};
 		}
 	});
 
-	console.log("collections.js loaded")
+	app.debug("collections.js loaded")
 })();

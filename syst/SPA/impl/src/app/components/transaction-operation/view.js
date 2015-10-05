@@ -56,7 +56,11 @@ var app = app || {};
 			this.log.set("transaction", this.model.href);
 			app.collections.log.persist(this.log, {success: function(){
 				self.uploadView = new app.FileUploadView({el: $(".js-file-upload-el", self.$el)[0]});
-				self.uploadView.start({url: app.config.serverUrl +"/log/" + self.log.id + '/upload'});
+				self.uploadView.start({url: app.config.serverUrl +"/log/" + self.log.idd + '/upload',
+					success: function(view){
+						$(".btn-next").removeAttr("disabled");
+					}
+				});
 			}});
 			
 			
@@ -71,8 +75,22 @@ var app = app || {};
 				goinTo = $(".js-wizard",this.$el).wizard("selectedItem").step;
 			switch(goinTo){
 				case 2:
-					
-
+					if(!self.uploadView.uploaded)
+						$(".btn-next", self.$el).attr("disabled", "disabled");
+					else
+						$(".btn-next", self.$el).removeAttr("disabled");
+				break;
+				case 3:
+					app.collections.log.do(this.log, {
+						success: function(){
+							$(".js-message", self.$el).html("Transação executada com sucesso.");
+							self.trigger("execute", self);
+						},
+						error: function(){
+							$(".js-message", self.$el).html("Falha na transação!");
+							self.trigger("error", self);
+						}
+					});
 				break;
 			}
 		}

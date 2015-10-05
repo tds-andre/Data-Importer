@@ -41,7 +41,12 @@ var app = app || {};
 			if(this.options.isSource){
 				types = app.SourceableDatasetTypes;
 			}
-
+			var defaults =  {};
+			$.extend(defaults, 				
+				(new app.CsvModel()).defaults, 
+				(new app.SolrServerModel()).defaults,
+				(new app.ServerModel()).defaults)
+			json.defaults = defaults;
 			for(var i = 0; i < types.length; i++)
 				json.types.push({value: types[i], caption: app.DatasetTypeEnum[types[i]].caption})
 	
@@ -96,7 +101,7 @@ var app = app || {};
 					else{
 						server = this.model.get("server");
 						server.set("name", name + " - Server");
-						this.update(this.model,server,app.collections.csv,app.collections.localServer);
+						this.patch(this.model,server,app.collections.csv,app.collections.localServer);
 					}
 				break;
 				case "solr":
@@ -109,6 +114,7 @@ var app = app || {};
 					server.set("host"    , $(".js-solr-host", this.$el).val());
 					server.set("port"    , $(".js-solr-port", this.$el).val());
 					server.set("ftpPort" , $(".js-solr-ftp", this.$el).val());
+					server.set("ftpRoot" , $(".js-solr-root", this.$el).val());
 					server.set("username", $(".js-solr-user", this.$l).val())
 					server.set("password", $(".js-solr-pass", this.$l).val())
 					server.set("core", $(".js-solr-core", this.$l).val())
@@ -116,7 +122,7 @@ var app = app || {};
 						this.create(this.model,server,app.collections.solr,app.collections.solrServer);
 					}
 					else{						
-						this.update(this.model,server,app.collections.solr,app.collections.solrServer);
+						this.patch(this.model,server,app.collections.solr,app.collections.solrServer);
 					}					
 					
 				break;
@@ -170,10 +176,10 @@ var app = app || {};
 
 			switch(this.datasetConector){
 				case "csv":
-					if(this.model.get("recordDelimiter")=="\r\n")
-						$($('.js-csv-line-separator option', this.$el)[0]).attr('selected', 'selected')
-					else
+					if(this.model.get("recordDelimiter")=="\n")
 						$($('.js-csv-line-separator option', this.$el)[1]).attr('selected', 'selected')
+					else
+						$($('.js-csv-line-separator option', this.$el)[0]).attr('selected', 'selected')
 					$(".js-csv-field-separator", this.$el).val(this.model.get("fieldDelimiter"));
 				break;
 				case "solr":
@@ -181,8 +187,9 @@ var app = app || {};
 					$(".js-solr-core", this.$el).val(this.model.get("location"));
 					$(".js-solr-port", this.$el).val(this.model.get("server").get("port"));
 					$(".js-solr-ftp", this.$el).val(this.model.get("server").get("ftpPort"));
-					$(".js-solr-ftp", this.$el).val(this.model.get("server").get("username"));
-					$(".js-solr-ftp", this.$el).val(this.model.get("server").get("password"));
+					$(".js-solr-user", this.$el).val(this.model.get("server").get("username"));
+					$(".js-solr-pass", this.$el).val(this.model.get("server").get("password"));
+					$(".js-solr-root", this.$el).val(this.model.get("server").get("ftpRoot"));
 				break;
 			}
 			
@@ -215,7 +222,7 @@ var app = app || {};
 				}
 			);
 		},
-		udpate: function(model,server,datasetCollection,serverCollection){
+		patch: function(dataset,server,datasetCollection,serverCollection){
 			var 
 				self = this;
 			server.on("invalid", function(){self.trigger("error"), self});
@@ -227,7 +234,7 @@ var app = app || {};
 						datasetCollection.update(dataset, 
 							{
 								success: function(ee){
-									self.trigger("udpate", self);
+									self.trigger("update", self);
 								}, 
 								error: function(ee){
 									self.trigger("error", self)
