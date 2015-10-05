@@ -12,7 +12,15 @@ app.views = app.views || {}
 		args = _.extend(defaults, args);
 		app.navigation.current = app.navigation.prepare("transactionOperation", app.TransactionOperationView, ["Transações", "Operação"], "Execute a Transação", args);    	
 		view = app.navigation.current.view;
-	
+		view.on("details", function(view){
+			detailsView = new app.TransactionDetailsView({model: view.model, el:app.views.modal.$content[0]});
+			detailsView.start();				
+			app.views.modal.show("Transação - Detalhes");
+		});
+		view.on("finish", function(view){
+			app.navigation.to("TransactionList");
+		})
+
 		view.start(); 
 	};
 
@@ -24,7 +32,11 @@ app.views = app.views || {}
 		args = _.extend(defaults, args);
 		app.navigation.current = app.navigation.prepare("transactionReport", app.TransactionTabsView, ["Principal"], "Principal", args);    	
 		view = app.navigation.current.view;
-	
+		view.on("details", function(view){
+			detailsView = new app.TransactionDetailsView({model: view.model, el:app.views.modal.$content[0]});
+			detailsView.start();				
+			app.views.modal.show("Transação - Detalhes");
+		});
 		view.start(); 
 	};
 

@@ -34,7 +34,7 @@ app.BaseModel = Backbone.Model.extend({
 		},
 
 		validate: function(){
-			return true
+			
 		},
 		validationBoilerplate: function(attrs,options){
 			var

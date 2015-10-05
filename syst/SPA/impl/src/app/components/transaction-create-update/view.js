@@ -191,10 +191,8 @@ var app = app || {};
 			
 			view.model.destroy();
 			view.remove();
-			view = null;
-			
+			view = null;			
 		},
-
 		
 		saveNew: function(view, key){
 			view.on("new", this.datasetCreated);
@@ -202,6 +200,7 @@ var app = app || {};
 			view.key = key;
 			view.saveClicked();
 		},
+
 		retrieveExisting: function(key){
 			var
 				view = key=="origin" ? this.existingOriginView : this.existingTargetView;				
@@ -210,7 +209,6 @@ var app = app || {};
 
 			this.model.set(attr+"Dataset", target.href);
 			this.datasetSetup(key);
-
 		},
 		
 		datasetSetup: function(key){
@@ -222,7 +220,7 @@ var app = app || {};
 
 		
 			if(this.state.targetConfigured && this.state.originConfigured){
-				if(this.model.validate()){
+				if(!app.isDefined(this.model.validate())){
 					$(".js-next", this.$el).removeAttr("disabled");
 					$(".js-step-2", this.$el).append("<div>Transação pronta. Clique em concluir para salva-la.</div>")
 				}else{

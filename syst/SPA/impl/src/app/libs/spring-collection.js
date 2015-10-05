@@ -27,7 +27,7 @@ var app = app || {};
  		persist: function(model,args){
 
  			args = args ? args : {};
- 			if(model.validate(model.attributes, args)){
+ 			if(!app.isDefined(model.validate(model.attributes, args))){
 	 			$.ajax({
 	 				url: this.url(), 
 	 				type: "POST", 
@@ -53,7 +53,7 @@ var app = app || {};
  		},
  		update: function(model, args){
  			args = args ? args : {};
- 			if(model.validate(model.attributes, args)){
+ 			if(!app.isDefined(model.validate(model.attributes, args))){
 	 			$.ajax({
 	 				url: this.url() + "/" + model.idd, 
 	 				type: "PATCH", 
@@ -75,7 +75,33 @@ var app = app || {};
 	 				}
 	 			});
 	 		}
- 		} 
+ 		},
+ 		patch: function(model, attrs, args){
+ 			args = args ? args : {};
+ 			if(!app.isDefined(model.validate(model.attributes, args))){
+	 			$.ajax({
+	 				url: this.url() + "/" + model.idd, 
+	 				type: "PATCH", 
+	 				contentType: "application/json", 
+	 				data: JSON.stringify(attrs),  
+	 				success: function(data,status,xhr){ 					
+	 					if(args.success)
+	 						args.success(data, status, xhr);
+	 					console.log(data,status,xhr);
+	 				},
+	 				error: function(request,status,error){
+	 					if(args.error)
+	 						args.error(request,status,error);
+	 				},
+	 				complete: function(a,b,c){
+	 					if(args.complete)
+	 						args.complete(a,b,c);
+	 					console.log(a,b,c);
+	 				}
+	 			});
+	 		}
+ 		}
+
 
  		
  			

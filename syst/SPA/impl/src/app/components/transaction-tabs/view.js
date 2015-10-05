@@ -9,7 +9,9 @@ var app = app || {};
 		// -------------------------------------------------------------------------------- //
 		
 		events: {
-			//'click  .js-??????-button'  : 'buttonClicked',			
+			'click  .js-filter-all'  : 'showAll',
+			'click  .js-filter-recent'  : 'showRecent',
+			'click  .js-filter-favorite'  : 'showFavorite',
 		},		
 		
 		defaults: {
@@ -25,62 +27,57 @@ var app = app || {};
 
 		initialize: function(){
 			this.options = {}
-			this.views ={
-				recent: null,
-				all:null,
-				favorite: null
-			}
+			this.listView = null;
 		},		
 
-		render: function () {
-			var
-				recentCollection = new app.TransactionCollection(),
-				allCollection = new app.TransactionCollection();		
-			this.listenTo(recentCollection, "reset", this.renderRecent);
-			this.listenTo(allCollection, "reset", this.renderAll);
-			this.listenTo(allCollection, "reset", this.renderFavorite);
-			
-			recentCollection.fetch({url: "http://localhost:8090/transaction/search/recent", reset: true});
-			allCollection.fetch({ reset: true});
-
+		render: function () {			
 			this.$el.html(this.template());
-			this.views.recent = new app.TransactionListView({el: $()})			
+			this.listView = new app.TransactionListView({el: $(".js-list-el", this.$el)[0], collection: this.collection});
+			this.listView.start({fetched: true, showHeader: false, actions:["detail", "favorite"]});
+			this.showFavorite();
 			return this;			
 		},
 
 		start: function(options){
 			$.extend(true, this.options, this.defaults, options);
-			this.render();
+			var
+				self = this;
+			this.recent = new app.TransactionCollection();
+			this.collection = new app.TransactionCollection();		
+						
+			this.recent.fetch({url: "http://localhost:8090/transaction/search/recent", reset: true, success:function(){				
+				self.collection.fetch({reset: true, success: function(){
+					self.merge();
+					self.render();
+				}});
+			}});
+			
 			return this;		
 		},
 
 		// View callbacks------------------------------------------------------------------ //
 		// -------------------------------------------------------------------------------- //
-
+		showAll: function(){
+			this.listView.filter(function(model){return true});
+		},
+		showRecent: function(){
+			this.listView.filter(function(model){return model.isRecent});
+		},
+		showFavorite: function(){
+			this.listView.filter(function(model){return model.get("isFavorite")});
+		},
 		
 
 		// Other callbacks----------------------------------------------------------------- //
 		// -------------------------------------------------------------------------------- //
-		renderRecent: function(elements){
-			this.views.recent = new app.TransactionListView({el: $(".js-recent-el",this.$el)[0], collection: elements})
-			this.views.recent.start({fetched: true, showHeader: false, actions:["detail", "favorite"]});
-
-		},
-		renderAll: function(elements){
-			this.views.all = new app.TransactionListView({el: $(".js-all-el",this.$el)[0], collection: elements})
-			this.views.all.start({fetched: true, showHeader: false, actions:["detail", "favorite"]});
-		},
-		renderFavorite: function(elements){
-			var
-				favCol = new app.TransactionCollection();
-			elements = elements.filter(function(el){return el.get("isFavorite");});
-			favCol.add(elements);
-			this.views.favorite = new app.TransactionListView({el: $(".js-favorite-el",this.$el)[0], collection: favCol})
-			this.views.favorite.start({fetched: true, showHeader: false, actions:["detail", "favorite"]});
-		},
+		
 
 		// Internal methods --------------------------------------------------------------- //
 		// -------------------------------------------------------------------------------- //
+		merge: function(){
+			var ids = this.recent.map(function(model){return model.idd})
+			this.collection.filter(function(model){return (ids.indexOf(model.idd)>-1)}).forEach(function(model){model.isRecent = true})
+		}
 
 	});
 })(jQuery);

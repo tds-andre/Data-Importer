@@ -1,5 +1,4 @@
 <!--Templates-->
-<?php include_once "components/start-transaction/template.html"; ?>
 <?php include_once "components/dataset-list/template.html"; ?>
 <?php include_once "components/dataset-list-item/template.html"; ?>
 <?php include_once "components/dataset-details/template.html"; ?>
@@ -68,7 +67,6 @@
 <script type="text/javascript" src="collections.js"></script>
 
 <!--Views-->
-<script type="text/javascript" src="components/start-transaction/view.js"></script>
 <script type="text/javascript" src="components/dataset-list/view.js"></script>
 <script type="text/javascript" src="components/dataset-list-item/view.js"></script>
 <script type="text/javascript" src="components/dataset-details/view.js"></script>

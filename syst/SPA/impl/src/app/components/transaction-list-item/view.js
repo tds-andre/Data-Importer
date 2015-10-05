@@ -41,7 +41,7 @@ var app = app || {};
 		},
 
 		start: function(options){
-			$.extend(true, this.options, this.defaults, options);
+			$.extend( this.options, this.defaults, options);
 			return this;		
 		},
 
@@ -71,8 +71,22 @@ var app = app || {};
 			this.trigger("edit", this);
 		},
 		favoriteClicked: function(e){
-			this.model.set("isFavorite", this.model.get("isFavorite"));
-			this.model.save();
+			//this.model.set("isFavorite", this.model.get("isFavorite"));
+			var
+				fav = !this.model.get("isFavorite"),
+				self = this;
+
+			app.collections.transaction.patch(this.model, {isFavorite: fav}, {
+				success: function(e){
+					self.model.set("isFavorite", fav)
+					self.updateFavorite();
+					self.trigger("favorite");
+				},
+				error: function(e){
+
+				}
+			});
+			
 			this.trigger("favorite", this);
 		},
 
@@ -86,6 +100,15 @@ var app = app || {};
 
 		// Internal methods --------------------------------------------------------------- //
 		// -------------------------------------------------------------------------------- //
+		updateFavorite: function(){
+			if(this.model.get("isFavorite")){
+				$(".js-favorite", this.$el).removeClass("bg-gray");
+				$(".js-favorite", this.$el).addClass("bg-gold");
+			}else{
+				$(".js-favorite", this.$el).removeClass("bg-gold");
+				$(".js-favorite", this.$el).addClass("bg-gray");
+			}
+		},
 
 		updateTarget: function(){
 			$(".js-target-name", this.$el).html(this.model.get("targetDataset").get("name"));
@@ -94,18 +117,7 @@ var app = app || {};
 			$(".js-source-name", this.$el).html(this.model.get("sourceDataset").get("name"));
 		}, 
 
-		favoriteChanged: function(){
-			var
-				fav = this.model.get("isFavorite");
-			if(fav){
-				$(".js-favorite",this.$el).removeClass("bg-gray");
-				$(".js-favorite",this.$el).addClass("bg-gold");
-			}else{
-				$(".js-favorite",this.$el).removeClass("bg-gold");
-				$(".js-favorite",this.$el).addClass("bg-gray");
-			}
-
-		}
+		
 
 	});
 })(jQuery);

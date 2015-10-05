@@ -39,6 +39,9 @@ var app = app || {};
 			$(".js-wizard",this.$el).on("changed.fu.wizard", function(e,data){
 				self.actionClicked(e, self);
 			});
+			$(".js-wizard",this.$el).on("finished.fu.wizard", function(e,data){
+				self.trigger("finish", self);
+			});
 
 			this.detailsView = new app.TransactionDetailsView({model: this.model, el: $(".js-transaction-details-el", this.$el)[0]});
 			this.detailsView.start();	

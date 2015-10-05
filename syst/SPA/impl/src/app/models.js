@@ -32,7 +32,8 @@ var app = app || {};
 			if(!result)
 				this.trigger("invalid",this);
 			console.log("invalid: ", this);
-			return result;
+			if(!result)
+				return result;
 		}
 	});
 
@@ -111,7 +112,8 @@ var app = app || {};
 			if(!result)
 				this.trigger("invalid", this);
 			console.log("invalid: ", this);
-			return result;
+			if(!result)
+				return result;
 
 		}
 	});

@@ -24,10 +24,10 @@ Purchase: http://wrapbootstrap.com
     <link href="../assets/css/font-awesome.min.css" rel="stylesheet" />
     <link href="../assets/css/weather-icons.min.css" rel="stylesheet" />
 
-    <!--Fonts-->
+    <!--Fonts
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300" rel="stylesheet" type="text/css">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
-    <!--Beyond styles-->
+    Beyond styles-->
     <link id="beyond-link" href="../assets/css/beyond.min.css" rel="stylesheet" type="text/css" />
     <link href="../assets/css/demo.min.css" rel="stylesheet" />
     <link href="../assets/css/typicons.min.css" rel="stylesheet" />

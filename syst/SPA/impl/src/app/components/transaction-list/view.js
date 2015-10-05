@@ -38,7 +38,7 @@ var app = app || {};
 		},
 
 		start: function(options){
-			$.extend(true, this.options, this.defaults, options);
+			$.extend(this.options, this.defaults, options);
 			this.render();
 			this.$list = $(".js-list", this.$el);
 			if(!this.options.fetched){
@@ -73,13 +73,24 @@ var app = app || {};
 			});
 			view.on("link", function(view){
 				self.trigger("link", view);
+			});
+			view.on("favorite", function(view){
+				self.trigger("favorite", view);
 			})
 			
 		},
 
-		addAll: function(){
+		addAll: function(collection){
+			collection = collection || this.collection;
 			this.$list.html('');
-			this.collection.each(this.addOne, this);
+			if(collection.each)
+				collection.each(this.addOne, this);
+			else
+				collection.forEach(this.addOne, this);
+		},
+
+		filter: function(fn){
+			this.addAll(this.collection.filter(fn))
 		}
 
 		// Internal methods --------------------------------------------------------------- //
