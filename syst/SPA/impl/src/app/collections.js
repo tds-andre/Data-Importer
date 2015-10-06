@@ -18,6 +18,16 @@ var app = app || {};
 		model: app.LogModel
 	});
 
+	app.JdbcTableCollection = app.BaseCollection.extend({
+		path: "jdbctable",
+		model: app.JdbcTableModel
+	});
+
+	app.JdbcDatabaseCollection = app.BaseCollection.extend({
+		path: "jdbcdatabase",
+		model: app.JdbcDatabaseModel
+	});
+
 	app.SolrCollection = app.BaseCollection.extend({
 		path: "solrtable",
 		model: app.SolrModel

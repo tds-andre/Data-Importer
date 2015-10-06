@@ -54,6 +54,24 @@ var app = app || {};
 			dataset: app.DatasetModel
 		}
 	});
+
+	app.JdbcTableModel = app.BaseModel.extend({
+		defaults: {
+		
+		},
+		inherited:{
+			dataset: app.DatasetModel
+		}
+	});
+
+	app.JdbcDatabaseModel = app.BaseModel.extend({
+		defaults:{
+			driver: "mysql"
+		},
+		inherited:{
+			server: app.ServerModel
+		}
+	})
 	
 	app.SolrModel = app.BaseModel.extend({
 		defaults:{name: "Sem nome"},
@@ -125,7 +143,8 @@ var app = app || {};
 
 	app.DatasetTypeEnum = {
 		"csv": { ordinal: 0, caption: "CSV", model: app.CsvModel, collection: app.CsvCollection, path: "csv"},
-		"solr": { ordinal: 0, caption: "Solr", model: app.SolrModel, collection: app.SolrCollection, path: "solrtable"},
+		"solr": { ordinal: 1, caption: "Solr", model: app.SolrModel, collection: app.SolrCollection, path: "solrtable"},
+		"jdbc": { ordinal: 2, caption: "SQL", model: app.JdbcTableModel, colleciton: app.JdbcTableCollection, path: "jdbctable"},
 		byPath: function(path,returnKey){
 			for(var key in this)
 				if(this[key].path && this[key].path==path)
@@ -134,10 +153,11 @@ var app = app || {};
 					else
 						return this[key];
 			return null;
-		}
+		},
+
 	}
 	app.SourceableDatasetTypes = ["csv"];
-	app.TargetableDatasetTypes = ["solr"];
+	app.TargetableDatasetTypes = ["solr", "jdbc"];
 
 //------------------------------------------------------------------------------//
 //------------------------------------------------------------------------------//

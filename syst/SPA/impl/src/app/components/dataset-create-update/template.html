@@ -34,8 +34,8 @@
 					</div>							
 				</div>
 
-				<!-- CSV ---------------------------------------------------------------------------->
-				<!----------------------------------------------------------------------------------->
+				<!-- CSV -->
+				
 
 				<div class="row js-fieldset js-csv-fieldset">
 					<div class="col-sm-6">
@@ -55,8 +55,8 @@
 					</div>												
 				</div>
 
-				<!-- SOLR---------------------------------------------------------------------------->
-				<!----------------------------------------------------------------------------------->
+				<!-- SOLR -->
+				
 
 				<div class="js-fieldset js-solr-fieldset">
 					<div class="row">
@@ -109,6 +109,33 @@
 						</div>	
 					</div>
 				</div>
+
+				<!-- JDBC -->				
+
+				<div class="row js-fieldset js-jdbc-fieldset">
+					<div class="col-sm-3">
+						<div class="form-group">
+							<label class="control-label" for="line">Banco</label>
+							<input type="text" class="form-control js-jdbc-table"/>
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<div class="form-group simula_validacao">
+							<label class="control-label" for="field">Tabela </label>
+							<input type="text" class="form-control js-jdbc-database"/>
+						</div>
+					</div>		
+					<div class="col-sm-3">
+						<div class="form-group simula_validacao">
+							<label class="control-label" for="field">Driver </label>
+							<input type="text" class="form-control js-jdbc-driver" value="<%- defaults.driver %>"/>
+						</div>
+					</div>												
+				</div>
+
+
+
+
 
 <% if(options.showHeader) { %>	
 		</div>

@@ -146,8 +146,7 @@ $(function () {
 
     app.log = function(a){
         console.log(a)
-    },
-    
+    },    
 
     app.collections = {
         localServer: new app.LocalServerCollection(),
@@ -156,7 +155,9 @@ $(function () {
         solr: new app.SolrCollection(),
         solrServer: new app.SolrServerCollection(),
         transaction: new app.TransactionCollection(),
-        log: new app.LogCollection()
+        log: new app.LogCollection(),
+        jdbcTable: new app.JdbcTableCollection(),
+        jdbcDatabase: new app.JdbcDatabaseCollection()
     };
 
 	

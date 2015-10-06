@@ -45,7 +45,9 @@ var app = app || {};
 			$.extend(defaults, 				
 				(new app.CsvModel()).defaults, 
 				(new app.SolrServerModel()).defaults,
-				(new app.ServerModel()).defaults)
+				(new app.ServerModel()).defaults,
+				(new app.JdbcDatabaseModel().defaults)
+			)
 			json.defaults = defaults;
 			for(var i = 0; i < types.length; i++)
 				json.types.push({value: types[i], caption: app.DatasetTypeEnum[types[i]].caption})
@@ -115,8 +117,8 @@ var app = app || {};
 					server.set("port"    , $(".js-solr-port", this.$el).val());
 					server.set("ftpPort" , $(".js-solr-ftp", this.$el).val());
 					server.set("ftpRoot" , $(".js-solr-root", this.$el).val());
-					server.set("username", $(".js-solr-user", this.$l).val())
-					server.set("password", $(".js-solr-pass", this.$l).val())
+					server.set("username", $(".js-solr-user", this.$el).val())
+					server.set("password", $(".js-solr-pass", this.$el).val())
 					server.set("core", $(".js-solr-core", this.$l).val())
 					if(this.isNew){						
 						this.create(this.model,server,app.collections.solr,app.collections.solrServer);
@@ -124,7 +126,23 @@ var app = app || {};
 					else{						
 						this.patch(this.model,server,app.collections.solr,app.collections.solrServer);
 					}					
-					
+				break;
+				case "jdbc":
+					if(this.isNew)
+						server = new app.LocalServerModel();
+					else
+						server = this.model.get("server");
+					this.model.set("location", $(".js-jdbc-table", this.$el).val());
+					this.model.set("recordDelimiter", $(".js-csv-line-separator", this.$el).val());
+					server.set("name", name + " - Server");
+					server.set("driver", $(".js-jdbc-driver", this.$el).val());
+					server.set("db", $(".js-jdbc-database", this.$el).val());
+					if(this.isNew){						
+						this.create(this.model,server,app.collections.jdbcTable,app.collections.jdbcDatabase);
+					}
+					else{						
+						this.patch(this.model,server,app.collections.jdbcTable,app.collections.jdbcDatabase);
+					}
 				break;
 			}
 		},
@@ -140,15 +158,22 @@ var app = app || {};
 		renderDatasetTypeFieldset: function(){
 			this.hideFieldsets();
 			switch(this.datasetConector){
-				case "csv":
+				case "csv":				
 					this.showCsvFieldset();
 				break;
 				case "solr":
 					this.showSolrFieldset();
 				break;
+				case "jdbc":
+					this.showJdbcFieldset();
+				break;
 			}
 			
 
+		},
+
+		showJdbcFieldset: function(){
+			$(".js-jdbc-fieldset", this.$el).show();
 		},
 
 		showCsvFieldset: function(){
@@ -190,6 +215,11 @@ var app = app || {};
 					$(".js-solr-user", this.$el).val(this.model.get("server").get("username"));
 					$(".js-solr-pass", this.$el).val(this.model.get("server").get("password"));
 					$(".js-solr-root", this.$el).val(this.model.get("server").get("ftpRoot"));
+				break;
+				case "jdbc":
+					$(".js-jdbc-driver", this.$el).val(this.model.get("server").get("driver"));
+					$(".js-jdbc-table", this.$el).val(this.model.get("location"));
+					(".js-jdbc-database", this.$el).val(this.model.get("db"));
 				break;
 			}
 			

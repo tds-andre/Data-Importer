@@ -9,9 +9,16 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.UnrecoverableKeyException;
+
+import javax.net.ssl.KeyManager;
+import javax.net.ssl.KeyManagerFactory;
 
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
+import org.apache.commons.net.ftp.FTPSClient;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
@@ -20,6 +27,13 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.jcraft.jsch.Channel;
+import com.jcraft.jsch.ChannelSftp;
+import com.jcraft.jsch.JSch;
+import com.jcraft.jsch.JSchException;
+import com.jcraft.jsch.Session;
+import com.jcraft.jsch.SftpException;
 
 import data_importer.domain.datasets.CsvFile;
 import data_importer.domain.datasets.SolrTable;
@@ -33,23 +47,30 @@ import data_importer.services.exceptions.TransactionNotReadyException;
 
 @Service
 public class DataService {
+	private static final int FTP_TIMEOUT = 1000000;
 	@Autowired
 	private TransactionLogRepo logs;
 	
-	public void executeTransaction(long transactionLogId) throws IOException, URISyntaxException, SolrIndexingException, TransactionNotReadyException{		
+	public void executeTransaction(long transactionLogId) throws Exception{		
 		TransactionLog 		log 	= logs.findOne(transactionLogId);
+		Transaction 		trans	= log.getTransaction();
 		if(!(log.getStatus() == TransactionStatus.READY))
 			throw new TransactionNotReadyException("Transação indisponível");
-		log.setStatus(TransactionStatus.EXECUTING);					
-		Transaction 		trans	= log.getTransaction();
-		SolrTable			target  = (SolrTable)trans.getTargetDataset();
-		CsvFile 			source 	= (CsvFile)trans.getSourceDataset();
-		SolrServer 			server 	= target.getServer();
-		File 				file 	= new File(log.getUploadedFilename());
+		log.setStatus(TransactionStatus.EXECUTING);
 		
+		String duo  = "";
+		if(trans.getSourceDataset() instanceof CsvFile){
+			duo = "csv";
+		}
+		if(trans.getTargetDataset() instanceof SolrTable){
+			duo += "-solr";
+		}		
 		try{
-			uploadToFTP(server.getHost(), server.getFtpPort(), server.getUsername(), server.getPassword(), log.getUploadedFilename(), file.getName());
-			indexSolr(server.getHost(), server.getPort(), target.getLocation(), server.getFtpRoot() + file.getName() );
+			switch(duo){
+			case "csv-solr":
+				csvToSolr(log);
+				break;
+			}			
 		}catch(Exception e){
 			log.setStatus(TransactionStatus.FAILED);
 			logs.save(log);
@@ -57,6 +78,16 @@ public class DataService {
 		}
 		log.setStatus(TransactionStatus.EXECUTED);
 		logs.save(log);		
+	}
+	
+	public void csvToSolr(TransactionLog log) throws IOException, SolrIndexingException, URISyntaxException, UnrecoverableKeyException, KeyStoreException, NoSuchAlgorithmException, JSchException, SftpException{
+		Transaction 		trans	= log.getTransaction();
+		SolrTable			target  = (SolrTable)trans.getTargetDataset();
+		CsvFile 			source 	= (CsvFile)trans.getSourceDataset();
+		SolrServer 			server 	= target.getServer();
+		File 				file 	= new File(log.getUploadedFilename());
+		uploadToFTP(server.getHost(), server.getFtpPort(), server.getUsername(), server.getPassword(), log.getUploadedFilename(), file.getName());
+		indexSolr(server.getHost(), server.getPort(), target.getLocation(), server.getFtpRoot() + file.getName() );
 	}
 	
 	public void receiveFile(long transactionLogId, MultipartFile file) throws IOException{
@@ -86,14 +117,31 @@ public class DataService {
 		stream.close();
 	}
 	
-	public void uploadToFTP(String host, int port, String user, String pass, String sourceFilename, String targetFilename) throws IOException{		
+	public void uploadToFTP(String host, int port, String user, String pass, String sourceFilename, String targetFilename) throws IOException, UnrecoverableKeyException, KeyStoreException, NoSuchAlgorithmException, JSchException, SftpException{
+		
 		FTPClient client = new FTPClient();		
 		client.connect(host,port);		
 		client.login(user, pass);
 		client.setFileType(FTP.BINARY_FILE_TYPE);
 		client.enterLocalPassiveMode();		
 	    client.storeFile(targetFilename,  new FileInputStream(new File(sourceFilename)));
-	    client.disconnect();		
+	    client.disconnect();	
+		/*java.util.Properties config = new java.util.Properties(); 
+	    config.put("StrictHostKeyChecking", "no");
+		JSch jsch = new JSch();
+	    Session session = jsch.getSession( user, host, port );
+	    session.setConfig( "PreferredAuthentications", "password" );
+	    session.setPassword( pass );
+	    session.setConfig(config);
+	    session.connect( FTP_TIMEOUT );
+	    Channel channel = session.openChannel( "sftp" );
+	    ChannelSftp sftp = ( ChannelSftp ) channel;
+	    sftp.connect( FTP_TIMEOUT );
+	    sftp.cd("/");
+	    
+        File f = new File(sourceFilename);
+        sftp.put(new FileInputStream(f), f.getName());*/
+
 	}
 	
 	public void indexSolr(String host, Integer port, String core, String filename) throws ClientProtocolException, IOException, URISyntaxException, SolrIndexingException{

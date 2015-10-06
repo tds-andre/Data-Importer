@@ -22,7 +22,7 @@ public class CsvDataset extends ADataset<ADatabase> {
 	
 
 	private char FieldDelimiter = ';';
-	private String RowDelimiter = "\r\n";
+	private String LineDelimiter = "\r\n";
 	private char TextEnclosure = '"';
 	private char Escape = '"';
 
@@ -40,7 +40,7 @@ public class CsvDataset extends ADataset<ADatabase> {
 		
 	public void setFormat(char fieldDelimiter, String rowDelimiter, char textEnclosure, char escape){		
 		FieldDelimiter = fieldDelimiter;
-		RowDelimiter = rowDelimiter;
+		LineDelimiter = rowDelimiter;
 		TextEnclosure = textEnclosure;
 		Escape = escape;
 	}
@@ -50,7 +50,7 @@ public class CsvDataset extends ADataset<ADatabase> {
 		CSVFormat format = CSVFormat.DEFAULT
 		.withDelimiter(FieldDelimiter)
 		.withEscape(Escape)
-		.withRecordSeparator(RowDelimiter)
+		.withRecordSeparator(LineDelimiter)
 		.withQuote(TextEnclosure);	    
 		    
 		CSVParser f = CSVParser.parse(new File(getFullLocation()), Charset.defaultCharset(), format);
@@ -142,14 +142,19 @@ public class CsvDataset extends ADataset<ADatabase> {
 		
 	}
 
-	public String getFieldDelimiter() {
-		// TODO Auto-generated method stub
-		return null;
+	public char getFieldDelimiter() {
+		return FieldDelimiter;
+		
 	}
 
 	public String getLineDelimiter() {
-		// TODO Auto-generated method stub
-		return null;
+		return LineDelimiter;
+		
+	}
+
+	public void copTo(CsvDataset tmp) {
+		
+		
 	}
 
 	

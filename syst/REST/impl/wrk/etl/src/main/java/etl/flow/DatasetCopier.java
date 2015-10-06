@@ -1,10 +1,14 @@
 package etl.flow;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.SQLException;
 
+import etl.databases.LocalFileSystem;
 import etl.datasets.CsvDataset;
 import etl.datasets.IDataset;
 import etl.datasets.MySqlDataset;
+import etl.datasets.SolrCore;
 
 public class DatasetCopier extends ManagedThread
 {
@@ -31,12 +35,25 @@ public class DatasetCopier extends ManagedThread
 			MySqlDataset tar = (MySqlDataset)Target;
 			CsvDataset src = (CsvDataset)Source;
 			
-			tar.bulkLoadFromCsv(src.getFullLocation());		
+			CsvToMysqlLocal(src, tar);
+		}
+		else if((Source instanceof CsvDataset) && Target instanceof SolrCore){
+			SolrCore tar = (SolrCore)Target;
+			CsvDataset src = (CsvDataset)Source;			
+			CsvToSolr(src, tar);
 		}
 	}
 	
 	
-	public void CsvToMysql(CsvDataset source, MySqlDataset target) throws SQLException{
+	private void CsvToSolr(CsvDataset src, SolrCore tar) throws FileNotFoundException, IOException {
+		CsvDataset tmp = new CsvDataset(new LocalFileSystem(src.getDatabase().getLocation()), src.getLocation() +".tmp");
+		//tmp.setSchema(tar.getSchema);
+		//src.copyTo(tmp);
+			
+		
+	}
+
+	public void CsvToMysqlLocal(CsvDataset source, MySqlDataset target) throws SQLException{
 		String query = "load data local "+
 				" infile '"+ source.getFullLocation().replace("\\", "/") +
 				"' into table "+ target.getLocation() +

@@ -15,7 +15,7 @@ import etl.datasets.MySqlDataset;
 
 public class JdbcDatabase extends ADatabase
 {	
-	private LocalFileSystem QueryServer ;
+	private LocalFileSystem QueryServer;
 	public Connection Connection;
 	
 	/**
@@ -26,8 +26,7 @@ public class JdbcDatabase extends ADatabase
 	 * @generated
 	 */
 	public JdbcDatabase(JdbcConnectionToken tkn) throws ClassNotFoundException, SQLException{
-		super(tkn);
-		
+		super(tkn);		
 	}
 	
 	public static AConnectionToken createToken(String driver, String host, String location, String user, String pass){
