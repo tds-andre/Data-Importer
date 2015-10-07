@@ -34,7 +34,7 @@ public class BreadcrumbItem extends Object {
 		if(index==-1){
 			sep = '\\';
 			index = location.indexOf(sep);
-		}
+		}  
 		if(!isRoot)
 			while(location.charAt(0)==sep)
 				location = location.substring(1);

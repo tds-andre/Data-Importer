@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.HashMap;
@@ -13,6 +14,7 @@ import java.util.Map;
 
 import etl.databases.ADatabase;
 import etl.databases.IDatabase;
+import etl.databases.LocalFileSystem;
 import etl.exceptions.NotImplementedMethodException;
 
 import org.apache.commons.csv.*;
@@ -30,6 +32,19 @@ public class CsvDataset extends ADataset<ADatabase> {
 		super(database, location);		
 	}
 	
+	public CsvDataset(String filename){
+		super(stupidJava1(filename),stupidJava2(filename) );
+		
+		
+	}
+	private static IDatabase stupidJava1(String filename){
+		File dummy = new File(filename);
+		return new LocalFileSystem(dummy.getParent());
+	}
+	private static String stupidJava2(String filename){
+		File dummy = new File(filename);
+		return dummy.getName();
+	}
 	@Override
 	public Schema getSchema() throws Exception{
 		if(Schema==null)
