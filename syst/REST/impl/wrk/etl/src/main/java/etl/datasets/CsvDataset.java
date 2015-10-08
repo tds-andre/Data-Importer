@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import etl.databases.ADatabase;
@@ -27,16 +28,46 @@ public class CsvDataset extends ADataset<ADatabase> {
 	private String LineDelimiter = "\r\n";
 	private char TextEnclosure = '"';
 	private char Escape = '"';
+	private CSVParser parser = null;
+	private CSVFormat format = null;
+	private List<String> headers = new ArrayList<String>();
 
 	public CsvDataset(IDatabase database, String location) throws FileNotFoundException, IOException {
 		super(database, location);		
 	}
 	
-	public CsvDataset(String filename){
-		super(stupidJava1(filename),stupidJava2(filename) );
-		
-		
+	
+	public List<String> getHeaders(){
+		return headers;
 	}
+	
+	private void setHeaders(){
+		headers.clear();
+		Iterator iter = parser.iterator().next().iterator();
+		while(iter.hasNext()){			
+			headers.add((String)iter.next());
+		}
+	}
+	
+	public Iterator<CSVRecord> open() throws IOException{
+		if(format==null)
+			format = CSVFormat.DEFAULT
+			.withDelimiter(FieldDelimiter)
+			.withEscape(Escape)
+			.withRecordSeparator(LineDelimiter)
+			.withQuote(TextEnclosure);
+		if(parser == null)
+			parser = CSVParser.parse(new File(getFullLocation()), Charset.defaultCharset(), format);
+		setHeaders();
+		return parser.iterator();
+	}
+	
+		
+	
+	public CsvDataset(String filename){
+		super(stupidJava1(filename),stupidJava2(filename));		
+	}
+	
 	private static IDatabase stupidJava1(String filename){
 		File dummy = new File(filename);
 		return new LocalFileSystem(dummy.getParent());
