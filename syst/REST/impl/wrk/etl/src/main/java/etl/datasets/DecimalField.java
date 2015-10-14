@@ -13,6 +13,13 @@ public class DecimalField extends NumericField<Double> {
 		return Double.SIZE;
 	}
 	
+	public DecimalField clone() throws CloneNotSupportedException{
+		DecimalField clone  = new DecimalField();
+		fillClone(clone);
+		return clone;
+		
+	}
+	
 	
 
 }

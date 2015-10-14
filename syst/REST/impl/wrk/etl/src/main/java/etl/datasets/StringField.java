@@ -25,4 +25,12 @@ public class StringField extends AField<String> {
 	public boolean getBlobMode(){
 		return blobMode;
 	}
+	
+	public StringField clone() throws CloneNotSupportedException{
+		StringField clone = new StringField();
+		fillClone(clone);
+		clone.setBlobMode(this.blobMode);
+		clone.setSize(this.Size);
+		return clone;
+	}
 }

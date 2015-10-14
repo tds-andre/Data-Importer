@@ -46,8 +46,9 @@ public class DatasetCopier extends ManagedThread
 	
 	
 	private void CsvToSolr(CsvDataset src, SolrCore tar) throws FileNotFoundException, IOException {
-		CsvDataset tmp = new CsvDataset(new LocalFileSystem(src.getDatabase().getLocation()), src.getLocation() +".tmp");
-		//tmp.setSchema(tar.getSchema);
+		CsvDataset tmp = new CsvDataset(src.getFullLocation() + ".tmp");		
+		tmp.setSchema(tar.getSchema());
+		
 		//src.copyTo(tmp);
 			
 		

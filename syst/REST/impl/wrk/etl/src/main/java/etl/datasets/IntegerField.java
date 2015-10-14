@@ -14,5 +14,13 @@ public class IntegerField extends NumericField<Long> {
 		return Long.SIZE;
 	}
 	
+	@Override
+	public IntegerField clone() throws CloneNotSupportedException{
+		IntegerField clone  = new IntegerField();
+		fillClone(clone);
+		return clone;
+		
+	}
+	
 	
 }

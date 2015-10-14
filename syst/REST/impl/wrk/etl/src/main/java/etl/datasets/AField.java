@@ -8,6 +8,11 @@ public abstract class AField<T> {
 	public void setNullable(boolean nullable){	
 		Nullable = nullable;
 	}
+	public boolean getNullable(){	
+		return Nullable;
+	}
+	
+	
 	public void setDefault(T def){		
 		Default = def;
 		HasDefault = true;
@@ -27,6 +32,17 @@ public abstract class AField<T> {
 	}
 	
 	public abstract long getMemorySize();
+	
+	protected void fillClone(AField clone) throws CloneNotSupportedException{
+		clone.setDefault(this.getDefault());
+		clone.setName(this.getName());
+		clone.setNullable(this.getNullable());		
+	}
+	
+	protected AField<T> clone() throws CloneNotSupportedException{
+		return null;
+		
+	}
 	
 	
 	
