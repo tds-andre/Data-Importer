@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 	<groupId>br.com.mais.suite</groupId>
 	<artifactId>data-importer</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -47,13 +47,17 @@
          <dependency>
         	<groupId>br.com.mais</groupId>
         	<artifactId>etl</artifactId>
-        	<version>0.0.1-SNAPSHOT</version>
+        	<version>0.0.1</version>
         </dependency>
          <dependency>
         	<groupId>com.jcraft</groupId>
         	<artifactId>jsch</artifactId>
         	<version>0.1.53</version>
         </dependency>
+        <dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+		</dependency>
     </dependencies>
 
     <build>

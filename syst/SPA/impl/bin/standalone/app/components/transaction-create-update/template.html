@@ -1,0 +1,134 @@
+<script type="text/template" id="transaction-create-update-template">
+
+
+	<!-- wizard -->
+	<div id="simplewizardinwidget" class="wizard js-wizard" data-target="#simplewizardinwidget-steps">
+		<ul class="steps">
+			<li data-target="#simplewizardinwidgetstep1" class="active"><span class="step">1</span>Etapa 1<span class="chevron"></span></li>
+			<li data-target="#simplewizardinwidgetstep2"><span class="step">2</span>Etapa 2<span class="chevron"></span></li>
+			
+		</ul>
+		<div class="actions" id="simplewizardinwidget-actions">
+			<button type="button" class="btn btn-default btn-sm shiny btn-prev js-prev"> <i class="fa fa-angle-left"></i>Anterior</button>
+			<button type="button" class="btn btn-default btn-sm shiny btn-next js-next" data-last="Concluir">Próximo<i class="fa fa-angle-right"></i></button>
+		</div>
+	</div>
+	<div class="step-content js-transaction-create-udpate-steps" id="simplewizardinwidget-steps" >
+		
+		<!-- passo 1 -->
+		<div class="step-pane active" id="simplewizardinwidgetstep1">
+			
+			<fieldset class="bordered">
+				<div class="row">
+					<div class="col-sm-12 col-md-6">
+						<div class="form-group simula_validacao">
+							<label for="title" class="control-label">Título <sup>*</sup></label>
+							<input type="text" class="form-control js-title" name="title" placeholder="Título">
+						</div>
+					</div>
+				</div>				
+			</fieldset>	
+			
+			<!-- origem -->
+			<fieldset class="bordered">
+				
+				<div class="control-group">
+					<div class="radio-inline no-padding">
+						<label>
+							<input  checked="checked" class="js-transaction-create-update-existing-origin js-radio" value="existing-origin" name="origem" type="radio" checked="checked">
+							<span class="text">Origem Existente</span>
+						</label>
+					</div>
+					<div class="radio-inline">
+						<label>
+							<input class="js-transaction-create-update-origem-new-origin js-radio" value="new-origin" name="origem" type="radio">
+							<span class="text">Nova Origem</span>
+						</label>
+					</div>
+				</div>
+				
+				<!-- campos origem existente -->
+				<div class="js-transaction-create-update-origin-wrapper ">
+					<div class="row js-transaction-create-update-origin-existing js-existing-wrapper">
+						<div class="col-sm-12 col-md-6">
+							<div class="form-group simula_validacao">
+								<label for="select" class="control-label">Destino <sup>*</sup></label>
+								<select name="select" class="form-control js-transaction-create-update-origin-select js-dataset-select">
+									<option disabled selected> -- Selecione -- </option>
+								</select>
+							</div>
+							<div class="js-existing-el js-transaction-create-update-origin-existing-view">
+							</div>
+						</div>
+						
+					</div>
+					<div class="js-transaction-create-update-origin-new">
+					</div>
+														
+				</div>
+				<!-- /campos nova origem -->
+			
+			</fieldset>
+			<!-- /origem -->
+			
+			<!-- destino -->
+			<fieldset class="bordered">
+				
+				<div class="control-group">
+					<div class="radio-inline no-padding">
+						<label>
+							<input  checked="checked" class="js-transaction-create-update-existing-target js-radio" value="existing-target" name="target" type="radio" checked="checked">
+							<span class="text">Destino Existente</span>
+						</label>
+					</div>
+					<div class="radio-inline">
+						<label>
+							<input class="js-transaction-create-update-origem-new-target js-radio" value="new-target" name="target" type="radio">
+							<span class="text">Novo Destino</span>
+						</label>
+					</div>
+				</div>
+				
+				<!-- campos origem existente -->
+				<div class="js-transaction-create-update-target-wrapper">
+					<div class="row js-transaction-create-update-target-existing  js-existing-wrapper">
+						<div class="col-sm-12 col-md-6">
+							<div class="form-group simula_validacao">
+								<label for="select" class="control-label">Destino <sup>*</sup></label>
+								<select name="select" class="form-control js-transaction-create-update-target-select js-dataset-select">
+									<option disabled selected> -- Selecione -- </option>
+								</select>
+							</div>
+							<div class="js-existing-el js-transaction-create-update-target-existing-view">
+							</div>	
+						</div>
+						
+					</div>
+					<div class="js-transaction-create-update-target-new">
+					</div>
+															
+				</div>
+				<!-- /campos nova origem -->
+			
+			</fieldset>
+			<!-- /destino -->
+		
+		</div>
+		<!-- /passo 1 -->
+
+		<!-- passo 1 -->
+		<div class="step-pane js-step-2" id="simplewizardinwidgetstep2">	
+					
+			
+		</div>
+		<!-- /passo 1 -->
+		
+		
+		
+		
+		
+	</div>
+	<!-- /wizard -->
+	
+
+</script>

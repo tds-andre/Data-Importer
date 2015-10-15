@@ -1,0 +1,65 @@
+<script type="text/template" id="transaction-operation-template">
+	<div id="simplewizardinwidget" class="wizard js-wizard" data-target="#simplewizardinwidget-steps">
+		<ul class="steps">
+			<li data-target="#simplewizardinwidgetstep1" class="active"><span class="step">1</span>Dados<span class="chevron"></span></li>
+			<li data-target="#simplewizardinwidgetstep2"><span class="step">2</span>Arquivo<span class="chevron"></span></li>			
+			<li data-target="#simplewizardinwidgetstep3"><span class="step">3</span>Relatório<span class="chevron"></span></li>
+		</ul>
+		<div class="actions" id="simplewizardinwidget-actions">
+			<button type="button" class="btn btn-default btn-sm shiny btn-prev "> <i class="fa fa-angle-left"></i>Anterior</button>
+			<button type="button" class="btn btn-default btn-sm shiny btn-next " data-last="Concluir">Próximo<i class="fa fa-angle-right"></i></button>
+		</div>
+	</div>
+	<div class="step-content" id="simplewizardinwidget-steps">
+								
+		<!-- passo 1 -->
+		<div class="step-pane active padding-10" id="simplewizardinwidgetstep1">
+			
+			<h5>Confira os Dados</h5>
+			
+			<div class="js-transaction-details-el">
+			</div>
+		
+		</div>
+		<!-- /passo 1 -->
+		
+
+		
+		<!-- passo 2 -->
+		<div class="step-pane padding-10" id="simplewizardinwidgetstep2">
+
+				<div class="js-file-upload-el">
+				</div>
+
+		</div>
+		<!-- /passo 2 -->								
+		
+		
+		
+		<!-- passo 4 -->
+		<div class="step-pane padding-10" id="simplewizardinwidgetstep3">
+			<h5 class="js-message">Executando transação...</h5>
+			<!--<h5>Relatório de Críticas</h5>
+			
+			<dl class="def_lista">
+				<dt>Campo "Lorem"</dt>
+				<dd>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a risus lectus.</dd>
+				<dt>Campo "Data de Admissão"</dt>
+				<dd>Cconsectetur adipiscing elit. Curabitur a risus lectus.</dd>										
+				<dt>Campo "Salário"</dt>
+				<dd>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a risus lectus.</dd>
+			</dl>
+			
+			<dl class="def_lista">
+				<dt>Próximo passo:</dt>
+				<dd><a href="#">Rever Mapeamento (volta à etapa "Mapeamento")</a></dd>
+				<dd><a href="#">Recarregar Arquivo e Rever Mapeamento (volta à etapa "Arquivo")</a></dd>
+				<dd><a href="#">Prosseguir mesmo com erros (Concluir)</a></dd>
+			</dl>-->
+			
+		</div>
+		<!-- /passo 4 -->	
+		
+		
+	</div>
+</script>

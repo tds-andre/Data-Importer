@@ -12,13 +12,10 @@ import java.net.URISyntaxException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.UnrecoverableKeyException;
-
-import javax.net.ssl.KeyManager;
-import javax.net.ssl.KeyManagerFactory;
+import java.sql.SQLException;
 
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
-import org.apache.commons.net.ftp.FTPSClient;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
@@ -28,11 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.jcraft.jsch.Channel;
-import com.jcraft.jsch.ChannelSftp;
-import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
-import com.jcraft.jsch.Session;
 import com.jcraft.jsch.SftpException;
 
 import data_importer.domain.datasets.CsvFile;
@@ -44,6 +37,10 @@ import data_importer.domain.transactions.TransactionStatus;
 import data_importer.repository.TransactionLogRepo;
 import data_importer.services.exceptions.SolrIndexingException;
 import data_importer.services.exceptions.TransactionNotReadyException;
+import etl.datasets.CsvDataset;
+import etl.datasets.SolrCore;
+import etl.flow.DatasetCopier;
+import etl.flow.EDatasetCopierMode;
 
 @Service
 public class DataService {
@@ -68,7 +65,7 @@ public class DataService {
 		try{
 			switch(duo){
 			case "csv-solr":
-				csvToSolr(log);
+				csvToSolr2(log);
 				break;
 			}			
 		}catch(Exception e){
@@ -90,6 +87,18 @@ public class DataService {
 		indexSolr(server.getHost(), server.getPort(), target.getLocation(), server.getFtpRoot() + file.getName() );
 	}
 	
+	public void csvToSolr2(TransactionLog log) throws Exception{
+		Transaction 		trans	= log.getTransaction();
+		SolrTable			target  = (SolrTable)trans.getTargetDataset();
+		CsvFile 			source 	= (CsvFile)trans.getSourceDataset();
+		SolrServer 			server 	= target.getServer();
+		File 				file 	= new File(log.getUploadedFilename());
+		CsvDataset src = new CsvDataset(log.getUploadedFilename());
+		SolrCore tar = new SolrCore(target.getLocation(), server.getHost(), server.getFtpPort(), server.getPort(), server.getUsername(), server.getPassword(), server.getFtpRoot());
+		DatasetCopier copier = new DatasetCopier(null, EDatasetCopierMode.CREATE, src, tar);
+		copier.execute();
+	}
+	
 	public void receiveFile(long transactionLogId, MultipartFile file) throws IOException{
 		TransactionLog log = logs.findOne(transactionLogId);
 		log.setStatus(TransactionStatus.PREPARING);
@@ -101,7 +110,7 @@ public class DataService {
 				dir.mkdir();
 			String filename = dir.getAbsolutePath() + "\\" + file.getOriginalFilename(); 
 			stream = new BufferedOutputStream(new FileOutputStream(new File(filename)));
-			stream.write(bytes);
+			stream.write(bytes); 
 			log.setUploadedFilename(filename);
 			log.setStatus(TransactionStatus.READY);
 			logs.save(log);

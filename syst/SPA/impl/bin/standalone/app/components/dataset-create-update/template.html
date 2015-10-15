@@ -1,0 +1,152 @@
+<script type="text/template" id="dataset-create-update-template">
+<style>
+	.js-fieldset{
+		display: none;
+	}
+</style>
+<% if(options.showHeader) { %>
+	<div class="widget no-header radius-bordered">
+		<div class="widget-body">
+			<div class="well well-sm attached top text-right js-header">
+				<a class="btn btn-default js-cancel">Cancelar</a>									
+				<button class="btn btn-primary js-save" type="button">Salvar</button>
+			</div>
+			<div class="well attached js-main">
+<% } %>
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="form-group simula_validacao">
+							<label class="control-label" for="name">Nome <sup>*</sup></label>
+							<input type="text" name="name" class="js-name form-control">
+						</div>
+					</div>
+					<div class="col-sm-6 col-md-3">
+						<div class="form-group">
+							<label class="control-label" for="dataset">Conector <sup>*</sup></label>
+							<select name="dataset" class="form-control select js-conector">
+								<option>Selecione</option>
+								<% for(var i = 0; i < types.length; i ++){ %>
+									<option value="<%- types[i].value %>"><%- types[i].caption %></option>
+								<%}%>
+							</select>
+							
+						</div>
+					</div>							
+				</div>
+
+				<!-- CSV -->
+				
+
+				<div class="row js-fieldset js-csv-fieldset">
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label class="control-label" for="line">Separador de linha </label>
+							<select name="line" class="form-control select js-csv-line-separator">
+								<option value="&#14&#10" selected>Windows</option>
+								<option value="&#10">Unix</option>								
+							</select>
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<div class="form-group simula_validacao">
+							<label class="control-label" for="field">Separador de campo </label>
+							<input type="text" id="field" class="form-control js-csv-field-separator" value="<%- defaults.fieldSeparator %>">
+						</div>
+					</div>												
+				</div>
+
+				<!-- SOLR -->
+				
+
+				<div class="js-fieldset js-solr-fieldset">
+					<div class="row">
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label class="control-label" for="line">Servidor </label>
+								<input type="text" id="field" class="form-control js-solr-host">
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="form-group simula_validacao">
+								<label class="control-label" for="field">Core </label>
+								<input type="text" id="field" class="form-control js-solr-core">
+							</div>
+						</div>
+																		
+					</div>
+					<div class="row">
+						<div class="col-sm-3">
+							<div class="form-group">
+								<label class="control-label" for="line">Usuário</label>
+								<input type="text" id="field" class="form-control js-solr-user" value="<%- defaults.username %>">
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="form-group simula_validacao">
+								<label class="control-label" for="field">Senha</label>
+								<input type="password" id="field" class="form-control js-solr-pass" value="<%- defaults.password %>">
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="form-group simula_validacao">
+								<label class="control-label" for="field">Raiz</label>
+								<input type="text" id="field" class="form-control js-solr-root" value="<%- defaults.ftpRoot %>">
+							</div>
+						</div>															
+					</div>
+					<div class="row">
+						<div class="col-sm-3">
+							<div class="form-group">
+								<label class="control-label" for="line">Porta FTP/SSH</label>
+								<input type="number" min="0" max ="65535" id="field" class="form-control js-solr-ftp" value="<%- defaults.ftpPort %>">
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="form-group simula_validacao">
+								<label class="control-label" for="field">Porta HTTP</label>
+								<input type="number" min="0" max ="65535" id="field" class="form-control js-solr-port" value="<%- defaults.port %>">
+							</div>
+						</div>	
+					</div>
+				</div>
+
+				<!-- JDBC -->				
+
+				<div class="row js-fieldset js-jdbc-fieldset">
+					<div class="col-sm-3">
+						<div class="form-group">
+							<label class="control-label" for="line">Banco</label>
+							<input type="text" class="form-control js-jdbc-table"/>
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<div class="form-group simula_validacao">
+							<label class="control-label" for="field">Tabela </label>
+							<input type="text" class="form-control js-jdbc-database"/>
+						</div>
+					</div>		
+					<div class="col-sm-3">
+						<div class="form-group simula_validacao">
+							<label class="control-label" for="field">Driver </label>
+							<input type="text" class="form-control js-jdbc-driver" value="<%- defaults.driver %>"/>
+						</div>
+					</div>												
+				</div>
+
+
+
+
+
+<% if(options.showHeader) { %>	
+		</div>
+		<div class="well well-sm attached bottom text-right js-header">
+			<a class="btn btn-default js-cancel">Cancelar</a>									
+			<button class="btn btn-primary js-save" type="button">Salvar</button>
+		</div>	
+		</div>
+	</div>
+<% }  %>
+
+
+
+</script>

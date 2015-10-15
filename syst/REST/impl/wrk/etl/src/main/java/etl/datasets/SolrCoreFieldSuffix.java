@@ -16,13 +16,13 @@ public enum SolrCoreFieldSuffix {
     public Class type() { return type; }
 
     public static String suffixForType(Class type){		
-    	if(type.isInstance(StringField.class)){
+    	if(type == StringField.class){
     		return SolrCoreFieldSuffix.STRING.suffix();
-		}else if(type.isInstance(DecimalField.class)){			
+		}else if(type == DecimalField.class){			
 			return SolrCoreFieldSuffix.DECIMAL.suffix();
-		}else if(type.isInstance(IntegerField.class)){
+		}else if(type == IntegerField.class){
 			return SolrCoreFieldSuffix.INTEGER.suffix();
-		}else if(type.isInstance(DatetimeField.class)){
+		}else if(type == DatetimeField.class){
 			return SolrCoreFieldSuffix.DATE.suffix();
 		}
     	return "";

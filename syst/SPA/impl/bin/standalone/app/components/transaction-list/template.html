@@ -1,0 +1,50 @@
+<script type="text/template" id="transaction-list-template">
+	<div class="widget radius-bordered">
+		<div class="widget-header bg-seashell">
+			<span class="widget-caption silver">Transações</span>
+			<div class="widget-buttons buttons-bordered hidden-print">
+				<span><a class="btn btn-default btn-sm js-new">Nova Transação</a></span>
+			</div>									
+			<div class="widget-buttons buttons-bordered hidden-print">									
+				<a data-toggle="maximize" href="#">
+					<i class="fa fa-expand silver"></i>
+				</a>
+				<a data-toggle="collapse" href="#">
+					<i class="fa fa-minus silver"></i>
+				</a>
+			</div>									
+		</div>
+		<div class="widget-body js-main">
+		
+			
+
+			<div class="table-scrollable">
+				<table class="table table-striped table-bordered table-hover">
+					<thead>
+						<tr>
+							<th scope="col" class="sorting_asc">
+								Título
+							</th>													
+							<th scope="col" class="sorting">
+								Origem
+							</th>
+							<th scope="col" class="sorting">
+								Destino
+							</th>
+							<th scope="col" class="sorting">
+								Mapeamento
+							</th>
+							<th class="hidden-print min-width"></th>
+						</tr>
+					</thead>
+					<tbody class="js-list">
+						
+					</tbody>
+				</table>
+			</div>
+
+			
+				
+		</div>
+	</div>
+</script>

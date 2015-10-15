@@ -18,7 +18,7 @@ public class SolrServer extends ADatabase {
 		return tkn;
 	}
 	
-	public SolrServer(JdbcConnectionToken tkn) throws ClassNotFoundException, SQLException{
+	public SolrServer(SolrConnectionToken tkn) throws ClassNotFoundException, SQLException{
 		super(tkn);		
 	}
 }

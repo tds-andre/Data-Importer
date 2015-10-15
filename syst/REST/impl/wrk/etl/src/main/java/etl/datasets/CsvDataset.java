@@ -1,24 +1,24 @@
 package etl.datasets;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
+
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
 
 import etl.databases.ADatabase;
 import etl.databases.IDatabase;
 import etl.databases.LocalFileSystem;
-import etl.exceptions.NotImplementedMethodException;
-
-import org.apache.commons.csv.*;
 
 public class CsvDataset extends ADataset<ADatabase> {
 	
@@ -198,10 +198,30 @@ public class CsvDataset extends ADataset<ADatabase> {
 		
 	}
 
-	public void copTo(CsvDataset tmp) {
-		
+	
+
+
+	public void writeCopyOf(CsvDataset src) throws IOException {
+		Iterator<CSVRecord> rows = src.open();
+		File f = new File(getFullLocation());
+		BufferedWriter writer = new BufferedWriter(new FileWriter(f));
+		for(AField field:Schema.getFields()){
+			writer.write(field.getName() + FieldDelimiter);
+		}
+		writer.write(LineDelimiter);
+		while (rows.hasNext()) {
+			CSVRecord rec = rows.next();
+			Iterator<String> fields = rec.iterator();
+			while(fields.hasNext()){				
+				writer.append(fields.next().trim() + FieldDelimiter);
+			}			
+			writer.append(LineDelimiter);			
+		}
+		writer.close();
 		
 	}
+
+
 
 	
 
