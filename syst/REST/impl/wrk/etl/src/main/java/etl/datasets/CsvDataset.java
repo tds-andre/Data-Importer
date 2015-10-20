@@ -194,6 +194,8 @@ public class CsvDataset extends ADataset<ADatabase> {
 						names.get(i));
 		}
 
+		if(result.getField(result.getFields().size()-1).getName().equals(""))
+			result.getFields().remove(result.getFields().size()-1);
 		return result;
 
 	}
