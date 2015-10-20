@@ -139,7 +139,7 @@ $(function () {
 	  while(curDate-date < millis);
 	}
     app.isDefined = function(obj){
-        if(obj==null || obj=="undefined" || obj == "")
+        if(typeof obj =='undefined' || obj==null || obj=="undefined" || obj == "")
             return false;
         return true;
     }
@@ -148,16 +148,14 @@ $(function () {
         console.log(a)
     },    
 
-    app.collections = {
-        localServer: new app.LocalServerCollection(),
-        csv: new app.CsvCollection(),
-        dataset: new app.DatasetCollection(),
-        solr: new app.SolrCollection(),
-        solrServer: new app.SolrServerCollection(),
-        transaction: new app.TransactionCollection(),
-        log: new app.LogCollection(),
-        jdbcTable: new app.JdbcTableCollection(),
-        jdbcDatabase: new app.JdbcDatabaseCollection()
+    app.collections = {        
+        csv: new app.domain.CsvCollection(),
+        dataset: new app.domain.DatasetCollection(),
+        solr: new app.domain.SolrCollection(),        
+        transaction: new app.domain.TransactionCollection(),
+        log: new app.domain.LogCollection(),
+        jdbc: new app.domain.JdbcCollection(),
+        excel: new app.domain.ExcelCollection()
     };
 
 	

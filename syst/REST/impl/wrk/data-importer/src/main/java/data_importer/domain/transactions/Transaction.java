@@ -1,6 +1,5 @@
 package data_importer.domain.transactions;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -13,43 +12,26 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import data_importer.domain.datasets.Dataset;
-import data_importer.domain.fields.Mapping;
-import data_importer.domain.servers.FileServer;
 
 @Entity
-public class Transaction{
+public class Transaction {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
-	@Column(nullable=true)
+
 	private Boolean isFavorite = false;
 	
-	public Boolean getIsFavorite() {
-		return isFavorite;
-	}
+	private String name;
 
-	public void setIsFavorite(Boolean isFavorite) {
-		this.isFavorite = isFavorite;
-	}
-
-	@Column(nullable=true)
-	private String name = "Sem nome";
-	
-	@ManyToOne(cascade=CascadeType.DETACH)
+	@ManyToOne(cascade = CascadeType.DETACH)
 	private Dataset targetDataset;
-	
-	@ManyToOne(cascade=CascadeType.DETACH)
-	private Dataset sourceDataset;
-	
-	@ManyToOne(optional=true)	
-	private Mapping mapping;
-	
 
-	@OneToMany(targetEntity=TransactionLog.class, mappedBy="transaction", cascade=CascadeType.REMOVE)
+	@ManyToOne(cascade = CascadeType.DETACH)
+	private Dataset sourceDataset;
+
+	@OneToMany(targetEntity = TransactionLog.class, mappedBy = "transaction")
 	private List<TransactionLog> logs;
 
-	
 	public Dataset getTargetDataset() {
 		return targetDataset;
 	}
@@ -64,14 +46,6 @@ public class Transaction{
 
 	public void setSourceDataset(Dataset sourceDataset) {
 		this.sourceDataset = sourceDataset;
-	}
-
-	public Mapping getMapping() {
-		return mapping;
-	}
-
-	public void setMapping(Mapping mapping) {
-		this.mapping = mapping;
 	}
 
 	public List<TransactionLog> getLogs() {
@@ -93,21 +67,15 @@ public class Transaction{
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public Boolean getIsFavorite() {
+		return isFavorite;
+	}
+
+	public void setIsFavorite(Boolean isFavorite) {
+		this.isFavorite = isFavorite;
+	}
+
 	
-	/*public Long getLatest(){
-		if(logs.size()==0)
-			return null;
-		TransactionLog result = logs.get(0);
-		for(TransactionLog log:logs){
-			if(log.getCreatedAt().after(result.getCreatedAt()))
-				result = log;
-		}
-		return result.getId();
-		
-	}*/
-	
-	
-	
-	
-	
+
 }

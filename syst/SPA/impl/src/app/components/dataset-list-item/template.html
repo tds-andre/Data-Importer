@@ -1,13 +1,14 @@
 <script type="text/template" id="dataset-list-item-template">
-
+	<% if(!app.isDefined(host)) var host = " - " %>
 	<td>
 		<%- name %>
 	</td>													
 	<td>
 		<%- conector %>
 	</td>
+
 	<td class="js-new-dataset-list-item-host">
-		<%- server.attributes.host || " - " %>		
+		<%-host %>		
 	</td>
 	<td class="hidden-print">
 		<a href="#" class="btn bg-silver btn-xs icon-only white js-new-dataset-list-item-details" href="#" title="Detalhes">

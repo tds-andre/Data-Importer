@@ -1,0 +1,16 @@
+{
+  "name": "@tds-andre/data-importer",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.php",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "backbone": "^1.2.3",
+    "springbone": "0.0.1",
+    "underscore": "^1.8.3"
+  }
+}

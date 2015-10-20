@@ -37,8 +37,7 @@ var app = app || {};
 
 		render: function () {
 			var
-				json = this.model.toJSON();
-			this.listenTo(this.model.get("server"), "change", this.updateHost)
+				json = this.model.toJSON();			
 			json.conector = app.DatasetTypeEnum.byPath(this.model.get("typePath")).caption
 			this.$el.html(this.template(json));			
 			return this;			
@@ -73,13 +72,11 @@ var app = app || {};
 					})
 				}
 			});
-		},
+		}
 
 		// Internal methods --------------------------------------------------------------- //
 		// -------------------------------------------------------------------------------- //
-		updateHost: function(){
-			$(".js-new-dataset-list-item-host", this.$el).html(this.model.get("server").get("host"));
-		}
+		
 
 	});
 })(jQuery);

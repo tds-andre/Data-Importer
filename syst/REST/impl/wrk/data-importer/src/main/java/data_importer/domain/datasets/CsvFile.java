@@ -5,14 +5,21 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
-public class CsvFile extends FileDataset {
+public class CsvFile extends Upload {
 	private String fieldDelimiter = ";";
-	private String recordDelimiter = "\r\n";
+	private String recordDelimiter = "\n";
+	private String encoding = "UTF-8";
 	public String getFieldDelimiter() {
 		return fieldDelimiter;
 	}
 	public void setFieldDelimiter(String fieldDelimiter) {
 		this.fieldDelimiter = fieldDelimiter;
+	}
+	public String getEncoding() {
+		return encoding;
+	}
+	public void setEncoding(String encoding) {
+		this.encoding = encoding;
 	}
 	public String getRecordDelimiter() {
 		return recordDelimiter;

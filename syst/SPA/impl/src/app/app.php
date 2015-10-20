@@ -10,6 +10,9 @@
 <?php include_once "components/transaction-operation/template.html"; ?>
 <?php include_once "components/transaction-tabs/template.html"; ?>
 <?php include_once "components/file-upload/template.html"; ?>
+<?php include_once "components/upload-schema/template.html"; ?>
+<?php include_once "components/schema-table/template.html"; ?>
+<?php include_once "components/schema-table-item/template.html"; ?>
 
 
 
@@ -53,18 +56,15 @@
 
 
 <!--Libraries-->
-<script src="vendor/underscore/underscore-min.js" type="text/javascript"></script>
-<script src="vendor/backbone/backbone-min.js" type="text/javascript"></script>
-<script src="vendor/jfeldstein/jQuery.AjaxFileUpload.js/jQuery.AjaxFileUpload.js" type="text/javascript"></script>
+<script src="../node_modules/underscore/underscore.js" type="text/javascript"></script>
+<script src="../node_modules/backbone/backbone.js" type="text/javascript"></script>
+<script src="../node_modules/springbone/springbone.js" type="text/javascript"></script>
 
 <!--Groundwork-->
 <script type="text/javascript" src="init.js"></script>
-<script type="text/javascript" src="libs/tds-spinner.js"></script>
 <script type="text/javascript" src="config.js"></script>
-<script type="text/javascript" src="libs/spring-model.js"></script>
-<script type="text/javascript" src="libs/spring-collection.js"></script>
 <script type="text/javascript" src="models.js"></script>
-<script type="text/javascript" src="collections.js"></script>
+
 
 <!--Views-->
 <script type="text/javascript" src="components/dataset-list/view.js"></script>
@@ -78,6 +78,9 @@
 <script type="text/javascript" src="components/transaction-operation/view.js"></script>
 <script type="text/javascript" src="components/transaction-tabs/view.js"></script>
 <script type="text/javascript" src="components/file-upload/view.js"></script>
+<script type="text/javascript" src="components/upload-schema/view.js"></script>
+<script type="text/javascript" src="components/schema-table/view.js"></script>
+<script type="text/javascript" src="components/schema-table-item/view.js"></script>
 
 <!--App & Initialization-->
 <script type="text/javascript" src="routes.js"></script>

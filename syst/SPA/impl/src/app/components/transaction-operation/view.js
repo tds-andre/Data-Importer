@@ -46,6 +46,8 @@ var app = app || {};
 			this.detailsView = new app.TransactionDetailsView({model: this.model, el: $(".js-transaction-details-el", this.$el)[0]});
 			this.detailsView.start();	
 
+			this.uploadView = new app.UploadSchemaView({model: this.model.get("sourceDataset"), el: $('.js-upload-schema-el',this.$el)[0]});
+			this.uploadView.start();
 
 			return this;			
 		},
@@ -55,7 +57,7 @@ var app = app || {};
 				self = this;
 			$.extend(true, this.options, this.defaults, options);
 			this.render();
-			this.log = new app.LogModel();
+			/*this.log = new app.LogModel();
 			this.log.set("transaction", this.model.href);
 			app.collections.log.persist(this.log, {success: function(){
 				self.uploadView = new app.FileUploadView({el: $(".js-file-upload-el", self.$el)[0]});
@@ -64,7 +66,7 @@ var app = app || {};
 						$(".btn-next").removeAttr("disabled");
 					}
 				});
-			}});
+			}});*/
 			
 			
 			return this;		
@@ -78,22 +80,23 @@ var app = app || {};
 				goinTo = $(".js-wizard",this.$el).wizard("selectedItem").step;
 			switch(goinTo){
 				case 2:
-					if(!self.uploadView.uploaded)
-						$(".btn-next", self.$el).attr("disabled", "disabled");
-					else
-						$(".btn-next", self.$el).removeAttr("disabled");
+					
 				break;
 				case 3:
-					app.collections.log.do(this.log, {
-						success: function(){
-							$(".js-message", self.$el).html("Transação executada com sucesso.");
-							self.trigger("execute", self);
-						},
-						error: function(){
-							$(".js-message", self.$el).html("Falha na transação!");
-							self.trigger("error", self);
-						}
-					});
+					this.log = new app.domain.Log();
+					this.log.set("transaction", this.model.href);
+					app.collections.log.persist(this.log,{success: function(){
+						app.collections.log.do(self.log, {
+							success: function(){
+								$(".js-message", self.$el).html("Transação executada com sucesso.");
+								self.trigger("execute", self);
+							},
+							error: function(){
+								$(".js-message", self.$el).html("Falha na transação!");
+								self.trigger("error", self);
+							}
+						});
+					}});
 				break;
 			}
 		}

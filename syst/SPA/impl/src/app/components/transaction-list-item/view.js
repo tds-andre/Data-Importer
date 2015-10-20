@@ -42,7 +42,8 @@ var app = app || {};
 
 		start: function(options){
 			$.extend( this.options, this.defaults, options);
-			return this;		
+			this.model.nestedFetch();
+			return this.render();		
 		},
 
 		// View callbacks------------------------------------------------------------------ //

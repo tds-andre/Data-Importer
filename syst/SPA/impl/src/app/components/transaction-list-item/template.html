@@ -13,11 +13,7 @@
 			<%- targetDataset.attributes.name %>
 		<% } %>
 	</td>
-	<td>
-		<% if(app.isDefined(mapping)) {	%>
-			<%- mapping.attributes.name %>
-		<% } %>
-	</td>
+
 	<td class="hidden-print">
 		<% if(actions.indexOf("detail")>-1) {	%>
 			<a class="btn bg-silver btn-xs icon-only white js-details" title="Detalhes"><i class="fa fa-search"></i></a>

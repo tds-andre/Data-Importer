@@ -3,47 +3,49 @@ var app = app || {};
 
 	'use strict';	
 
-	app.DatasetDetailsView = Backbone.View.extend({
+	app.SchemaTableItemView = Backbone.View.extend({
 
 		// Variables----------------------------------------------------------------------- //
 		// -------------------------------------------------------------------------------- //
-		tagName: "div",
-		events: {
-			
-		},				
+		tagName: 'tr',
 
-		template: _.template($('#dataset-details-template').html()),
+
+		events: {
+			//'click  .js-??????-button'  : 'buttonClicked',			
+		},		
+		
+		defaults: {
+			
+		},	
+
+		template: _.template($('#schema-table-item').html()),
 
 		// Core --------------------------------------------------------------------------- //
 		// -------------------------------------------------------------------------------- //
 
 		initialize: function(){
 			this.options = {};
-		},
-
-		
+		},		
 
 		render: function () {
-			var
-				json = this.model.toJSON(),
-				typePath = json.typePath || this.model.typePath,
-				key = app.DatasetTypeEnum.byPath(typePath,true);
-
-			json.conector = app.DatasetTypeEnum[key].caption;			
-			this.$el.html(this.template(json));
-			
+			var json = this.model.toJSON();
+			this.$el.html(this.template(json));			
 			return this;			
 		},
 
 		start: function(options){
-			$.extend(true,this.options, this.defaults, options);
-			return this.render();				
+			$.extend(true, this.options, this.defaults, options);
+			this.render();
+			return this;		
 		},
 
-		// Events ------------------------------------------------------------------------- //
+		// View callbacks------------------------------------------------------------------ //
 		// -------------------------------------------------------------------------------- //
 
-		
+		buttonClicked: function(ev){}
+
+		// Other callbacks----------------------------------------------------------------- //
+		// -------------------------------------------------------------------------------- //
 
 		// Internal methods --------------------------------------------------------------- //
 		// -------------------------------------------------------------------------------- //

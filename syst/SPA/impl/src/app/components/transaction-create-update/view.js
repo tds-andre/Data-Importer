@@ -36,18 +36,20 @@ var app = app || {};
 				targetConfigured: false,
 				transactionSet: false
 			}
+			this.$wizard=null;
 
 		},		
 
 		render: function () {
 			var
 				self = this;
-			this.$el.html(this.template());				
-			$(".js-wizard",this.$el).wizard();
-			$(".js-wizard",this.$el).on("changed.fu.wizard", function(e,data){
+			this.$el.html(this.template());
+			this.$wizard = $(".js-wizard",this.$el);			
+			this.$wizard.wizard();
+			this.$wizard.on("changed.fu.wizard", function(e,data){
 				self.actionClicked(e, self);
 			});
-			$(".js-wizard",this.$el).on("finished.fu.wizard", function(e,data){
+			this.$wizard.on("finished.fu.wizard", function(e,data){
 				self.finish();
 			});
 			
@@ -92,8 +94,9 @@ var app = app || {};
 		actionClicked: function(ev, self){
 			var
 				self = self || this,
-				goinTo = $(".js-wizard",this.$el).wizard("selectedItem").step,
-				cominFrom = self.state.step;
+				cominFrom = self.state.step,
+				goinTo = this.$wizard.wizard("selectedItem").step;
+				
 			switch(goinTo){
 				case 1: 
 					$(".js-next", self.$el).removeAttr("disabled");
@@ -112,7 +115,7 @@ var app = app || {};
 					if(cominFrom==1){
 						$(".js-next", self.$el).attr("disabled","disabled");
 						self.state.step = 2;
-						self.model = new app.TransactionModel();
+						self.model = new app.domain.Transaction();
 						if(!app.isDefined($(".js-title", self.$el).val())){
 							alert("De um nome à transção");
 							return;

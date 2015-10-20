@@ -29,6 +29,8 @@ var app = app || {};
 			this.isSaving= false;
 			this.datasetConector= null;			
 			this.isNew = true;
+			this.uploadView = null;
+			this.excelUploadView = null;
 			if(this.model)
 				this.isNew = false;
 		},		
@@ -36,17 +38,17 @@ var app = app || {};
 		render: function () {
 			var
 				json = {options: this.options, types: []},
-				types = app.TargetableDatasetTypes;			
+				types = app.TargetableDatasetTypes,
+				self = this;			
 			
 			if(this.options.isSource){
 				types = app.SourceableDatasetTypes;
 			}
 			var defaults =  {};
 			$.extend(defaults, 				
-				(new app.CsvModel()).defaults, 
-				(new app.SolrServerModel()).defaults,
-				(new app.ServerModel()).defaults,
-				(new app.JdbcDatabaseModel().defaults)
+				app.domain.Csv.prototype.defaults,
+				app.domain.Solr.prototype.defaults,
+				app.domain.Jdbc.prototype.defaults				
 			)
 			json.defaults = defaults;
 			for(var i = 0; i < types.length; i++)
@@ -54,6 +56,18 @@ var app = app || {};
 	
 			this.$el.html(this.template(json));		
 			
+			if(this.isNew){
+				this.uploadView = new app.FileUploadView({el: $(".js-csv-upload-el", this.$el)[0]});
+				this.uploadView.start({flat: true, select:function(view, filename,formdata){				
+					self.upload = {filename: filename, formdata: formdata}
+				}});
+
+				this.excelUploadView = new app.FileUploadView({el: $(".js-excel-upload-el", this.$el)[0]});
+				this.excelUploadView.start({flat: true, select:function(view, filename,formdata){				
+					self.upload = {filename: filename, formdata: formdata}
+				}})
+			}
+
 			if(!this.isNew)			
 				this.update();
 			return this;			
@@ -80,6 +94,7 @@ var app = app || {};
 			if(this.isSaving)
 				return;
 			this.isSaving = true;
+
 			
 			if(!app.isDefined(this.datasetConector)){
 				this.trigger("error",{message: "Selecione o conector!"});
@@ -95,54 +110,51 @@ var app = app || {};
 				case "csv":
 					this.model.set("fieldDelimiter", $(".js-csv-field-separator", this.$el).val());
 					this.model.set("recordDelimiter", $(".js-csv-line-separator", this.$el).val());
-					if(this.isNew){
-						server = new app.LocalServerModel();
-						server.set("name", name + " - Server");
-						this.create(this.model,server,app.collections.csv,app.collections.localServer);
+					if(this.isNew){						
+						this.create(this.model,app.collections.csv, this.upload);
 					}
-					else{
-						server = this.model.get("server");
-						server.set("name", name + " - Server");
-						this.patch(this.model,server,app.collections.csv,app.collections.localServer);
+					else{						
+						this.patch(this.model,app.collections.csv);
 					}
 				break;
 				case "solr":
-					if(this.isNew)
-						server = new app.LocalServerModel();
-					else
-						server = this.model.get("server");					
-					this.model.set("location", $(".js-solr-core", this.$el).val());
-					server.set("name", name + " - Server");
-					server.set("host"    , $(".js-solr-host", this.$el).val());
-					server.set("port"    , $(".js-solr-port", this.$el).val());
-					server.set("ftpPort" , $(".js-solr-ftp", this.$el).val());
-					server.set("ftpRoot" , $(".js-solr-root", this.$el).val());
-					server.set("username", $(".js-solr-user", this.$el).val())
-					server.set("password", $(".js-solr-pass", this.$el).val())
-					server.set("core", $(".js-solr-core", this.$l).val())
+					this.model.set("location", $(".js-solr-core", this.$el).val());					
+					this.model.set("host"    , $(".js-solr-host", this.$el).val());
+					this.model.set("port"    , $(".js-solr-port", this.$el).val());
+					this.model.set("ftpPort" , $(".js-solr-ftp", this.$el).val());
+					this.model.set("ftpRoot" , $(".js-solr-root", this.$el).val());
+					this.model.set("username", $(".js-solr-user", this.$el).val())
+					this.model.set("password", $(".js-solr-pass", this.$el).val())					
 					if(this.isNew){						
-						this.create(this.model,server,app.collections.solr,app.collections.solrServer);
+						this.create(this.model,app.collections.solr);
 					}
 					else{						
-						this.patch(this.model,server,app.collections.solr,app.collections.solrServer);
+						this.patch(this.model,app.collections.solr);
 					}					
 				break;
 				case "jdbc":
-					if(this.isNew)
-						server = new app.LocalServerModel();
-					else
-						server = this.model.get("server");
-					this.model.set("location", $(".js-jdbc-table", this.$el).val());
-					this.model.set("recordDelimiter", $(".js-csv-line-separator", this.$el).val());
-					server.set("name", name + " - Server");
-					server.set("driver", $(".js-jdbc-driver", this.$el).val());
-					server.set("db", $(".js-jdbc-database", this.$el).val());
+					this.model.set("location", $(".js-jdbc-table"   , this.$el).val());					
+					this.model.set("driver"  , $(".js-jdbc-driver"  , this.$el).val());
+					this.model.set("db"      , $(".js-jdbc-database", this.$el).val());
+					this.model.set("username", $(".js-jdbc-user"    , this.$el).val());
+					this.model.set("password", $(".js-jdbc-pass"    , this.$el).val());
+					this.model.set("host"    , $(".js-jdbc-host"    , this.$el).val());
 					if(this.isNew){						
-						this.create(this.model,server,app.collections.jdbcTable,app.collections.jdbcDatabase);
+						this.create(this.model,app.collections.jdbc);
 					}
 					else{						
-						this.patch(this.model,server,app.collections.jdbcTable,app.collections.jdbcDatabase);
+						this.patch(this.model,app.collections.jdbc);
 					}
+				break;
+				case "excel":
+					this.model.set("sheet", $(".js-excel-sheet"   , this.$el).val());					
+					if(this.isNew){						
+						this.create(this.model,app.collections.excel, this.upload);
+					}
+					else{						
+						this.patch(this.model,app.collections.excel);
+					}
+
 				break;
 			}
 		},
@@ -167,6 +179,9 @@ var app = app || {};
 				case "jdbc":
 					this.showJdbcFieldset();
 				break;
+				case "excel":
+					this.showExcelFieldset();
+				break;
 			}
 			
 
@@ -182,6 +197,9 @@ var app = app || {};
 
 		showSolrFieldset: function(){
 			$(".js-solr-fieldset", this.$el).show()
+		},
+		showExcelFieldset: function(){
+			$(".js-excel-fieldset", this.$el).show()
 		},
 
 		hideFieldsets: function(){
@@ -201,82 +219,74 @@ var app = app || {};
 
 			switch(this.datasetConector){
 				case "csv":
-					if(this.model.get("recordDelimiter")=="\n")
-						$($('.js-csv-line-separator option', this.$el)[1]).attr('selected', 'selected')
-					else
-						$($('.js-csv-line-separator option', this.$el)[0]).attr('selected', 'selected')
+					var index = 0
+					if(this.model.get("recordDelimiter")=="\n") index = 1;
+					$($('.js-csv-line-separator option', this.$el)[index]).attr('selected', 'selected')					
 					$(".js-csv-field-separator", this.$el).val(this.model.get("fieldDelimiter"));
 				break;
 				case "solr":
-					$(".js-solr-host", this.$el).val(this.model.get("server").get("host"));
+					$(".js-solr-host", this.$el).val(this.model.get("host"    ));
 					$(".js-solr-core", this.$el).val(this.model.get("location"));
-					$(".js-solr-port", this.$el).val(this.model.get("server").get("port"));
-					$(".js-solr-ftp", this.$el).val(this.model.get("server").get("ftpPort"));
-					$(".js-solr-user", this.$el).val(this.model.get("server").get("username"));
-					$(".js-solr-pass", this.$el).val(this.model.get("server").get("password"));
-					$(".js-solr-root", this.$el).val(this.model.get("server").get("ftpRoot"));
+					$(".js-solr-port", this.$el).val(this.model.get("port"    ));
+					$(".js-solr-ftp" , this.$el).val(this.model.get("ftpPort" ));
+					$(".js-solr-user", this.$el).val(this.model.get("username"));
+					$(".js-solr-pass", this.$el).val(this.model.get("password"));
+					$(".js-solr-root", this.$el).val(this.model.get("ftpRoot" ));
 				break;
 				case "jdbc":
-					$(".js-jdbc-driver", this.$el).val(this.model.get("server").get("driver"));
-					$(".js-jdbc-table", this.$el).val(this.model.get("location"));
-					(".js-jdbc-database", this.$el).val(this.model.get("db"));
+					$(".js-jdbc-driver"  , this.$el).val(this.model.get("driver"   ));
+					$(".js-jdbc-table"   , this.$el).val(this.model.get("location" ));
+					$(".js-jdbc-database", this.$el).val(this.model.get("db"       ));
+					$(".js-jdbc-user"    , this.$el).val(this.model.get("username" ));
+					$(".js-jdbc-pass"    , this.$el).val(this.model.get("passoword"));
+					$(".js-jdbc-host"    , this.$el).val(this.model.get("host"));
+				break;
+				case "excel":
+					$(".js-excel-sheet"  , this.$el).val(this.model.get("sheet"   ));
 				break;
 			}
 			
 
 		},
 
-		create: function(dataset,server,datasetCollection,serverCollection){
-			var
-				self = this;
-			server.on("invalid", function(){self.trigger("error", self)});
-			dataset.on("invalid", function(){self.trigger("error", self)});
-			serverCollection.persist(server,
+		create: function(dataset,datasetCollection,upload){
+			var				
+				self = this,
+				upload = upload || false;
+			dataset.on("invalid", function(){self.trigger("error", self)});			
+			datasetCollection.persist(dataset, 
 				{
-					success: function(e){						
-						self.model.set("server", server.href);
-						datasetCollection.persist(dataset, 
-							{
-								success: function(ee){
-									self.trigger("new", self);
-								}, 
-								error: function(ee){
-									self.trigger("error", self)
-								}
-							}
-						);
-					},
-					error: function(e){
+					success: function(ee){
+						if(upload){
+							self.uploadView.options.success = function(){
+								self.trigger("new", self);								
+							};
+							self.uploadView.options.url = datasetCollection.uploadUrl(self.model);
+							self.uploadView.upload(self.upload.filename,self.upload.formdata);
+							
+						}else
+							self.trigger("new",self)
+					}, 
+					error: function(ee){
 						self.trigger("error", self)
 					}
 				}
-			);
+			);					
 		},
-		patch: function(dataset,server,datasetCollection,serverCollection){
-			var 
-				self = this;
-			server.on("invalid", function(){self.trigger("error"), self});
-			dataset.on("invalid", function(){self.trigger("error"), self});
-			serverCollection.update(server,
+		patch: function(dataset,datasetCollection){
+			var
+				self = this;			
+			dataset.on("invalid", function(){self.trigger("error", self)});			
+			datasetCollection.update(dataset, 
 				{
-					success: function(e){						
-						self.model.set("server", server.href);
-						datasetCollection.update(dataset, 
-							{
-								success: function(ee){
-									self.trigger("update", self);
-								}, 
-								error: function(ee){
-									self.trigger("error", self)
-								}
-							}
-						);
-					},
-					error: function(e){
+					success: function(ee){
+						self.trigger("update", self);
+					}, 
+					error: function(ee){
 						self.trigger("error", self)
 					}
 				}
-			);
+			);	
 		}
 
 

@@ -45,5 +45,6 @@ public enum EFieldType {
 	}*/;
 	@SuppressWarnings("rawtypes")
 	public abstract AField createInstance();
+	
 
 }

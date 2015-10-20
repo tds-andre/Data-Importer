@@ -1,8 +1,10 @@
 <script type="text/template" id="file-upload-template">
-<div class="widget no-header radius-bordered">
-	<div class="widget-body">	
-		<div class="well attached js-main">
-			<div class="row">
+<% if(!options.flat) {%>
+	<div class="widget no-header radius-bordered">
+		<div class="widget-body">	
+			<div class="well attached">
+<% } %>
+				<div class="row js-main">
 					<div class="col-sm-offset-1 col-sm-10 col-md-6 col-md-offset-3">
 						<form>
 							<div class="form-group js-file-container">
@@ -26,8 +28,10 @@
 						
 
 					</div>
-				</div>				
+				</div>
+<% if(!options.flat) {%>			
 			</div>			
 		</div>				
 	</div>
+<% } %>
 </script>

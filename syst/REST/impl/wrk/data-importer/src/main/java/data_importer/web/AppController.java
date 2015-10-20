@@ -66,8 +66,8 @@ public class AppController  extends WebMvcConfigurerAdapter {
 		return new ResponseEntity<Message>(msg ,headers, responseCode);		
 	}
 	
-	@RequestMapping(value = "log/{transactionLogId}/upload", method = RequestMethod.POST)
-	 public  @ResponseBody ResponseEntity<Message> uploadFile(HttpServletResponse response, @RequestParam(value="file") MultipartFile file, @PathVariable long transactionLogId){	 
+	@RequestMapping(value = {"upload/{datasetId}/upload", "csv/{datasetId}/upload", "excel/{datasetId}/upload"}, method = RequestMethod.POST)
+	 public  @ResponseBody ResponseEntity<Message> uploadFile(HttpServletResponse response, @RequestParam(value="file") MultipartFile file, @PathVariable long datasetId){	 
 		HttpStatus  		responseCode = HttpStatus.OK;
     	final HttpHeaders	headers 	 = new HttpHeaders();
     	Message 			msg			 = new Message();
@@ -77,7 +77,7 @@ public class AppController  extends WebMvcConfigurerAdapter {
 		headers.setDate(0);
 		
 		try{
-			dataService.receiveFile(transactionLogId, file);			
+			dataService.receiveFile(datasetId, file);			
 		}catch(Exception e){
 			e.printStackTrace();
 			msg.message = "You failed to upload. "+ e.getMessage();

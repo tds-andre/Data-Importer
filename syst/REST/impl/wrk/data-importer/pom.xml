@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 	<groupId>br.com.mais.suite</groupId>
 	<artifactId>data-importer</artifactId>
-	<version>0.0.1</version>
+	<version>0.1.0-SNAPSHOT</version>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -47,7 +47,7 @@
          <dependency>
         	<groupId>br.com.mais</groupId>
         	<artifactId>etl</artifactId>
-        	<version>0.0.1</version>
+        	<version>0.0.2-SNAPSHOT</version>
         </dependency>
          <dependency>
         	<groupId>com.jcraft</groupId>

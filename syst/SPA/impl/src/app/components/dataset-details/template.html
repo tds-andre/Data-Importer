@@ -36,7 +36,7 @@
 		<div class="row">
 			<div class="col-sm-6">
 				<h6>Servidor Solr</h6>
-				<h5><%- server.attributes.host || " - " %></h5>
+				<h5><%- host || " - " %></h5>
 			</div>
 			<div class="col-sm-3">
 				<h6>Core</h6>
@@ -44,7 +44,7 @@
 			</div>
 			<div class="col-sm-3">
 				<h6>Porta HTTP</h6>
-				<h5> <%- server.attributes.port || " - " %> </h5>
+				<h5> <%- port || " - " %> </h5>
 			</div>
 							
 		</div>
@@ -52,17 +52,17 @@
 			
 			<div class="col-sm-6">
 				<h6>Raiz</h6>
-				<h5> <%- server.attributes.ftpRoot || " - " %> </h5>
+				<h5> <%- ftpRoot || " - " %> </h5>
 			</div>
 			<div class="col-sm-3">
 				<h6>Usuário</h6>
-				<h5> <%- server.attributes.username || " - " %> </h5>
+				<h5> <%- username || " - " %> </h5>
 			</div>
 			
 			
 			<div class="col-sm-3">
 				<h6>Porta FTP/SSH</h6>
-				<h5> <%- server.attributes.ftpPort || " - " %> </h5>
+				<h5> <%- ftpPort || " - " %> </h5>
 			</div>					
 		</div>	
 	</div>
