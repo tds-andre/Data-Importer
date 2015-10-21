@@ -113,24 +113,26 @@ public class Xlsx extends ADataset<LocalFileSystem> {
 
 				switch (cell.getCellType()) {
 				case Cell.CELL_TYPE_BOOLEAN:
-					data.append(cell.getBooleanCellValue() + ";");
+					data.append(cell.getBooleanCellValue());
 
 					break;
 				case Cell.CELL_TYPE_NUMERIC:
-					data.append(cell.getNumericCellValue() + ";");
+					data.append(cell.getNumericCellValue());
 
 					break;
 				case Cell.CELL_TYPE_STRING:
-					data.append(cell.getStringCellValue() + ";");
+					data.append(cell.getStringCellValue());
 					break;
 
 				case Cell.CELL_TYPE_BLANK:
-					data.append("" + ";");
+					data.append("");
 					break;
 				default:
-					data.append(cell + ";");
+					data.append(cell );
 
 				}
+				if(cellIterator.hasNext())
+					data.append(";");
 			}
 			data.append("\n");
 		}

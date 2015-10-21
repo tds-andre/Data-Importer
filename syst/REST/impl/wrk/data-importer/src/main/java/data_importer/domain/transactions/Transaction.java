@@ -23,13 +23,13 @@ public class Transaction {
 	
 	private String name;
 
-	@ManyToOne(cascade = CascadeType.DETACH)
+	@ManyToOne
 	private Dataset targetDataset;
 
-	@ManyToOne(cascade = CascadeType.DETACH)
+	@ManyToOne
 	private Dataset sourceDataset;
 
-	@OneToMany(targetEntity = TransactionLog.class, mappedBy = "transaction")
+	@OneToMany(targetEntity = TransactionLog.class, mappedBy = "transaction", cascade=CascadeType.REMOVE)
 	private List<TransactionLog> logs;
 
 	public Dataset getTargetDataset() {

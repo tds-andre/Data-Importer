@@ -12,6 +12,7 @@ import java.net.URISyntaxException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.UnrecoverableKeyException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,10 +27,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.SftpException;
 
 import data_importer.domain.datasets.CsvFile;
+import data_importer.domain.datasets.Dataset;
 import data_importer.domain.datasets.ExcelFile;
 import data_importer.domain.datasets.FieldType;
 import data_importer.domain.datasets.JdbcTable;
@@ -80,12 +85,14 @@ public class DataService {
 		//if(!(log.getStatus() == TransactionStatus.READY))
 		//	throw new TransactionNotReadyException("Transação indisponível");
 		log.setStatus(TransactionStatus.EXECUTING);
+		log.setSourceInfo(datasetToJson(trans.getSourceDataset()));
+		log.setTargetInfo(datasetToJson(trans.getTargetDataset()));
 		
 		String duo  = "";
 		if(trans.getSourceDataset() instanceof CsvFile){
 			duo = "csv";
 		}else if(trans.getSourceDataset() instanceof ExcelFile){
-			duo = "csvs";
+			duo = "csv";
 		} 
 		if(trans.getTargetDataset() instanceof SolrTable){
 			duo += "-solr";
@@ -95,7 +102,7 @@ public class DataService {
 		try{
 			switch(duo){
 			case "csv-solr":
-				csvToSolr2(log);
+				csvToSolr(log);
 				break;
 			case "csv-jdbc":
 				csvToJdbc(log);
@@ -107,10 +114,11 @@ public class DataService {
 			throw e;
 		}
 		log.setStatus(TransactionStatus.EXECUTED);
+		log.setFinishedAt(new Timestamp(new java.util.Date().getTime()));
 		logs.save(log);		
 	}
 	
-	public void csvToSolr(TransactionLog log) throws IOException, SolrIndexingException, URISyntaxException, UnrecoverableKeyException, KeyStoreException, NoSuchAlgorithmException, JSchException, SftpException{
+	public void csvToSolr2(TransactionLog log) throws IOException, SolrIndexingException, URISyntaxException, UnrecoverableKeyException, KeyStoreException, NoSuchAlgorithmException, JSchException, SftpException{
 		Transaction 		trans	= log.getTransaction();
 		SolrTable			target  = (SolrTable)trans.getTargetDataset();
 		CsvFile 			source 	= (CsvFile)trans.getSourceDataset();		
@@ -119,7 +127,7 @@ public class DataService {
 		indexSolr(target.getHost(), target.getPort(), target.getLocation(), target.getFtpRoot() + file.getName() );
 	}
 	
-	public void csvToSolr2(TransactionLog log) throws Exception{
+	public void csvToSolr(TransactionLog log) throws Exception{
 		Transaction 		trans	= log.getTransaction();
 		SolrTable			target  = (SolrTable)trans.getTargetDataset();
 		CsvFile 			source 	= (CsvFile)trans.getSourceDataset();		
@@ -252,6 +260,12 @@ public class DataService {
 		if(!res.contains("<int name=\"status\">0</int>"))
 			throw new SolrIndexingException(res);
 		
+		
+	}
+	
+	private String datasetToJson(Dataset dataset) throws JsonProcessingException{
+		ObjectMapper mapper = new ObjectMapper();
+		return mapper.writeValueAsString(dataset);
 		
 	}
 

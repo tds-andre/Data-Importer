@@ -30,10 +30,17 @@ var app = app || {};
 			this.listView = null;
 		},		
 
-		render: function () {			
+		render: function () {
+			var self = this;			
 			this.$el.html(this.template());
 			this.listView = new app.TransactionListView({el: $(".js-list-el", this.$el)[0], collection: this.collection});
 			this.listView.start({fetched: true, showHeader: false, actions:["detail", "favorite"]});
+			this.listView.on("link", function(view){
+				self.trigger("link",view);
+			});
+			this.listView.on("details", function(view){
+				self.trigger("details",view);
+			});
 			this.showFavorite();
 			return this;			
 		},
@@ -42,8 +49,8 @@ var app = app || {};
 			$.extend(true, this.options, this.defaults, options);
 			var
 				self = this;
-			this.recent = new app.TransactionCollection();
-			this.collection = new app.TransactionCollection();		
+			this.recent = new app.domain.TransactionCollection();
+			this.collection = new app.domain.TransactionCollection();		
 						
 			this.recent.fetch({url: "http://localhost:8090/transaction/search/recent", reset: true, success:function(){				
 				self.collection.fetch({reset: true, success: function(){

@@ -35,7 +35,7 @@ $(function () {
     }
     app.views.modal.init();
 
-    //compact view for the breadcrumb
+    //compact view for modal with success and error alerts
     app.views.validation = {
         $el: app.$validation ,
         $body: null,
@@ -78,7 +78,7 @@ $(function () {
     },    
     app.views.validation.init();
 
-    //compact view for the breadcrumb and title
+    //compact view for the breadcrumb 
     app.views.breadcrumb = {
     	$el: app.$breadcrumb,
     	set: function(strings){
@@ -95,6 +95,8 @@ $(function () {
     		
     	}
     };
+
+    //compact view for the title 
     app.views.title = {
         $el: app.$title,
         set: function(title){
@@ -102,35 +104,48 @@ $(function () {
         }
     }
 
-    //compact view for the menu
+    //compact view for the side menu
     app.views.menu = {
+        $activable: $(".js-activable"),
+        toogle: function(id){
+            this.$activable.removeClass("active");
+            $(id).addClass("active");
+        },
     	init: function(){
+            var self = this;
     		$("#new-origin-button").on("click", function(event){
-    			app.navigation.to("NewOrigin");    			
+    			app.navigation.to("NewOrigin");
+                self.toogle("#new-origin-button")
     		});
             $("#origins-list-button").on("click", function(event){
                 app.navigation.to("OriginsList");
+                self.toogle("#origins-list-button")
             });
             $("#new-target-button").on("click", function(event){
                 app.navigation.to("NewTarget");
+                self.toogle("#new-target-button")
             });
             $("#target-list-button").on("click", function(event){
                 app.navigation.to("TargetsList");
+                self.toogle("#target-list-button")
             });
             $("#new-transaction-button").on("click", function(event){
                 app.navigation.to("NewTransaction");
+                self.toogle("#new-transaction-button")
             });
             $("#transaction-list-button").on("click", function(event){
                 app.navigation.to("TransactionList");
+                self.toogle("#transaction-list-button")
             });
             $("#transaction-report-button").on("click", function(event){
                 app.navigation.to("TransactionReport");
+                self.toogle("#transaction-report-button")
             });
     	}
     };
     app.views.menu.init();
     
-    //utils
+    //global utilitary functions
     app.sleep = function(millis)
 	 {
 	  var date = new Date();
@@ -143,11 +158,12 @@ $(function () {
             return false;
         return true;
     }
-
     app.log = function(a){
         console.log(a)
     },    
 
+
+    //global collections
     app.collections = {        
         csv: new app.domain.CsvCollection(),
         dataset: new app.domain.DatasetCollection(),
@@ -159,18 +175,11 @@ $(function () {
     };
 
 	
+    //starter page trigger
+    $("#transaction-report-button").click();
 
-	//initialization
-    /*app.transactions = new app.TransactionCollection({elEctor:"#transaction-list-placeholder"});
-    app.logs = new app.LogCollection();
-    app.showTransactionList();
-    app.transactionView.on("selected", function(transaction){
-    	app.showStartTransaction(transaction);
-    })*/
-
-
-
-    app.debug("data-importer app loaded");
+    //app loaded
+    app.log("data-importer app loaded");
 });
 
 

@@ -37,6 +37,9 @@ app.views = app.views || {}
 			detailsView.start();				
 			app.views.modal.show("Transação - Detalhes");
 		});
+		view.on("link", function(view){
+			app.navigation.to("TransactionOperation", {model: view.model});
+		})
 		view.start(); 
 	};
 
@@ -56,7 +59,7 @@ app.views = app.views || {}
 			app.navigation.to("NewTransaction");
 		});
 		view.on("delete", function(view){
-			app.views.modal.show("Transação - Exclusão", "Transação excluída.");
+			//app.views.modal.show("Transação - Exclusão", "Transação excluída.");
 		});
 		view.on("link", function(view){
 			app.navigation.to("TransactionOperation", {model: view.model});
@@ -144,7 +147,7 @@ app.views = app.views || {}
 			app.navigation.to("EditTarget", {model: view.model});
 		});
 		view.on("delete", function(view){
-			app.views.modal.show("Destino - Exclusão", "Dataset excluído.");
+			//app.views.modal.show("Destino - Exclusão", "Dataset excluído.");
 		});
 		view.on("new", function(){
 			app.navigation.to("NewTarget");
@@ -211,7 +214,7 @@ app.views = app.views || {}
 			app.navigation.to("EditOrigin", {model: view.model});
 		});
 		view.on("delete", function(view){
-			app.views.modal.show("Origem - Exclusão", "Dataset excluído.");
+			//app.views.modal.show("Origem - Exclusão", "Dataset excluído.");
 		});
 		view.on("new", function(){
 			app.navigation.to("NewOrigin");

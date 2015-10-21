@@ -14,8 +14,7 @@
 <?php include_once "components/schema-table/template.html"; ?>
 <?php include_once "components/schema-table-item/template.html"; ?>
 
-
-
+<!--Reusable modal with success and error-->
 <div id="validation-modal" class="modal modal-message fade" style="display: none;" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -34,28 +33,24 @@
     </div>
 </div>
 
+<!--Reusable generic modal-->
 <div id="generic-modal" class="modal fade" style="display: none;" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4 class="modal-title">Origem - Detalhes</h4>
-                </div>
-
-                <div class="modal-body">
-                  
-                    
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>                  
-                </div>
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Origem - Detalhes</h4>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>                  
             </div>
         </div>
     </div>
+</div>
 
-
-<!--Libraries-->
+<!--Libraries (installation via npm install!)-->
 <script src="../node_modules/underscore/underscore.js" type="text/javascript"></script>
 <script src="../node_modules/backbone/backbone.js" type="text/javascript"></script>
 <script src="../node_modules/springbone/springbone.js" type="text/javascript"></script>
@@ -64,7 +59,6 @@
 <script type="text/javascript" src="init.js"></script>
 <script type="text/javascript" src="config.js"></script>
 <script type="text/javascript" src="models.js"></script>
-
 
 <!--Views-->
 <script type="text/javascript" src="components/dataset-list/view.js"></script>
@@ -85,5 +79,3 @@
 <!--App & Initialization-->
 <script type="text/javascript" src="routes.js"></script>
 <script type="text/javascript" src="app.js"></script>
-
-

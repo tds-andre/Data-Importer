@@ -111,7 +111,7 @@ var app = app || {};
 					this.model.set("fieldDelimiter", $(".js-csv-field-separator", this.$el).val());
 					this.model.set("recordDelimiter", $(".js-csv-line-separator", this.$el).val());
 					if(this.isNew){						
-						this.create(this.model,app.collections.csv, this.upload);
+						this.create(this.model,app.collections.csv, this.upload?this.uploadView:false);
 					}
 					else{						
 						this.patch(this.model,app.collections.csv);
@@ -149,7 +149,7 @@ var app = app || {};
 				case "excel":
 					this.model.set("sheet", $(".js-excel-sheet"   , this.$el).val());					
 					if(this.isNew){						
-						this.create(this.model,app.collections.excel, this.upload);
+						this.create(this.model,app.collections.excel, this.upload?this.excelUploadView:false );
 					}
 					else{						
 						this.patch(this.model,app.collections.excel);
@@ -249,20 +249,20 @@ var app = app || {};
 
 		},
 
-		create: function(dataset,datasetCollection,upload){
+		create: function(dataset,datasetCollection,uploadView){
 			var				
 				self = this,
-				upload = upload || false;
+				uploadView = uploadView || false;
 			dataset.on("invalid", function(){self.trigger("error", self)});			
 			datasetCollection.persist(dataset, 
 				{
 					success: function(ee){
-						if(upload){
-							self.uploadView.options.success = function(){
+						if(uploadView){
+							uploadView.options.success = function(){
 								self.trigger("new", self);								
 							};
-							self.uploadView.options.url = datasetCollection.uploadUrl(self.model);
-							self.uploadView.upload(self.upload.filename,self.upload.formdata);
+							uploadView.options.url = datasetCollection.uploadUrl(self.model);
+							uploadView.upload(self.upload.filename,self.upload.formdata);
 							
 						}else
 							self.trigger("new",self)

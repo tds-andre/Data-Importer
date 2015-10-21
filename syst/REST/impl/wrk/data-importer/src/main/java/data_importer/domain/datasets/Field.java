@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Field {
 	@Id
@@ -33,6 +35,7 @@ public class Field {
 	@Column(nullable = true)
 	private String modifier;
 
+	@JsonIgnore
 	@ManyToOne(optional = false, targetEntity = Dataset.class)
 	private Dataset dataset;
 

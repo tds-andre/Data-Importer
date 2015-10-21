@@ -1,5 +1,6 @@
 package data_importer.domain.datasets;
 
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,6 +17,7 @@ public class Upload extends Dataset {
 	
 	private boolean uploaded = false;
 
+	
 	private boolean isFixed = false;
 	
 	public boolean isUploaded() {

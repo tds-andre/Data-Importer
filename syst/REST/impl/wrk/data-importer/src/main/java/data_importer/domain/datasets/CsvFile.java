@@ -1,10 +1,16 @@
 package data_importer.domain.datasets;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.MappedSuperclass;
 
 @Entity
+@Inheritance(strategy=InheritanceType.JOINED)
+@DiscriminatorColumn(name="file_type")
 public class CsvFile extends Upload {
 	private String fieldDelimiter = ";";
 	private String recordDelimiter = "\n";
