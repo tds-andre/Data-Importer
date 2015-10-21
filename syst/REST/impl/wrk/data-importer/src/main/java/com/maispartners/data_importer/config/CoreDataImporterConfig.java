@@ -23,11 +23,11 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-//@Configuration
-//@EnableAutoConfiguration
-//@EnableTransactionManagement()
-//@EnableJpaRepositories(entityManagerFactoryRef = "diEntityManagerFactory", transactionManagerRef = "diTransactionManager", basePackages = { "br.com.mais.suite.core.data.importer.repository" })
-//@ComponentScan(basePackages = { "br.com.mais.suite.core.data.importer.service" })
+@Configuration
+@EnableAutoConfiguration
+@EnableTransactionManagement()
+@EnableJpaRepositories(entityManagerFactoryRef = "diEntityManagerFactory", transactionManagerRef = "diTransactionManager", basePackages = { "com.maispartners.data_importer.repository" })
+@ComponentScan(basePackages = { "com.maispartners.data_importer.services" })
 public class CoreDataImporterConfig implements Serializable {
 
 	@Autowired
@@ -60,7 +60,7 @@ public class CoreDataImporterConfig implements Serializable {
 		LocalContainerEntityManagerFactoryBean lef = new LocalContainerEntityManagerFactoryBean();
 		lef.setDataSource(diDatasource());
 		lef.setJpaVendorAdapter(jpaVendorAdapter());
-		lef.setPackagesToScan("br.com.mais.suite.core.data.importer.domain");
+		lef.setPackagesToScan("com.maispartners.data_importer.domain");
 		lef.setPersistenceUnitName("diPersistenceUnit");
 		lef.afterPropertiesSet();
 		return lef.getObject();

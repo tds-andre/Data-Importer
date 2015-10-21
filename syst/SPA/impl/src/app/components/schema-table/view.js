@@ -35,7 +35,7 @@ var app = app || {};
 			$.extend(true, this.options, this.defaults, options);
 			this.render();
 			if(this.options.fetched){
-				this.addAll;
+				this.addAll();
 			}
 			else{
 				this.collection.reset();
