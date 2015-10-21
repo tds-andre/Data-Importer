@@ -14,7 +14,7 @@ var app = app || {};
 		},		
 		
 		defaults: {
-			
+			flat : false
 		},	
 
 		
@@ -29,7 +29,8 @@ var app = app || {};
 		},		
 
 		render: function () {
-			this.$el.html(this.template());	
+			var json = {options: this.options};
+			this.$el.html(this.template(json));	
 			this.$progress = $(".js-progress", this.$el)
 			this.$message = $(".js-progress-message", this.$el);
 			this.uploaded = false;	
@@ -37,7 +38,7 @@ var app = app || {};
 		},
 
 		start: function(options){
-			$.extend(true, this.options, this.defaults, options);
+			$.extend(this.options, this.defaults, options);
 			
 			return this.render();			
 		},
@@ -58,6 +59,10 @@ var app = app || {};
 				name = ss[ss.length-1];
 			if(app.isDefined(name))
 				this.updateFilename(name);
+			if(this.options.select){
+				this.options.select(this,name,formData);
+				return;
+			}
 			this.upload(name,formData);
 				
 			

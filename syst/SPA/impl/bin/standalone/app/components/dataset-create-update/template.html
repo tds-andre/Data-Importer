@@ -24,7 +24,7 @@
 						<div class="form-group">
 							<label class="control-label" for="dataset">Conector <sup>*</sup></label>
 							<select name="dataset" class="form-control select js-conector">
-								<option>Selecione</option>
+								<option disabled="disabled" selected>Selecione</option>
 								<% for(var i = 0; i < types.length; i ++){ %>
 									<option value="<%- types[i].value %>"><%- types[i].caption %></option>
 								<%}%>
@@ -38,21 +38,28 @@
 				
 
 				<div class="row js-fieldset js-csv-fieldset">
-					<div class="col-sm-6">
-						<div class="form-group">
-							<label class="control-label" for="line">Separador de linha </label>
-							<select name="line" class="form-control select js-csv-line-separator">
-								<option value="&#14&#10" selected>Windows</option>
-								<option value="&#10">Unix</option>								
-							</select>
+					<div class="col-sm-12">
+						<div class="row">
+							<div class="col-sm-6">
+								<div class="form-group">
+									<label class="control-label" for="line">Separador de linha </label>
+									<select name="line" class="form-control select js-csv-line-separator">
+										<option value="&#14&#10" selected>Windows</option>
+										<option value="&#10">Unix</option>								
+									</select>
+								</div>
+							</div>
+							<div class="col-sm-3">
+								<div class="form-group simula_validacao">
+									<label class="control-label" for="field">Separador de campo </label>
+									<input type="text" id="field" class="form-control js-csv-field-separator" value="<%- defaults.fieldSeparator %>">
+								</div>
+							</div>
+						</div>
+						<div class="row js-csv-upload-el">
 						</div>
 					</div>
-					<div class="col-sm-3">
-						<div class="form-group simula_validacao">
-							<label class="control-label" for="field">Separador de campo </label>
-							<input type="text" id="field" class="form-control js-csv-field-separator" value="<%- defaults.fieldSeparator %>">
-						</div>
-					</div>												
+
 				</div>
 
 				<!-- SOLR -->
@@ -111,26 +118,62 @@
 				</div>
 
 				<!-- JDBC -->				
-
-				<div class="row js-fieldset js-jdbc-fieldset">
-					<div class="col-sm-3">
-						<div class="form-group">
-							<label class="control-label" for="line">Banco</label>
-							<input type="text" class="form-control js-jdbc-table"/>
+				<div class="js-fieldset js-jdbc-fieldset">
+					<div class="row">
+						<div class="col-md-3 col-sm-12">
+							<div class="form-group">
+								<label class="control-label" for="line">Banco</label>
+								<input type="text" class="form-control js-jdbc-database"/>
+							</div>
+						</div>
+						<div class="col-md-3 col-sm-12">
+							<div class="form-group simula_validacao">
+								<label class="control-label" for="field">Tabela </label>
+								<input type="text" class="form-control js-jdbc-table"/>
+							</div>
+						</div>		
+						<div class="col-md-3 col-sm-12">
+							<div class="form-group simula_validacao">
+								<label class="control-label" for="field">Driver </label>
+								<input type="text" class="form-control js-jdbc-driver" value="<%- defaults.driver %>"/>
+							</div>
 						</div>
 					</div>
-					<div class="col-sm-3">
-						<div class="form-group simula_validacao">
-							<label class="control-label" for="field">Tabela </label>
-							<input type="text" class="form-control js-jdbc-database"/>
-						</div>
-					</div>		
-					<div class="col-sm-3">
-						<div class="form-group simula_validacao">
-							<label class="control-label" for="field">Driver </label>
-							<input type="text" class="form-control js-jdbc-driver" value="<%- defaults.driver %>"/>
-						</div>
-					</div>												
+					<div class="row">
+						<div class="col-md-3 col-sm-12">
+							<div class="form-group simula_validacao">
+								<label class="control-label" for="field">Usuário </label>
+								<input type="text" class="form-control js-jdbc-user" />
+							</div>
+						</div>	
+						<div class="col-md-3 col-sm-12">
+							<div class="form-group simula_validacao">
+								<label class="control-label" for="field">Senha </label>
+								<input type="text" class="form-control js-jdbc-pass"/>
+							</div>
+						</div>	
+						<div class="col-md-3 col-sm-12">
+							<div class="form-group simula_validacao">
+								<label class="control-label" for="field">Servidor </label>
+								<input type="text" class="form-control js-jdbc-host" value="<%- defaults.host %>"/>
+							</div>
+						</div>												
+					</div>
+				</div>
+
+
+				<!-- EXCEL -->				
+				<div class="js-fieldset js-excel-fieldset">
+					<div class="row">
+						<div class="col-md-3 col-sm-12">
+							<div class="form-group">
+								<label class="control-label" for="line">Planilha</label>
+								<input type="text" class="form-control js-excel-sheet"/>
+							</div>
+						</div>																
+					</div>
+					<div class="row js-excel-upload-el">
+					</div
 				</div>
 
 

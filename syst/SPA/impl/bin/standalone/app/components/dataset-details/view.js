@@ -21,23 +21,10 @@ var app = app || {};
 			this.options = {};
 		},
 
-		serverSynced: function(){
-			console.log("TransactionDetailsView.serverTwice, server: ", jQuery.extend({}, this.model.get("server").attributes));
-			this.render();
-		},
-
-		serverCreated: function(){			
-			this.listenTo(this.model.get("server"), "sync", this.serverSynced);
-		},
+		
 
 		render: function () {
-			if(!app.isDefined(this.model.get("server"))){
-				this.listenToOnce(this.model, "change:server", this.serverCreated);				
-				this.model.nestedFetch();
-				return;
-			}
 			var
-
 				json = this.model.toJSON(),
 				typePath = json.typePath || this.model.typePath,
 				key = app.DatasetTypeEnum.byPath(typePath,true);
