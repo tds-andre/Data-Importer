@@ -23,11 +23,11 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-@Configuration
-@EnableAutoConfiguration
-@EnableTransactionManagement()
-@EnableJpaRepositories(entityManagerFactoryRef = "diEntityManagerFactory", transactionManagerRef = "diTransactionManager", basePackages = { "com.maispartners.data_importer.repository" })
-@ComponentScan(basePackages = { "com.maispartners.data_importer.services" })
+//@Configuration
+//@EnableAutoConfiguration
+//@EnableTransactionManagement()
+//@EnableJpaRepositories(entityManagerFactoryRef = "diEntityManagerFactory", transactionManagerRef = "diTransactionManager", basePackages = { "com.maispartners.data_importer.repository" })
+//@ComponentScan(basePackages = { "com.maispartners.data_importer.services" })
 public class CoreDataImporterConfig implements Serializable {
 
 	@Autowired
