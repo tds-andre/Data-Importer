@@ -55,6 +55,8 @@ public class CsvDataset extends ADataset<ADatabase> {
 		if (parser == null)
 			parser = CSVParser.parse(new File(getFullLocation()),
 					Charset.defaultCharset(), format);
+		
+							
 		setHeaders();
 		return parser.iterator();
 	}
@@ -99,6 +101,7 @@ public class CsvDataset extends ADataset<ADatabase> {
 	public Schema inferSchema() throws Exception {
 		Schema result = new Schema();
 		CSVFormat format = CSVFormat.DEFAULT.withDelimiter(FieldDelimiter)
+				
 				.withEscape(Escape).withRecordSeparator(LineDelimiter)
 				.withQuote(TextEnclosure);
 

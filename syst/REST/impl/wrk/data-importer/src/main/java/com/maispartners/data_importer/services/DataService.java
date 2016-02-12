@@ -179,7 +179,12 @@ public class DataService {
 					Xlsx.xlsToCsv(filename, filename + ".csv", sheet);
 				filename += ".csv";
 			}
-			List<Field> list =  extractCsvMetadata(filename);
+			List<Field> list;
+			if(local instanceof CsvFile){
+				CsvFile csv = ((CsvFile)local);
+				list = extractCsvMetadata(filename, csv.getRecordDelimiter(), csv.getFieldDelimiter().charAt(0));
+			}else					
+				list =  extractCsvMetadata(filename);
 			for(Field field:list) field.setDataset(local);			
 			fields.save(list);			
 			local.setFields(list);
@@ -192,8 +197,10 @@ public class DataService {
 		}
 	}
 	
-	private List<Field> extractCsvMetadata(String filename) throws Exception{
+	private List<Field> extractCsvMetadata(String filename, String lineDelimiter, char fieldDelimiter) throws Exception{
 		CsvDataset csv  = new CsvDataset(filename);
+		csv.setFieldDelimiter(fieldDelimiter);
+		csv.setLineDelimiter(lineDelimiter);
 		Schema schema = csv.getSchema();
 		List<Field> fields = new ArrayList<Field>();
 		for(AField field:schema.getFields()){
@@ -211,6 +218,10 @@ public class DataService {
 			fields.add(f);
 		}
 		return fields;
+	}
+	
+	private List<Field> extractCsvMetadata(String filename) throws Exception{
+		return extractCsvMetadata(filename, "\r\n", ';');
 	}
 	
 	public void uploadToFTP(String host, int port, String user, String pass, String sourceFilename, String targetFilename) throws IOException, UnrecoverableKeyException, KeyStoreException, NoSuchAlgorithmException, JSchException, SftpException{
